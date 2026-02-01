@@ -17,13 +17,13 @@
  */
 package com.pwolfgang.msetarithmetic;
 
-import com.pwolfgang.boxarithmetic.MSet;
 import java.io.FileDescriptor;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import com.pwolfgang.boxarithmetic.Box;
 
 public class ToPolyNumberTest {
     
@@ -38,14 +38,14 @@ public class ToPolyNumberTest {
         
     }
     
-    void printIt(String s, MSet mSet) {
+    void printIt(String s, Box mSet) {
         System.out.printf("%s: %s%n", s, mSet.toString());
         System.out.printf("%s: %s%n", s, mSet.toIntegerString());
         System.out.printf("%s: %s%n", s, mSet.asPolyNumber());
         assertEquals(s, mSet.asPolyNumber());
     }
 
-    void printIt_noAssert(String s, MSet mSet) {
+    void printIt_noAssert(String s, Box mSet) {
         System.out.printf("%s: %s%n", s, mSet.toString());
         System.out.printf("%s: %s%n", s, mSet.toIntegerString());
         System.out.printf("%s: %s%n", s, mSet.asPolyNumber());
@@ -53,33 +53,33 @@ public class ToPolyNumberTest {
     
     @Test
     public void test1() {
-        var p = MSet.of(MSet.of(0),MSet.of(0),MSet.of(0),MSet.of(1),MSet.of(3),MSet.of(4),MSet.of(4));
+        var p = Box.of(Box.of(0),Box.of(0),Box.of(0),Box.of(1),Box.of(3),Box.of(4),Box.of(4));
         var s = p.asPolyNumber();
         printIt("3+\u03B1\u2080+\u03B1\u2080\u00B3+2\u03B1\u2080\u2074",p);
     }
     
     @Test
     public void testAlpha() {
-        var alphaSubOne = MSet.of(MSet.of(MSet.of(1)));
+        var alphaSubOne = Box.of(Box.of(Box.of(1)));
         printIt("\u03B1\u2081", alphaSubOne);
-        printIt("2\u03B1\u2081", MSet.of(MSet.of(MSet.of(1)),MSet.of(MSet.of(1))));
+        printIt("2\u03B1\u2081", Box.of(Box.of(Box.of(1)),Box.of(Box.of(1))));
         printIt("\u03B1\u2081\u00B2", alphaSubOne.mul(alphaSubOne));
-        printIt("\u03B1\u2081\u00B3", MSet.mul(alphaSubOne,alphaSubOne,alphaSubOne));
-        var alphaSubTwo = MSet.of(MSet.of(MSet.of(2)));
+        printIt("\u03B1\u2081\u00B3", Box.mul(alphaSubOne,alphaSubOne,alphaSubOne));
+        var alphaSubTwo = Box.of(Box.of(Box.of(2)));
         printIt("\u03B1\u2082", alphaSubTwo);
-        printIt("2\u03B1\u2082", MSet.of(MSet.of(MSet.of(2)),MSet.of(MSet.of(2))));
+        printIt("2\u03B1\u2082", Box.of(Box.of(Box.of(2)),Box.of(Box.of(2))));
         printIt("\u03B1\u2082\u00B2", alphaSubTwo.mul(alphaSubTwo));
-        printIt("\u03B1\u2082\u00B3", MSet.mul(alphaSubTwo,alphaSubTwo,alphaSubTwo));
+        printIt("\u03B1\u2082\u00B3", Box.mul(alphaSubTwo,alphaSubTwo,alphaSubTwo));
     }
     
     @Test
     public void testAlphaExpressions() {
-        var alphaSubOne = MSet.of(MSet.of(MSet.of(1)));
-        var alphaSubTwo = MSet.of(MSet.of(MSet.of(2)));
-        var alphaSubOneCubed = MSet.mul(alphaSubOne,alphaSubOne,alphaSubOne);
+        var alphaSubOne = Box.of(Box.of(Box.of(1)));
+        var alphaSubTwo = Box.of(Box.of(Box.of(2)));
+        var alphaSubOneCubed = Box.mul(alphaSubOne,alphaSubOne,alphaSubOne);
         printIt("\u03B1\u2081\u00B3\u03b1\u2082", alphaSubOneCubed.mul(alphaSubTwo));
-        var alphaSubZero = MSet.of(MSet.of(1));
-        var alpha5alpha7 = MSet.of(MSet.of(MSet.of(5), MSet.of(7)));
+        var alphaSubZero = Box.of(Box.of(1));
+        var alpha5alpha7 = Box.of(Box.of(Box.of(5), Box.of(7)));
         printIt("\u03B1\u2080", alphaSubZero);
         var twoAlphaSubZero = alphaSubZero.add(alphaSubZero);
         printIt("2\u03B1\u2080",twoAlphaSubZero);

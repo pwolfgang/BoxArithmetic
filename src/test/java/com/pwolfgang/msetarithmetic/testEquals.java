@@ -17,16 +17,16 @@
  */
 package com.pwolfgang.msetarithmetic;
 
-import com.pwolfgang.boxarithmetic.MSet;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import org.junit.jupiter.api.Test;
+import com.pwolfgang.boxarithmetic.Box;
 
 public class testEquals {
     
     @Test
     public void testEquals() {
-        var x = MSet.parse("[0 0 3 8]");
-        var y = MSet.parse("[1 1 3 8]");
+        var x = Box.parse("[0 0 3 8]");
+        var y = Box.parse("[1 1 3 8]");
         boolean areEqual = x.equals(y);
         assertFalse(areEqual);
     }

@@ -17,13 +17,13 @@
  */
 package com.pwolfgang.msetarithmetic;
 
-import com.pwolfgang.boxarithmetic.MSet;
 import java.io.FileDescriptor;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import com.pwolfgang.boxarithmetic.Box;
 
 public class SigmaTest {
     
@@ -40,65 +40,23 @@ public class SigmaTest {
         
     }
     
-    void printIt(String s, MSet mSet) {
-        String mSetToString = mSet.toString();
-        String mSetToIntegerString = mSet.toIntegerString();
-        String mSetAsPolyNumber = mSet.asPolyNumber();
-        System.out.printf("%s: %s%n", s, mSetToString);
-        System.out.printf("%s: %s%n", s, mSetToIntegerString);
-        System.out.printf("%s: %s%n", s, mSetAsPolyNumber);
-        assertEquals(s, mSet.asPolyNumber());
+    void printIt(String s, Box box) {
+        String boxToString = box.toString();
+        String boxToIntegerString = box.toIntegerString();
+        String boxAsPolyNumber = box.asPolyNumber();
+        System.out.printf("%s: %s%n", s, boxToString);
+        System.out.printf("%s: %s%n", s, boxToIntegerString);
+        System.out.printf("%s: %s%n", s, boxAsPolyNumber);
+        assertEquals(s, box.asPolyNumber());
     }
     
-        void printIt_noAssert(String s, MSet mSet) {
-        String mSetToString = mSet.toString();
-        String mSetToIntegerString = mSet.toIntegerString();
-        String mSetAsPolyNumber = mSet.asPolyNumber();
-        System.out.printf("%s: %s%n", s, mSetToString);
-        System.out.printf("%s: %s%n", s, mSetToIntegerString);
-        System.out.printf("%s: %s%n", s, mSetAsPolyNumber);
+        void printIt_noAssert(String s, Box box) {
+        String boxToString = box.toString();
+        String boxToIntegerString = box.toIntegerString();
+        String boxAsPolyNumber = box.asPolyNumber();
+        System.out.printf("%s: %s%n", s, boxToString);
+        System.out.printf("%s: %s%n", s, boxToIntegerString);
+        System.out.printf("%s: %s%n", s, boxAsPolyNumber);
     }
 
-    
-    @Test
-    public void testAlpha1() {
-        System.out.println("\n\n\n\u03B1\u00B9 to \u03B1\u207B\u00B9");
-        var alpha = MSet.of(MSet.of(1));
-        printIt("α₀", alpha);
-        var alphaMone = MSet.of(MSet.of(-1));
-        printIt("\u03B1\u2080\u207B\u00B9", alphaMone);
-        var alphaMone2 = alpha.sigma();
-        printIt("\u03B1\u2080\u207B\u00B9", alphaMone2);
-    }
-    
-    @Test
-    public void testAlphaMinus3() {
-        System.out.println("\n\n\n\u03B1\u2080\u207B\u00B3 to \u03B1\u2080\u00B3");        
-        var alphaM3 = MSet.of(MSet.of(-3));
-        printIt("\u03B1\u2080\u207B\u00B3", alphaM3);
-        printIt("\u03B1\u2080\u00B3", alphaM3.sigma());
-    }
-    
-    @Test
-    public void testTwoTerms() {
-        System.out.println("\n\n\n\u03B1\u00B9 + \u03B1\u2080\u207B\u00B3 to \u03B1\u207B\u00B9 + \u03B1\u2080\u00B3");
-        var alphaPlusAlphaM3 = MSet.of(MSet.of(1), MSet.of(-3));
-        var sigmaOfAlphaPlusAlphaM3 = alphaPlusAlphaM3.sigma();
-        var expected = MSet.of(MSet.of(-1),MSet.of(3));
-        printIt("\u03B1\u2080+\u03B1\u2080\u207B\u00B3", alphaPlusAlphaM3);
-        printIt_noAssert("expected", expected);
-        printIt("\u03B1\u2080\u207B\u00B9+\u03B1\u2080\u00B3", sigmaOfAlphaPlusAlphaM3);            
-    }
-    
-    @Test
-    public void testLargerPolyNumber() {
-        System.out.println("\n\n\n\u03B1\u2080\u207B\u00B9 - \u03B1\u2080 + 3\u03B1\u2080\u00B2");
-        var p = MSet.of(MSet.of(-1), MSet.of(1).makeAnti(), MSet.of(2),MSet.of(2));
-        var sigmaP = MSet.of(MSet.of(1),MSet.of(-1).makeAnti(), MSet.of(-2),MSet.of(-2));
-        printIt_noAssert("p", p);
-        printIt_noAssert("expected", sigmaP);
-        printIt_noAssert("sigmaP", p.sigma());
-        assertEquals(sigmaP,p.sigma());      
-    }
-    
 }

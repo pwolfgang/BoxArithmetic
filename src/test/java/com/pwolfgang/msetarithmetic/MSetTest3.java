@@ -17,13 +17,13 @@
  */
 package com.pwolfgang.msetarithmetic;
 
-import com.pwolfgang.boxarithmetic.MSet;
 import java.io.FileDescriptor;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import com.pwolfgang.boxarithmetic.Box;
 
 public class MSetTest3 {
     
@@ -38,14 +38,14 @@ public class MSetTest3 {
         
     }
     
-    void printIt(String s, MSet mSet) {
+    void printIt(String s, Box mSet) {
         System.out.printf("%s: %s%n", s, mSet.toString());
         System.out.printf("%s: %s%n", s, mSet.toIntegerString());
         System.out.printf("%s: %s%n", s, mSet.asPolyNumber());
         assertEquals(s, mSet.asPolyNumber());
     }
 
-    void printItNoAssert(String s, MSet mSet) {
+    void printItNoAssert(String s, Box mSet) {
         System.out.printf("%s: %s%n", s, mSet.toString());
         System.out.printf("%s: %s%n", s, mSet.toIntegerString());
         System.out.printf("%s: %s%n", s, mSet.asPolyNumber());
@@ -53,22 +53,22 @@ public class MSetTest3 {
    
     @Test
     public void testAlphaZero() {
-        var alphaZero = MSet.of(MSet.of(MSet.of(0)));
-        var twoAlphaZero = MSet.add(alphaZero, alphaZero);
-        var threeAlphaZero = MSet.add(twoAlphaZero, alphaZero);
-        var fourAlphaZero = MSet.add(twoAlphaZero, twoAlphaZero);
-        var alphaZeroSq = MSet.mul(alphaZero, alphaZero);
-        var alphaZero3rd = MSet.mul(alphaZeroSq, alphaZero);
-        var alphaZero4th = MSet.mul(alphaZeroSq, alphaZeroSq);
-        var twoAlphaZeroSq = MSet.add(alphaZeroSq, alphaZeroSq);
-        var twoAlphaZero3rd = MSet.add(alphaZero3rd, alphaZero3rd);
-        var twoAlphaZero4th = MSet.add(alphaZero4th, alphaZero4th);
-        var threeAlphaZeroSq = MSet.add(twoAlphaZeroSq, alphaZeroSq);
-        var threeAlphaZero3rd = MSet.add(twoAlphaZero3rd, alphaZero3rd);
-        var threeAlphaZero4th = MSet.add(twoAlphaZero4th, alphaZero4th);
-        var fourAlphaZeroSq = MSet.add(twoAlphaZeroSq, twoAlphaZeroSq);
-        var fourAlphaZero3rd = MSet.add(twoAlphaZero3rd, twoAlphaZero3rd);
-        var fourAlphaZero4th = MSet.add(twoAlphaZero4th, twoAlphaZero4th);
+        var alphaZero = Box.of(Box.of(Box.of(0)));
+        var twoAlphaZero = Box.add(alphaZero, alphaZero);
+        var threeAlphaZero = Box.add(twoAlphaZero, alphaZero);
+        var fourAlphaZero = Box.add(twoAlphaZero, twoAlphaZero);
+        var alphaZeroSq = Box.mul(alphaZero, alphaZero);
+        var alphaZero3rd = Box.mul(alphaZeroSq, alphaZero);
+        var alphaZero4th = Box.mul(alphaZeroSq, alphaZeroSq);
+        var twoAlphaZeroSq = Box.add(alphaZeroSq, alphaZeroSq);
+        var twoAlphaZero3rd = Box.add(alphaZero3rd, alphaZero3rd);
+        var twoAlphaZero4th = Box.add(alphaZero4th, alphaZero4th);
+        var threeAlphaZeroSq = Box.add(twoAlphaZeroSq, alphaZeroSq);
+        var threeAlphaZero3rd = Box.add(twoAlphaZero3rd, alphaZero3rd);
+        var threeAlphaZero4th = Box.add(twoAlphaZero4th, alphaZero4th);
+        var fourAlphaZeroSq = Box.add(twoAlphaZeroSq, twoAlphaZeroSq);
+        var fourAlphaZero3rd = Box.add(twoAlphaZero3rd, twoAlphaZero3rd);
+        var fourAlphaZero4th = Box.add(twoAlphaZero4th, twoAlphaZero4th);
         printIt("\u03B1\u2080", alphaZero);
         printIt("2\u03B1\u2080", twoAlphaZero);
         printIt("3\u03B1\u2080", threeAlphaZero);
@@ -89,22 +89,22 @@ public class MSetTest3 {
     
     @Test
     public void testAlphaOne() {
-        var alphaOne = MSet.of(MSet.of(MSet.of(1)));
-        var twoAlphaOne = MSet.add(alphaOne, alphaOne);
-        var threeAlphaOne = MSet.add(twoAlphaOne, alphaOne);
-        var fourAlphaOne = MSet.add(twoAlphaOne, twoAlphaOne);
-        var alphaOneSq = MSet.mul(alphaOne, alphaOne);
-        var alphaOne3rd = MSet.mul(alphaOneSq, alphaOne);
-        var alphaOne4th = MSet.mul(alphaOneSq, alphaOneSq);
-        var twoAlphaOneSq = MSet.add(alphaOneSq, alphaOneSq);
-        var twoAlphaOne3rd = MSet.add(alphaOne3rd, alphaOne3rd);
-        var twoAlphaOne4th = MSet.add(alphaOne4th, alphaOne4th);
-        var threeAlphaOneSq = MSet.add(twoAlphaOneSq, alphaOneSq);
-        var threeAlphaOne3rd = MSet.add(twoAlphaOne3rd, alphaOne3rd);
-        var threeAlphaOne4th = MSet.add(twoAlphaOne4th, alphaOne4th);
-        var fourAlphaOneSq = MSet.add(twoAlphaOneSq, twoAlphaOneSq);
-        var fourAlphaOne3rd = MSet.add(twoAlphaOne3rd, twoAlphaOne3rd);
-        var fourAlphaOne4th = MSet.add(twoAlphaOne4th, twoAlphaOne4th);
+        var alphaOne = Box.of(Box.of(Box.of(1)));
+        var twoAlphaOne = Box.add(alphaOne, alphaOne);
+        var threeAlphaOne = Box.add(twoAlphaOne, alphaOne);
+        var fourAlphaOne = Box.add(twoAlphaOne, twoAlphaOne);
+        var alphaOneSq = Box.mul(alphaOne, alphaOne);
+        var alphaOne3rd = Box.mul(alphaOneSq, alphaOne);
+        var alphaOne4th = Box.mul(alphaOneSq, alphaOneSq);
+        var twoAlphaOneSq = Box.add(alphaOneSq, alphaOneSq);
+        var twoAlphaOne3rd = Box.add(alphaOne3rd, alphaOne3rd);
+        var twoAlphaOne4th = Box.add(alphaOne4th, alphaOne4th);
+        var threeAlphaOneSq = Box.add(twoAlphaOneSq, alphaOneSq);
+        var threeAlphaOne3rd = Box.add(twoAlphaOne3rd, alphaOne3rd);
+        var threeAlphaOne4th = Box.add(twoAlphaOne4th, alphaOne4th);
+        var fourAlphaOneSq = Box.add(twoAlphaOneSq, twoAlphaOneSq);
+        var fourAlphaOne3rd = Box.add(twoAlphaOne3rd, twoAlphaOne3rd);
+        var fourAlphaOne4th = Box.add(twoAlphaOne4th, twoAlphaOne4th);
         printIt("\u03B1\u2081", alphaOne);
         printIt("2\u03B1\u2081", twoAlphaOne);
         printIt("3\u03B1\u2081", threeAlphaOne);
@@ -125,25 +125,25 @@ public class MSetTest3 {
     @Test
 
     public void testAlphaTwo() {
-        var alphaZero = MSet.of(MSet.of(MSet.of(0)));
-        var alphaZeroSq = MSet.mul(alphaZero,alphaZero);
-        var alphaOne = MSet.of(alphaZero);
-        var alphaTwo = MSet.of(alphaZeroSq);
-        var twoAlphaTwo = MSet.add(alphaTwo, alphaTwo);
-        var threeAlphaTwo = MSet.add(twoAlphaTwo, alphaTwo);
-        var fourAlphaTwo = MSet.add(twoAlphaTwo, twoAlphaTwo);
-        var alphaTwoSq = MSet.mul(alphaTwo, alphaTwo);
-        var alphaTwo3rd = MSet.mul(alphaTwoSq, alphaTwo);
-        var alphaTwo4th = MSet.mul(alphaTwoSq, alphaTwoSq);
-        var twoAlphaTwoSq = MSet.add(alphaTwoSq, alphaTwoSq);
-        var twoAlphaTwo3rd = MSet.add(alphaTwo3rd, alphaTwo3rd);
-        var twoAlphaTwo4th = MSet.add(alphaTwo4th, alphaTwo4th);
-        var threeAlphaTwoSq = MSet.add(twoAlphaTwoSq, alphaTwoSq);
-        var threeAlphaTwo3rd = MSet.add(twoAlphaTwo3rd, alphaTwo3rd);
-        var threeAlphaTwo4th = MSet.add(twoAlphaTwo4th, alphaTwo4th);
-        var fourAlphaTwoSq = MSet.add(twoAlphaTwoSq, twoAlphaTwoSq);
-        var fourAlphaTwo3rd = MSet.add(twoAlphaTwo3rd, twoAlphaTwo3rd);
-        var fourAlphaTwo4th = MSet.add(twoAlphaTwo4th, twoAlphaTwo4th);
+        var alphaZero = Box.of(Box.of(Box.of(0)));
+        var alphaZeroSq = Box.mul(alphaZero,alphaZero);
+        var alphaOne = Box.of(alphaZero);
+        var alphaTwo = Box.of(alphaZeroSq);
+        var twoAlphaTwo = Box.add(alphaTwo, alphaTwo);
+        var threeAlphaTwo = Box.add(twoAlphaTwo, alphaTwo);
+        var fourAlphaTwo = Box.add(twoAlphaTwo, twoAlphaTwo);
+        var alphaTwoSq = Box.mul(alphaTwo, alphaTwo);
+        var alphaTwo3rd = Box.mul(alphaTwoSq, alphaTwo);
+        var alphaTwo4th = Box.mul(alphaTwoSq, alphaTwoSq);
+        var twoAlphaTwoSq = Box.add(alphaTwoSq, alphaTwoSq);
+        var twoAlphaTwo3rd = Box.add(alphaTwo3rd, alphaTwo3rd);
+        var twoAlphaTwo4th = Box.add(alphaTwo4th, alphaTwo4th);
+        var threeAlphaTwoSq = Box.add(twoAlphaTwoSq, alphaTwoSq);
+        var threeAlphaTwo3rd = Box.add(twoAlphaTwo3rd, alphaTwo3rd);
+        var threeAlphaTwo4th = Box.add(twoAlphaTwo4th, alphaTwo4th);
+        var fourAlphaTwoSq = Box.add(twoAlphaTwoSq, twoAlphaTwoSq);
+        var fourAlphaTwo3rd = Box.add(twoAlphaTwo3rd, twoAlphaTwo3rd);
+        var fourAlphaTwo4th = Box.add(twoAlphaTwo4th, twoAlphaTwo4th);
         printIt("\u03B1\u2081", alphaOne);
         printIt("\u03B1\u2082", alphaTwo);
         printIt("2\u03B1\u2082", twoAlphaTwo);
@@ -166,11 +166,11 @@ public class MSetTest3 {
     @Test
     public void testAlphaZero4thPlusAlphaZero3rd() {
         System.out.println("\n\n\n\u03B1\u2080\u00B3+\u03B1\u2080\u2074");
-        var alphaZero = MSet.of(MSet.of(MSet.of(0)));
-        var alphaZeroSq = MSet.mul(alphaZero, alphaZero);
-        var alphaZero3rd = MSet.mul(alphaZeroSq, alphaZero);
-        var alphaZero4th = MSet.mul(alphaZeroSq, alphaZeroSq);
-        var alphaZero3rdPlusAlphaZero4th=MSet.add(alphaZero3rd,alphaZero4th);
+        var alphaZero = Box.of(Box.of(Box.of(0)));
+        var alphaZeroSq = Box.mul(alphaZero, alphaZero);
+        var alphaZero3rd = Box.mul(alphaZeroSq, alphaZero);
+        var alphaZero4th = Box.mul(alphaZeroSq, alphaZeroSq);
+        var alphaZero3rdPlusAlphaZero4th=Box.add(alphaZero3rd,alphaZero4th);
         printIt("\u03B1\u2080\u00B3", alphaZero3rd);
         printIt("\u03B1\u2080\u2074", alphaZero4th);
         printIt("\u03B1\u2080\u00B3+\u03B1\u2080\u2074", alphaZero3rdPlusAlphaZero4th);
@@ -179,9 +179,9 @@ public class MSetTest3 {
     @Test
     public void testAlphaThreePlusAlphaFour() {
         System.out.println("\n\nALPHA THREE PLUS ALPHA FOUR");
-        var alphaThree = MSet.of(MSet.of(MSet.of(3)));
-        var alphaFour = MSet.of(MSet.of(MSet.of(4)));
-        var alphaThreePlusAlphaFour=MSet.add(alphaThree,alphaFour);
+        var alphaThree = Box.of(Box.of(Box.of(3)));
+        var alphaFour = Box.of(Box.of(Box.of(4)));
+        var alphaThreePlusAlphaFour=Box.add(alphaThree,alphaFour);
         printIt("\u03B1\u2083", alphaThree);
         printIt("\u03B1\u2084", alphaFour);
         printIt("\u03B1\u2083+\u03B1\u2084", alphaThreePlusAlphaFour);

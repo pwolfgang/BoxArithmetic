@@ -18,9 +18,9 @@
 package com.pwolfgang.msetarithmetic;
 
 import com.pwolfgang.boxarithmetic.VirtualBox;
-import com.pwolfgang.boxarithmetic.MSet;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import com.pwolfgang.boxarithmetic.Box;
 
 
 /**
@@ -29,10 +29,10 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class VirtualBoxTest {
     
-    void printIt(String s, MSet mSet) {
-        System.out.printf("%s: %s%n", s, mSet.toString());
-        System.out.printf("%s: %s%n", s, mSet.toIntegerString());
-        System.out.printf("%s: %s%n", s, mSet.asPolyNumber());
+    void printIt(String s, Box box) {
+        System.out.printf("%s: %s%n", s, box.toString());
+        System.out.printf("%s: %s%n", s, box.toIntegerString());
+        System.out.printf("%s: %s%n", s, box.asPolyNumber());
     }
 
     
@@ -45,10 +45,10 @@ public class VirtualBoxTest {
     @Test
     public void testToString() {
         System.out.println("\n\nTesting toString");
-        MSet a = MSet.parse("[0 1 1 3]");
-        MSet b = MSet.parse("[0 0 2 1]");
-        MSet c = MSet.parse("[0 1 1 2 3 5]");
-        MSet d = MSet.parse("[0 0 1 2 2 5]");
+        Box a = Box.parse("[0 1 1 3]");
+        Box b = Box.parse("[0 0 2 1]");
+        Box c = Box.parse("[0 1 1 2 3 5]");
+        Box d = Box.parse("[0 0 1 2 2 5]");
         var U = new VirtualBox(a,b);
         var V = new VirtualBox(c,d);
         System.out.printf("%s = %s\n", "A \u2296 B", U.toString());
@@ -60,8 +60,8 @@ public class VirtualBoxTest {
     @Test
     public void testEquals() {
         System.out.println("\n\nTesting equals");
-        var x = new VirtualBox(MSet.of(4), MSet.of(6));
-        var y = new VirtualBox(MSet.of(5), MSet.of(7));
+        var x = new VirtualBox(Box.of(4), Box.of(6));
+        var y = new VirtualBox(Box.of(5), Box.of(7));
         System.out.printf("x: %s\n", x);
         System.out.printf("y: %s\n", y);
         assertEquals(x,x);
@@ -72,24 +72,24 @@ public class VirtualBoxTest {
     @Test
     public void testAdd() {
         System.out.println("\n\nTesting add");
-        var x = new VirtualBox(MSet.of(4),MSet.of(6));
-        var y = new VirtualBox(MSet.of(2),MSet.of(0));
+        var x = new VirtualBox(Box.of(4),Box.of(6));
+        var y = new VirtualBox(Box.of(2),Box.of(0));
         var sum = x.add(y);
         System.out.printf("x: %s\n", x);
         System.out.printf("y: %s\n", y);
         System.out.printf("sum: %s%n", sum);
-        assertEquals(new VirtualBox(MSet.of(0),MSet.of(0)), sum);
+        assertEquals(new VirtualBox(Box.of(0),Box.of(0)), sum);
     }
     
     @Test
     public void testSub() {
         System.out.println("\n\nTesting sub");
-        MSet a = MSet.parse("[0 1 1 3]");
-        MSet b = MSet.parse("[0 0 2 1]");
-        MSet c = MSet.parse("[0 1 1 2 3 5]");
-        MSet d = MSet.parse("[0 0 1 2 2 5]");
-        MSet e = MSet.parse("[3 [4]]");
-        MSet f = MSet.parse("[0 1]");
+        Box a = Box.parse("[0 1 1 3]");
+        Box b = Box.parse("[0 0 2 1]");
+        Box c = Box.parse("[0 1 1 2 3 5]");
+        Box d = Box.parse("[0 0 1 2 2 5]");
+        Box e = Box.parse("[3 [4]]");
+        Box f = Box.parse("[0 1]");
         var U = new VirtualBox(a,b);
         var V = new VirtualBox(c,d);
         var W = new VirtualBox(e,f);
@@ -106,9 +106,9 @@ public class VirtualBoxTest {
     @Test
     public void testMul() {
         System.out.println("\n\nTest mul");
-        var A = new VirtualBox(MSet.of(0), MSet.of(3));
-        var B = new VirtualBox(MSet.of(0), MSet.of(2));
-        var expected = new VirtualBox(MSet.of(6),MSet.of(0));
+        var A = new VirtualBox(Box.of(0), Box.of(3));
+        var B = new VirtualBox(Box.of(0), Box.of(2));
+        var expected = new VirtualBox(Box.of(6),Box.of(0));
         System.out.printf("A: %s%n", A);
         System.out.printf("B: %s\n", B);
         System.out.printf("A × B: %s\n", A.mul(B).toString());

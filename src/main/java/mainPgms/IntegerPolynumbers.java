@@ -17,9 +17,9 @@
  */
 package mainPgms;
 
-import com.pwolfgang.boxarithmetic.MSet;
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
+import com.pwolfgang.boxarithmetic.Box;
 
 /**
  *
@@ -27,13 +27,13 @@ import java.io.UnsupportedEncodingException;
  */
 public class IntegerPolynumbers {
 
-    static void printIt(String s, MSet mSet) {
-        String mSetToString = mSet.toString();
-        String mSetToIntegerString = mSet.toIntegerString();
-        String mSetAsPolyNumber = mSet.asPolyNumber();
-        System.out.printf("%s: %s%n", s, mSetToString);
-        System.out.printf("%s: %s%n", s, mSetToIntegerString);
-        System.out.printf("%s: %s%n", s, mSetAsPolyNumber);
+    static void printIt(String s, Box box) {
+        String boxToString = box.toString();
+        String boxToIntegerString = box.toIntegerString();
+        String boxAsPolyNumber = box.asPolyNumber();
+        System.out.printf("%s: %s%n", s, boxToString);
+        System.out.printf("%s: %s%n", s, boxToIntegerString);
+        System.out.printf("%s: %s%n", s, boxAsPolyNumber);
     }
 
 
@@ -43,67 +43,42 @@ public class IntegerPolynumbers {
         } catch (UnsupportedEncodingException ex) {
             throw new RuntimeException(ex);
         }
-        var p = MSet.of(MSet.of(0), MSet.of(0), MSet.of(1), MSet.of(4), MSet.of(4), MSet.of(4));
+        var p = Box.of(Box.of(0), Box.of(0), Box.of(1), Box.of(4), Box.of(4), Box.of(4));
         printIt("p", p);
-        var q = MSet.of(MSet.of(-3), MSet.of(-3), MSet.of(-1), MSet.of(0), MSet.of(1),MSet.of(1), MSet.of(1));
+        var q = Box.of(Box.of(-3), Box.of(-3), Box.of(-1), Box.of(0), Box.of(1),Box.of(1), Box.of(1));
         printIt("q", q);
-        var r = MSet.of(MSet.of(0).makeAnti(),MSet.of(0).makeAnti(),MSet.of(1),MSet.of(1),MSet.of(1),MSet.of(3).makeAnti());
-        printIt("r", r);
-        var s = MSet.of(MSet.of(-2).makeAnti(),MSet.of(-1).makeAnti(),MSet.of(-1).makeAnti(),MSet.of(0), MSet.of(2),MSet.of(2),MSet.of(2));
-        printIt("s", s);
-        p = MSet.of(MSet.of(-2),MSet.of(0),MSet.of(1),MSet.of(1));
-        printIt("p", p);
-        q = MSet.of(MSet.of(-1).makeAnti(),MSet.of(-1).makeAnti(),MSet.of(1));
-        printIt("q", q);
-        printIt("p + q", p.add(q));
-        printIt("p × q", p.mul(q));
-        var x = MSet.of(MSet.of(-1), MSet.of(1).makeAnti(), MSet.of(2),MSet.of(2),MSet.of(2));
-        printIt("x", x);
-        var sigmaX_e = MSet.of(MSet.of(-2),MSet.of(-2),MSet.of(-2),MSet.of(-1).makeAnti(),MSet.of(1));
-        printIt("expected σ(x)", sigmaX_e);
-        var sigmaX = x.sigma();
-        printIt("σ(x)", sigmaX);
-        System.out.println(sigmaX.equals(sigmaX_e) ? "Are Equal": "NOT EQUAL");
-        
-        var m = MSet.parse("[0 1]");
+        p = Box.of(Box.of(-2),Box.of(0),Box.of(1),Box.of(1));
+        printIt("p", p);       
+        var m = Box.parse("[0 1]");
         var mSq = m.mul(m);
-        var minusM = m.mul(MSet.of(-1));
-        var minusMSq = mSq.mul(MSet.of(-1));
+        var minusM = m.mul(Box.of(-1));
+        var minusMSq = mSq.mul(Box.of(-1));
         printIt("m", m);
         printIt("mSq", mSq);
         printIt("minusM", minusM);
         printIt("minusMSq", minusMSq);
         printIt("m + minusM", m.add(minusM));
         printIt("mSq + minusM", mSq.add(minusM));
-        p = MSet.parse("[0 0 2 2 2 5]");
-        q = MSet.parse("[0 1\u1D43 2\u1D43 3]");
+        p = Box.parse("[0 0 2 2 2 5]");
+        q = Box.parse("[0 1\u1D43 2\u1D43 3]");
         printIt("p", p);
         printIt("q", q);
         printIt("p + q", p.add(q));   
-        p = MSet.parse("[0 0 1]");
-        q = MSet.parse("[0 0 0 2\u1D43]");
+        p = Box.parse("[0 0 1]");
+        q = Box.parse("[0 0 0 2\u1D43]");
         printIt("p", p);
         printIt("q", q);
         printIt("p × q", p.mul(q)); 
-        x = MSet.parse("[0 1\u1D43]");
-        var xCubed = MSet.mul(x,x,x);
-        printIt("x", x);
-        printIt("x\u00B3", xCubed);
-        var one = MSet.of(1);
-        var twoAlpha = MSet.of(2).makeAnti();
-        printIt("1", one);
-        printIt("2\u1D43", twoAlpha);
-        printIt("1 + 2\u1D43", one.add(twoAlpha));
-        p = MSet.parse("[-2 -1 -1 -1 0 3 3]");
+        p = Box.parse("[-2 -1 -1 -1 0 3 3]");
         printIt("p", p);
         
-        p = MSet.parse("[-3 -1 2\u1D43]");
-        q = MSet.parse("[-1\u1D43 0 2 3]");
+        p = Box.parse("[-3 -1 2\u1D43]");
+        q = Box.parse("[-1\u1D43 0 2 3]");
         printIt("p", p);
         printIt("q", q);
         printIt("p + q", p.add(q));
-        p = MSet.parse("[-2 1]");
-        q = MSet.parse("[-1 -1 3\u1D43]");
+        p = Box.parse("[-2 1]");
+        q = Box.parse("[-1 -1 3\u1D43]");
         printIt("p", p);
         printIt("q", q);
         printIt("p × q", p.mul(q));

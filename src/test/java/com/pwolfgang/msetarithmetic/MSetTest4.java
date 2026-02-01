@@ -17,13 +17,13 @@
  */
 package com.pwolfgang.msetarithmetic;
 
-import com.pwolfgang.boxarithmetic.MSet;
 import java.io.FileDescriptor;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import com.pwolfgang.boxarithmetic.Box;
 
 public class MSetTest4 {
     
@@ -38,7 +38,7 @@ public class MSetTest4 {
         
     }
     
-    void printIt(String s, MSet mSet) {
+    void printIt(String s, Box mSet) {
         System.out.printf("%s: %s%n", s, mSet.toString());
         System.out.printf("%s: %s%n", s, mSet.toIntegerString());
         String asPolyNumber = mSet.asPolyNumber();
@@ -48,19 +48,19 @@ public class MSetTest4 {
     
     @Test
     public void testAlphaZero() {
-        var alphaZero = MSet.of(MSet.of(MSet.of(0)));
+        var alphaZero = Box.of(Box.of(Box.of(0)));
         printIt("\u03B1\u2080", alphaZero);
     }
 
     @Test
     public void testAlphaOne() {
-        var alphaOne = MSet.of(MSet.of(MSet.of(1)));
+        var alphaOne = Box.of(Box.of(Box.of(1)));
         printIt("\u03B1\u2081", alphaOne);
     }
 
     @Test
     public void testAlphaTwo() {
-        var alphaTwo = MSet.of(MSet.of(MSet.of(2)));
+        var alphaTwo = Box.of(Box.of(Box.of(2)));
         printIt("\u03B1\u2082", alphaTwo);
     }
 

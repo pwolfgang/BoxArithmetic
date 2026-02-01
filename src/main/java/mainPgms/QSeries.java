@@ -17,7 +17,7 @@
  */
 package mainPgms;
 
-import com.pwolfgang.boxarithmetic.MSet;
+import com.pwolfgang.boxarithmetic.Box;
 
 /**
  *
@@ -25,7 +25,7 @@ import com.pwolfgang.boxarithmetic.MSet;
  */
 public class QSeries {
     
-    static void printIt(String s, MSet mSet) {
+    static void printIt(String s, Box mSet) {
         String mSetToString = mSet.toString();
         String mSetToIntegerString = mSet.toIntegerString();
         String mSetAsPolyNumber = mSet.asPolyNumber();
@@ -35,10 +35,10 @@ public class QSeries {
     }
         
     public static void main(String... args) {
-        var p1 = MSet.parse("[0 1\u1D43]");
-        var p2 = MSet.parse("[0 2\u1D43]");
-        var p3 = MSet.parse("[0 3\u1D43]");
-        var prod = MSet.mul(p1,p2,p3);
+        var p1 = Box.parse("[0 1\u1D43]");
+        var p2 = Box.parse("[0 2\u1D43]");
+        var p3 = Box.parse("[0 3\u1D43]");
+        var prod = Box.mul(p1,p2,p3);
         printIt("p1: ", p1);
         printIt("p2: ", p2);
         printIt("p3: ", p3);

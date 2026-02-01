@@ -17,13 +17,13 @@
  */
 package com.pwolfgang.msetarithmetic;
 
-import com.pwolfgang.boxarithmetic.MSet;
 import java.io.FileDescriptor;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import com.pwolfgang.boxarithmetic.Box;
 
 public class MSetTest2 {
     
@@ -42,34 +42,17 @@ public class MSetTest2 {
         
     }
 
-    void printIt(String s, MSet mSet) {
-        System.out.printf("%s: %s%n", s, mSet.toString());
-        System.out.printf("%s: %s%n", s, mSet.toIntegerString());
-        System.out.printf("%s: %s%n", s, mSet.asPolyNumber());
-        assertEquals(s, mSet.asPolyNumber());
+    void printIt(String s, Box box) {
+        System.out.printf("%s: %s%n", s, box.toString());
+        System.out.printf("%s: %s%n", s, box.toIntegerString());
+        System.out.printf("%s: %s%n", s, box.asPolyNumber());
+        assertEquals(s, box.asPolyNumber());
     }
     
     @Test
     public void testPolyNumber() {
-        MSet p = MSet.of(MSet.of(0), MSet.of(0), MSet.of(0), MSet.of(1), MSet.of(3), MSet.of(4), MSet.of(4));
+        Box p = Box.of(Box.of(0), Box.of(0), Box.of(0), Box.of(1), Box.of(3), Box.of(4), Box.of(4));
         printIt("3+α₀+α₀³+2α₀⁴", p);
     }
-    
-    @Test
-    public void testTree() {
-        System.out.println("test tree 2");
-        MSet a = MSet.of(MSet.of(1),MSet.of(MSet.of(1)),MSet.of(0));
-        MSet b = MSet.of(MSet.of(0),MSet.of(2));
-        System.out.print("a: ");
-        printIt("1+\u03B1\u2080+\u03B1\u2081", a);
-        System.out.print("b: ");
-        printIt("1+\u03B1\u2080\u00B2",b);
-        System.out.print("a+b: ");
-        printIt("2+\u03B1\u2080+\u03B1\u2080\u00B2+\u03B1\u2081", MSet.add(a,b));
-        System.out.print("a×b: ");
-        printIt("1+\u03B1\u2080+\u03B1\u2080\u00B2+\u03B1\u2080\u00B3+\u03B1\u2081+\u03B1\u2080\u00B2\u03B1\u2081", MSet.mul(a,b));
-        System.out.print("a^b: ");
-        printIt("4+\u03B1\u2080\u00B2+\u03B1\u2081\u00B2", MSet.crt(a,b));
-    }
-    
+        
 }

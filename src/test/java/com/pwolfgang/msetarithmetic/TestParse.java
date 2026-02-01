@@ -17,13 +17,13 @@
  */
 package com.pwolfgang.msetarithmetic;
 
-import com.pwolfgang.boxarithmetic.MSet;
 import java.io.FileDescriptor;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import com.pwolfgang.boxarithmetic.Box;
 
 public class TestParse {
     
@@ -38,7 +38,7 @@ public class TestParse {
         
     }
     
-    void printIt(String s, MSet mSet) {
+    void printIt(String s, Box mSet) {
         String mSetToString = mSet.toString();
         String mSetToIntegerString = mSet.toIntegerString();
         String mSetAsPolyNumber = mSet.asPolyNumber();
@@ -48,7 +48,7 @@ public class TestParse {
         assertEquals(s, mSet.asPolyNumber());
     }
 
-    void printIt_noAssert(String s, MSet mSet) {
+    void printIt_noAssert(String s, Box mSet) {
         String mSetToString = mSet.toString();
         String mSetToIntegerString = mSet.toIntegerString();
         String mSetAsPolyNumber = mSet.asPolyNumber();
@@ -59,51 +59,33 @@ public class TestParse {
 
     @Test
     public void testEmpty() {
-        assertEquals(MSet.of(0), MSet.parse("[]"));
-        assertEquals(MSet.of(0), MSet.parse("[  ]"));
-        assertEquals(MSet.of(0), MSet.parse("  [ ] "));
+        assertEquals(Box.of(0), Box.parse("[]"));
+        assertEquals(Box.of(0), Box.parse("[  ]"));
+        assertEquals(Box.of(0), Box.parse("  [ ] "));
     }
     
     @Test
     public void testSingle() {
-        assertEquals(MSet.of(MSet.of(2)), MSet.parse("[2]"));
+        assertEquals(Box.of(Box.of(2)), Box.parse("[2]"));
     }
 
     @Test
     public void testIntList() {
-        var p = MSet.of(MSet.of(2), MSet.of(3), MSet.of(-5));
+        var p = Box.of(Box.of(2), Box.of(3), Box.of(-5));
         System.out.println(p.toIntegerString());
-        var q =  MSet.parse("[2 3 -5]");
+        var q =  Box.parse("[2 3 -5]");
         assertEquals(p,q);  
     }
     
     @Test
     public void testNested() {
-        var p = MSet.of(MSet.of(2), MSet.of(MSet.of(3),MSet.of(MSet.of(3))));
+        var p = Box.of(Box.of(2), Box.of(Box.of(3),Box.of(Box.of(3))));
         System.out.println(p.toIntegerString());
         System.out.println(p.asPolyNumber());
-        var q = MSet.parse("[2 [3 [3]]]");
+        var q = Box.parse("[2 [3 [3]]]");
         System.out.println(q.toIntegerString());
         System.out.println(q.asPolyNumber());
         assertEquals(p, q);
-    }
-    
-    @Test
-    public void testAntiInt() {
-        var r = MSet.parse("[2\u1D43]");
-        var e = MSet.of(MSet.of(2).makeAnti());
-        printIt_noAssert("r", r);
-        printIt_noAssert("e", e);
-        assertEquals(e,r);
-    }
-    
-    @Test
-    public void testAntiMSet() {
-        var r = MSet.parse("[[2]\u1D43]");
-        var e = MSet.of(MSet.of(MSet.of(2)).makeAnti());
-        printIt_noAssert("r", r);
-        printIt_noAssert("e", e);
-        assertEquals(e,r);        
     }
     
 }
