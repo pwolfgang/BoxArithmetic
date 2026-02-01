@@ -1,18 +1,20 @@
-# MSetArithmetic
-An implementation of N. J. Wildberger's model of arithmetic using multisets
-This is based on the youtube lectures beginning with Math Foundations 227 
-"A multiset approach to arithmetic"
-This project implements the features described through lecture 233 -- 
-The curious world of integral polynumbers.The basic unit is the multiset. 
-A multiset is an unordered collection of objects with the allowance for repeated instances. 
-The objects are restricted to be multisets.
+# BoxtArithmetic
+An implementation of N. J. Wildberger's model of arithmetic using boxes
+This is based on the youtube lectures Intro to Algebraic Calculus
+This project implements the features described through the lecture "Negation and 
+subtraction via Virtual Boxes"
+This project was converted from the MSetArighmetic project by renaming MSet to Box
+and removing the anti features.
+The curious world of integral polynumbers.The basic unit is the box. 
+A box is an unordered collection of objects with the allowance for repeated instances. 
+The objects are restricted to be boxes.
 ## Representing natural numbers 
-The number zero is represented by the empty mset []. An integer is represented 
-by an mset containing msets. Thus 1 is [[]] 2 is [[][]] and so on.
+The number zero is represented by the empty box []. An integer is represented 
+by an box containing empty boxes. Thus 1 is [[]] 2 is [[][]] and so on.
 ## Representing PolyNumbers
-A PolyNumber is an mset of msets. 
-The polynumber &#x03B1; is represented by the multiset containing a multiset
-containing an empty multiset, which is the mset containing the natural number one..
+A PolyNumber is an box of boxes. 
+The polynumber &#x03B1; is represented by the box containing a box
+containing an empty box, which is the box containing the natural number one..
 
 [[[]]] = [[1]] = &#x03B1;
 
@@ -20,12 +22,12 @@ The polynumber 2&#x03B1; is the multiset containing two instances of alpha
 
 [[[]][[]]] = [[1][1]] = 2&#x03B1;
 
-The polynumber &#x03B1;<sup>2</sup> is represented by the multiset containing a multiset
-containing two empty multisets, which is the mset containing the natural number two.
+The polynumber &#x03B1;<sup>2</sup> is represented by the box containing a box
+containing two empty boxes, which is the box containing the natural number two.
 
 [[[][]]] = [[2]] = &#x03B1;<sup>2</sup>
 
-In general, m&#x03b1;<sup>n</sup> is represented by an mset containing m copies of the natural number n.
+In general, m&#x03b1;<sup>n</sup> is represented by an box containing m copies of the natural number n.
 
 The polynumber 3 + &#x03B1; + &#x03B1;<sup>3</sup> + 2&#x03B1;<sup>4</sup> is represented by
 
@@ -35,7 +37,7 @@ which can be written as [0 0 0 1 3 4 4].
 
 ## Multinumbers
 
-A muultinumber is an mset of poly numbers. For example:
+A muultinumber is an box of poly numbers. For example:
 
 [0 0 0 [1] [1 1] [1 1] [1 1] [1 1] [1 1 1 1 1]]
 
@@ -74,7 +76,7 @@ contents of the multisets being combined.
 
 ### Multiplication
 
-Multiplication of msets is accomplished by forming all possible combinations of the contents
+Multiplication of boxes is accomplished by forming all possible combinations of the contents
 of the msets being multiplied and adding them. For example [A B C] × [X Y] = [A+X A+Y B+X B+Y C+X C+Y].
 
 #### Multiplication of natural numbers
@@ -97,164 +99,10 @@ since []+[] = [] the result is
 
 α₃α₈+α₀²α₂ × α₀²+α₉+α₁² = α₃α₈α₉+α₁²α₃α₈+α₀²α₃α₈+α₀²α₂α₉+α₀²α₁²α₂+α₀⁴α₂
 
-### The caret operator
-
-The caret operator is similar to the multiplication operator except that the pairs are multiplied. While 
-the operation sysmbol ^ usually represents exponentation, this operation does not have the properties
-of exponenation.
-
-#### Caret applied to natural numbers
-
-For natural numbers the caret opeator is the same a multiplicaiton.
-
-[[] []] ^ [[] [] []] = [[] [] [] [] [] []]
-
-2 ^ 3 = 6
-
-#### Caret applied to polynumbers
-
-[2 3] ^ [0 1 1] = [0 0 2 2 3 3]
-
-α₀²+α₀³ ^  1+2α₀ = 2+2α₀²+2α₀³
-
-#### Caret applied to multinumbers
-
-[4 [1 2]] ^ [0 [0 3]] = [0 0 [1 2 4 5] [0 0 0 0 3 3 3 3]]
-
-α₀⁴+α₁α₂ ^ 1+α₀α₃ = 2+α₁α₂α₄α₅+α₀⁴α₃⁴
-
 ## Negative numbers
 
-Need to define -1 that sitifies 1 + -1 = 0 and 1 × -1 = 1
-
-The anti-zero 0&#x1043; or []&#x1043; has the property that if we try to create the mset [0 0&#x1043;] the result is []
-the 0 and the 0&#x1043; anilate eachother much like particles and anti-particles do in physics. Thus 
-
-1 = [0] or [[]] and -1 = [0ᵃ] or [[]ᵃ] results in 1 + -1 = [0 0ᵃ] = [] = 0
-
-### Arithmetic with ant-izero
-
-#### 1 × 0 = 0
-
-1 × 0 = [0] × []
-
-Since [0 0ᵃ] = [] 
-
-1 × 0 = [0] × [] = [0] × [0 0ᵃ] = [0+0 0+0ᵃ] = [0 0ᵃ] = []
-
-Conclusion is that 0+0ᵃ = 0ᵃ and 0ᵃ+0 = 0ᵃ
-
-#### 0 × 0 = 0
-
-0 × 0 = [] × [] = [0 0ᵃ] × [0 0ᵃ] = [0+0 0+0ᵃ 0ᵃ+0 0ᵃ+0ᵃ]
-
-[0+0 0+0ᵃ 0ᵃ 0ᵃ+0ᵃ] = [0 0ᵃ 0ᵃ 0ᵃ+0ᵃ;] = [0ᵃ 0ᵃ+0ᵃ]
-
-Conclusion 0ᵃ0ᵃ = 0
-
-#### 1 ^ 0 and 0 ^ 0
-
-Similar analysis concludes that 0×0ᵃ = 0ᵃ and 0ᵃ×0 = 0ᵃ and 0ᵃ×0ᵃ = 0 
-
-#### M + 0&#x1D43; and M × 0&#x1D43;
-
-If M is an mset &#x2260; 0ᵃ then M + 0ᵃ = Mᵃ and 0ᵃ + M = Mᵃ where Mᵃ has the property that [M Mᵃ] = [].
-
-If M is an mset &#x2260; 0ᵃ then M × 0ᵃ = Mᵃ 0ᵃ × M = 0ᵃ
-
-p × q: [0ᵃ 0ᵃ 0ᵃ 0ᵃ 1 -1ᵃ 2 2 -3ᵃ -3ᵃ]
-
-#### -1 × 1
-
--1 × 1 = [0ᵃ] × [0] = [0ᵃ+0] = [0ᵃ] = -1
-
-#### -1 × -1
-
--1 × -1 = [0ᵃ] × [0ᵃ] = [0ᵃ+0ᵃ] = [0] = 1
-
-### Representing netagive integers
-
-Since n is the mset containing n copies of 0 [0 0 ... 0] then -n = -1 × n which is n copies of the anti-zero
-[0ᵃ 0ᵃ ... 0ᵃ]
-
-2 + -3 = [0 0] + [0ᵃ 0ᵃ 0ᵃ] = [0 0 0ᵃ 0ᵃ 0ᵃ] = [0ᵃ] = -1
-
-2 × -3 = [0 0] × [0ᵃ 0ᵃ 0ᵃ] = [0ᵃ 0ᵃ 0ᵃ 0ᵃ 0ᵃ 0ᵃ] = -6
-
-### Negative msets and anti msets
-
-If M is a pure mset (i.e. an mset that only contains msets), then -M = -1 × M = M × -1.
-
--M = [mᵃ : m] 
-
-M = [0 1] = 1+α₀
-
--M = [0ᵃ 1ᵃ] = -1+-1α₀
-
-M&#x00B2; = [0 1 1 2] = 1+2α₀+α₀²
-
-M&#x00B2; + -M = [0 1 1 2] + [0ᵃ 1ᵃ] = [1 2] = α₀+α₀²
-
-If M is a pure mset (i.e. an mset that only contains msets), then Mᵃ = 0ᵃ + M = M + 0ᵃ.
-
-1 + 0ᵃ = [0]ᵃ = 1ᵃ
-
-Note that 1ᵃ = [0]ᵃ is not the same as -1 = [0ᵃ]
-
-#### Examples
-
-p = [0 0 2 2 2 5] = 2+3α₀²+α₀⁵
-
-q = [0 1ᵃ 2ᵃ 3] = 1+-1α₀+-1α₀²+α₀³
-
-p + q = [0 0 0 1ᵃ 2 2 2 2ᵃ 3 5] = [0 0 0 1ᵃ 2 2 3 5] = 3+-1α₀+2α₀²+α₀³+α₀⁵
-
-p = [0 0 1] = 2+α₀
-
-q = [0 0 0 2ᵃ] = 3+-1α₀²
-
-p × q = [0+0 0+0 0+0 0+2ᵃ 0+0 0+0 0+0 0+2ᵃ 0+0 0+0 0+0 0+2ᵃ 1+0 1+0 1+0 1+2ᵃ]
-
-1 + 2ᵃ = [0] + [0 0]ᵃ = [0] + [0 0] + 0ᵃ = [0 0 0] + 0ᵃ = 3 + 0ᵃ = 3ᵃ 
-
-p × q = [0 0 0 2ᵃ 0 0 0 2ᵃ 0 0 0 2ᵃ 1 1 1 3ᵃ] = [0 0 0 0 0 0 1 1 1 2ᵃ 2ᵃ 3ᵃ]
-
-p × q = 6+3α₀+-2α₀²+-1α₀³
-
-## Integral Polynumbers
-
-p = [-2 -1 -1 -1 0 3 3] = α₀⁻²+3α₀⁻¹+1+2α₀³
-
-p = [-1 2ᵃ -3] = α₀⁻¹+-1α₀²+α₀⁻³
-
-q = [0 -1ᵃ 2 3] = 1+-1α₀⁻¹+α₀²+α₀³
-
-p + q = [-1 2ᵃ -3 0 -1ᵃ 2 3] = [0 3 -3] = 1+α₀³+α₀⁻³
-
-p = [-2 1] = α₀⁻²+α₀
-
-q = [-1 -1 3ᵃ] = 2α₀⁻¹ + -1α₀³ 
-
-p × q: [-2+-1 -2+-1 -2+3ᵃ 1+-1 1+-1 1+3ᵃ]
-
-p × q: [-3 -3 1ᵃ 0 0 4ᵃ] = 2α₀⁻³ + 2 + -1α₀ + -1α₀⁴
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Negative numbers are represened by virtual boxes. A virtual box contains two boxes and represents
+the value of the leftBox minus the rightBox.
 
 
 
