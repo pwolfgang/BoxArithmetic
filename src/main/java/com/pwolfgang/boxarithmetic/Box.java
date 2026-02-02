@@ -40,9 +40,24 @@ public interface Box extends Comparable<Box>, Cloneable, Iterable<Box> {
 
     /**
      * Return the size of this Box.
-     * @return the size of this Box.
+     * @return the intSize of this Box as an int,.
      */
-    int size();
+    int intSize();
+    
+    /**
+     * The size of a box is the box with each element replaced
+     * bo the empty box.
+     * @return the size of this box as a Box of empty boxes.
+     */
+    Box size();
+    
+    /**
+     * The B truncation of A is the tox tB obtained by removing
+     * all elements of A which are not equal to B.
+     * @param b The other box.
+     * @return the truncation of this box by b
+     */
+    Box tB(Box b);
 
     /**
      * Indicate that this is an empty Box
@@ -77,7 +92,7 @@ public interface Box extends Comparable<Box>, Cloneable, Iterable<Box> {
      */
     @Override
     default public int compareTo(Box other) {
-        int compareSize = Integer.compare(this.size(), other.size());
+        int compareSize = Integer.compare(this.intSize(), other.intSize());
         if (compareSize != 0) {
             return compareSize;
         } else {
@@ -192,6 +207,10 @@ public interface Box extends Comparable<Box>, Cloneable, Iterable<Box> {
      * @param y the other Box
      * @return x + y
      */
+    
+    /** Truncation of a box is the result of 
+    
+    
     public static Box add(Box x, Box y) {
         return x.add(y);
     }

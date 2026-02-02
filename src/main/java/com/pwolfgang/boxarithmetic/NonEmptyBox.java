@@ -124,8 +124,24 @@ public class NonEmptyBox implements Box {
      * @return the number of elements in this mset
      */
     @Override
-    public int size() {
+    public int intSize() {
         return content.size();
+    }
+    
+    @Override 
+    public Box size() {
+        return Box.of(content.size());
+    }
+    
+    @Override
+    public Box tB(Box b) {
+        List<Box> result = new ArrayList<>();
+        for (var x:content) {
+            if (x.equals(b)) {
+                result.add(x);
+            }
+        }
+        return Box.of(result);
     }
     
     /**
@@ -366,7 +382,7 @@ public class NonEmptyBox implements Box {
         var stb = new StringBuilder();
         ll.forEach(el ->{
             stb.append("\u03B1");
-            stb.append(genSub(el.get(0).size()));
+            stb.append(genSub(el.get(0).intSize()));
             var count = countSets(el);
             if (count < 0) {
                 stb.append("\u207B");

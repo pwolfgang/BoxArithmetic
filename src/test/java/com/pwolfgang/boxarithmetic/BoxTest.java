@@ -53,7 +53,7 @@ public class BoxTest {
         System.out.println("testCreateEmptySet");
         var m = Box.of();
         printIt("m", m);
-        assertEquals(0, m.size());
+        assertEquals(0, m.intSize());
         assertEquals("[ ]", m.toString());
         assertEquals("0", m.toIntegerString());
         assertEquals("0", m.asPolyNumber());
@@ -65,7 +65,7 @@ public class BoxTest {
         var zero = Box.of();
         var one = Box.of(zero);
         printIt("one", one);
-        assertEquals(1, one.size());
+        assertEquals(1, one.intSize());
         assertEquals("[[ ]]", one.toString());
         assertEquals("1", one.toIntegerString());
         assertEquals("1", one.asPolyNumber());
@@ -225,6 +225,25 @@ public class BoxTest {
         assertEquals(alphaSubOne_1,alphaSubOne_2);
         assertEquals(twoAlphaTwoSq_1,twoAlphaTwoSq_2);
         assertNotEquals(alphaSubOne_1,twoAlphaTwoSq_1);
+    }
+    
+    @Test
+    public void testTruncation() {
+        System.out.println("\n\ntestTruncation");
+        Box A = Box.parse("[7 7 [3 5] [[4] 2]]");
+        Box B = Box.of(7);
+        Box C = Box.parse("[3 5]");
+        Box D = Box.of(8);
+        printIt("A: ", A);
+        printIt("B: ", B);
+        printIt("C: ", C);
+        printIt("D: ", D);
+        Box tBofA = Box.parse("[7 7]");
+        Box tCofA = Box.parse("[[3 5]]");
+        Box tDofA = Box.of(0);
+        assertEquals(tBofA, A.tB(B));
+        assertEquals(tCofA, A.tB(C));
+        assertEquals(tDofA, A.tB(D));
     }
         
 }

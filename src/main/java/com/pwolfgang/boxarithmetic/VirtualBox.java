@@ -71,9 +71,15 @@ public class VirtualBox  implements Box{
     }
 
     @Override
-    public int size() {
+    public int intSize() {
         return 2;
     }
+    
+    @Override
+    public Box size() {
+        return Box.of(2);
+    }
+    
 
     @Override
     public boolean isEmptyBox() {
@@ -144,6 +150,11 @@ public class VirtualBox  implements Box{
     @Override
     public List<Box> getContent() {
         return List.of(leftBox, rightBox);
+    }
+
+    @Override
+    public Box tB(Box b) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
     
     

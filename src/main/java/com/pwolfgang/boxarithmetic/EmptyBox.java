@@ -35,7 +35,17 @@ public class EmptyBox implements Box {
      * @return Always return 0
      */
     @Override
-    public int size() {return 0;}
+    public int intSize() {
+        return 0;
+    }
+    
+    public Box size() {
+        return new EmptyBox();
+    }
+    
+    public Box tB(Box b) {
+        return new EmptyBox();
+    }
     
     /**
      * {@inheritDoc}
