@@ -15,9 +15,8 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package com.pwolfgang.msetarithmetic;
+package com.pwolfgang.boxarithmetic;
 
-import com.pwolfgang.boxarithmetic.EmptyBox;
 import java.io.FileDescriptor;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
@@ -55,7 +54,7 @@ public class BoxTest {
         var m = Box.of();
         printIt("m", m);
         assertEquals(0, m.size());
-        assertEquals("[]", m.toString());
+        assertEquals("[ ]", m.toString());
         assertEquals("0", m.toIntegerString());
         assertEquals("0", m.asPolyNumber());
     }
@@ -67,7 +66,7 @@ public class BoxTest {
         var one = Box.of(zero);
         printIt("one", one);
         assertEquals(1, one.size());
-        assertEquals("[[]]", one.toString());
+        assertEquals("[[ ]]", one.toString());
         assertEquals("1", one.toIntegerString());
         assertEquals("1", one.asPolyNumber());
     }

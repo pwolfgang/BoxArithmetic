@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package com.pwolfgang.msetarithmetic;
+package com.pwolfgang.boxarithmetic;
 
 import java.io.FileDescriptor;
 import java.io.FileOutputStream;
@@ -25,9 +25,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import com.pwolfgang.boxarithmetic.Box;
 
-public class SigmaTest {
-    
-    public SigmaTest() {}
+public class BoxTest4 {
     
     @BeforeEach
     public void init() {
@@ -40,23 +38,31 @@ public class SigmaTest {
         
     }
     
-    void printIt(String s, Box box) {
-        String boxToString = box.toString();
-        String boxToIntegerString = box.toIntegerString();
-        String boxAsPolyNumber = box.asPolyNumber();
-        System.out.printf("%s: %s%n", s, boxToString);
-        System.out.printf("%s: %s%n", s, boxToIntegerString);
-        System.out.printf("%s: %s%n", s, boxAsPolyNumber);
-        assertEquals(s, box.asPolyNumber());
+    void printIt(String s, Box mSet) {
+        System.out.printf("%s: %s%n", s, mSet.toString());
+        System.out.printf("%s: %s%n", s, mSet.toIntegerString());
+        String asPolyNumber = mSet.asPolyNumber();
+        System.out.printf("%s: %s%n", s, asPolyNumber);
+        assertEquals(s, mSet.asPolyNumber());
     }
     
-        void printIt_noAssert(String s, Box box) {
-        String boxToString = box.toString();
-        String boxToIntegerString = box.toIntegerString();
-        String boxAsPolyNumber = box.asPolyNumber();
-        System.out.printf("%s: %s%n", s, boxToString);
-        System.out.printf("%s: %s%n", s, boxToIntegerString);
-        System.out.printf("%s: %s%n", s, boxAsPolyNumber);
+    @Test
+    public void testAlphaZero() {
+        var alphaZero = Box.of(Box.of(Box.of(0)));
+        printIt("\u03B1\u2080", alphaZero);
     }
 
+    @Test
+    public void testAlphaOne() {
+        var alphaOne = Box.of(Box.of(Box.of(1)));
+        printIt("\u03B1\u2081", alphaOne);
+    }
+
+    @Test
+    public void testAlphaTwo() {
+        var alphaTwo = Box.of(Box.of(Box.of(2)));
+        printIt("\u03B1\u2082", alphaTwo);
+    }
+
+    
 }
