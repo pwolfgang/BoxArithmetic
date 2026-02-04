@@ -58,6 +58,22 @@ public interface Box extends Comparable<Box>, Cloneable, Iterable<Box> {
      * @return the truncation of this box by b
      */
     Box tB(Box b);
+    
+    /**
+     * Evaluate this box.
+     */
+    Box eval(Box A);
+   
+    default Box pow(Box n) {
+        Box prod = Box.of(1);
+        var itr = n.iterator();
+        while (itr.hasNext()) {
+            if (itr.next().isEmptyBox()) {
+                prod = prod.mul(this);
+            }
+        }
+        return prod;
+    }
 
     /**
      * Indicate that this is an empty Box

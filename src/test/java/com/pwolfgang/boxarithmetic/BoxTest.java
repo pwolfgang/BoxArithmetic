@@ -23,7 +23,6 @@ import java.io.PrintStream;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
-import com.pwolfgang.boxarithmetic.Box;
 
 public class BoxTest {
     

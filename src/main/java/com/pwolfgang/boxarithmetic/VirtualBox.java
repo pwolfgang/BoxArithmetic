@@ -156,6 +156,10 @@ public class VirtualBox  implements Box{
     public Box tB(Box b) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-    
+
+    @Override
+    public Box eval(Box A) {
+        return new VirtualBox(leftBox.eval(A), rightBox.eval(A));
+    }
     
 }

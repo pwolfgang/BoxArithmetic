@@ -28,7 +28,6 @@ import java.util.NoSuchElementException;
  */
 public class EmptyBox implements Box {
     
-    Box parent;
     
     /**
      * {@inheritDoc}
@@ -180,6 +179,15 @@ The product of a EmptyBox and an EmptyBox is an EmptyBox
     @Override
     public int getHeight() {
         return 0;
+    }
+
+    @Override
+    public Box eval(Box A) {
+        return new EmptyBox();
+    }
+    
+    public Box pow(Box n) {
+        return new EmptyBox();
     }
     
 }

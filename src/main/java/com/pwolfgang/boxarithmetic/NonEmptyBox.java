@@ -157,7 +157,7 @@ public class NonEmptyBox implements Box {
     
     /**
      * {@inheritDoc}
-     * @return A String consisting of nested [...] with the innermost mset
+     * @return A String consisting of nested [...] with the innermost box
      * replaced by an integer
      */
     @Override
@@ -196,7 +196,7 @@ public class NonEmptyBox implements Box {
     
     /**
      * {@inheritDoc}
-     * @return An iterator to the contents of this mset.
+     * @return An iterator to the contents of this box.
      */
     @Override
     public Iterator<Box> iterator() {
@@ -433,4 +433,22 @@ public class NonEmptyBox implements Box {
         return height;
     }
 
+    
+    @Override
+    public Box eval(Box A) {
+        Box result = new EmptyBox();
+        if (A.isEmptyBox()) {
+            return Box.of(result);
+        }
+        for (Box b:content) {
+            if (b.isEmptyBox()) {
+                result = result.add(Box.of(1));
+            } else {
+                result = result.add(A.pow(b));
+            }
+            
+        }
+        return result;
+    }
+    
 }
