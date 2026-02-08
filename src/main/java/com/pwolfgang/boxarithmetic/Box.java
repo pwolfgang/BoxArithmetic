@@ -156,7 +156,7 @@ public interface Box extends Comparable<Box>, Cloneable, Iterable<Box> {
         } else if (n > 0) {
             return new NonEmptyBox(n);
         } else {
-            return new VirtualBox(Box.of(0), new NonEmptyBox(-n));
+            throw new IllegalArgumentException("n must be >=0");
         }
     }
 
