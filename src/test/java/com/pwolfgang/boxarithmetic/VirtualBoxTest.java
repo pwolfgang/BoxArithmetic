@@ -17,7 +17,7 @@
  */
 package com.pwolfgang.boxarithmetic;
 
-import com.pwolfgang.boxarithmetic.VirtualBox;
+import com.pwolfgang.boxarithmetic.DifferencePair;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import com.pwolfgang.boxarithmetic.Box;
@@ -40,7 +40,7 @@ public class VirtualBoxTest {
     }
 
     /**
-     * Test of toString method, of class VirtualBox.
+     * Test of toString method, of class DifferencePair.
      */
     @Test
     public void testToString() {
@@ -49,8 +49,8 @@ public class VirtualBoxTest {
         Box b = Box.parse("[0 0 2 1]");
         Box c = Box.parse("[0 1 1 2 3 5]");
         Box d = Box.parse("[0 0 1 2 2 5]");
-        var U = new VirtualBox(a,b);
-        var V = new VirtualBox(c,d);
+        var U = new DifferencePair(a,b);
+        var V = new DifferencePair(c,d);
         System.out.printf("%s = %s\n", "A \u2296 B", U.toString());
         System.out.printf("%s = %s\n", "C \u2296 D", V.toString());
         assertEquals("([0 1 1 3]⊖[0 0 1 2])", U.toString());
@@ -60,8 +60,8 @@ public class VirtualBoxTest {
     @Test
     public void testEquals() {
         System.out.println("\n\nTesting equals");
-        var x = new VirtualBox(Box.of(4), Box.of(6));
-        var y = new VirtualBox(Box.of(5), Box.of(7));
+        var x = new DifferencePair(Box.of(4), Box.of(6));
+        var y = new DifferencePair(Box.of(5), Box.of(7));
         System.out.printf("x: %s\n", x);
         System.out.printf("y: %s\n", y);
         assertEquals(x,x);
@@ -72,13 +72,13 @@ public class VirtualBoxTest {
     @Test
     public void testAdd() {
         System.out.println("\n\nTesting add");
-        var x = new VirtualBox(Box.of(4),Box.of(6));
-        var y = new VirtualBox(Box.of(2),Box.of(0));
+        var x = new DifferencePair(Box.of(4),Box.of(6));
+        var y = new DifferencePair(Box.of(2),Box.of(0));
         var sum = x.add(y);
         System.out.printf("x: %s\n", x);
         System.out.printf("y: %s\n", y);
         System.out.printf("sum: %s%n", sum);
-        assertEquals(new VirtualBox(Box.of(0),Box.of(0)), sum);
+        assertEquals(new DifferencePair(Box.of(0),Box.of(0)), sum);
     }
     
     @Test
@@ -90,9 +90,9 @@ public class VirtualBoxTest {
         Box d = Box.parse("[0 0 1 2 2 5]");
         Box e = Box.parse("[3 [4]]");
         Box f = Box.parse("[0 1]");
-        var U = new VirtualBox(a,b);
-        var V = new VirtualBox(c,d);
-        var W = new VirtualBox(e,f);
+        var U = new DifferencePair(a,b);
+        var V = new DifferencePair(c,d);
+        var W = new DifferencePair(e,f);
         System.out.printf("U: %s\n", U);
         System.out.printf("V: %s\n", V);
         System.out.printf("W: %s\n", W);
@@ -106,9 +106,9 @@ public class VirtualBoxTest {
     @Test
     public void testMul() {
         System.out.println("\n\nTest mul");
-        var A = new VirtualBox(Box.of(0), Box.of(3));
-        var B = new VirtualBox(Box.of(0), Box.of(2));
-        var expected = new VirtualBox(Box.of(6),Box.of(0));
+        var A = new DifferencePair(Box.of(0), Box.of(3));
+        var B = new DifferencePair(Box.of(0), Box.of(2));
+        var expected = new DifferencePair(Box.of(6),Box.of(0));
         System.out.printf("A: %s%n", A);
         System.out.printf("B: %s\n", B);
         System.out.printf("A × B: %s\n", A.mul(B).toString());

@@ -21,12 +21,12 @@ package com.pwolfgang.boxarithmetic;
  *
  * @author Paul
  */
-public class VirtualBox {
+public class DifferencePair {
     
     private final Box leftBox;
     private final Box rightBox;
     
-    public VirtualBox(Box left, Box right) {
+    public DifferencePair(Box left, Box right) {
         leftBox = left;
         rightBox = right;
     }
@@ -39,7 +39,7 @@ public class VirtualBox {
     @Override
     public boolean equals(Object o) {
         if (o == null) return false;
-        if (o instanceof VirtualBox other) {
+        if (o instanceof DifferencePair other) {
             Box term1 = leftBox.add(other.rightBox);
             Box term2 = rightBox.add(other.leftBox);
             return term1.equals(term2);
@@ -48,22 +48,22 @@ public class VirtualBox {
         }
     }
     
-    public VirtualBox add(VirtualBox other) {
-        return new VirtualBox(leftBox.add(other.leftBox), rightBox.add(other.rightBox));   
+    public DifferencePair add(DifferencePair other) {
+        return new DifferencePair(leftBox.add(other.leftBox), rightBox.add(other.rightBox));   
     }
     
-    public VirtualBox neg() {
-        return new VirtualBox(rightBox, leftBox);
+    public DifferencePair neg() {
+        return new DifferencePair(rightBox, leftBox);
     }
     
-    public VirtualBox sub(VirtualBox other) {
+    public DifferencePair sub(DifferencePair other) {
         return add(other.neg());
     }
     
-    public VirtualBox mul(VirtualBox other) {
+    public DifferencePair mul(DifferencePair other) {
         var term1 = leftBox.mul(other.leftBox).add(rightBox.mul(other.rightBox));
         var term2 = leftBox.mul(other.rightBox).add(rightBox.mul(other.leftBox));
-        return new VirtualBox(term1, term2);
+        return new DifferencePair(term1, term2);
     }   
 
      public String toIntegerString() {
@@ -71,8 +71,8 @@ public class VirtualBox {
     }
 
     @Override
-    public VirtualBox clone() {
-        return new VirtualBox(leftBox.clone(), rightBox.clone());
+    public DifferencePair clone() {
+        return new DifferencePair(leftBox.clone(), rightBox.clone());
     }
 
     public String asPolyNumber() {
