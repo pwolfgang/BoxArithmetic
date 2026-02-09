@@ -17,17 +17,15 @@
  */
 package com.pwolfgang.boxarithmetic;
 
-import com.pwolfgang.boxarithmetic.DifferencePair;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-import com.pwolfgang.boxarithmetic.Box;
 
 
 /**
  *
  * @author Paul
  */
-public class VirtualBoxTest {
+public class DifferencePairTest {
     
     void printIt(String s, Box box) {
         System.out.printf("%s: %s%n", s, box.toString());
@@ -36,7 +34,7 @@ public class VirtualBoxTest {
     }
 
     
-    public VirtualBoxTest() {
+    public DifferencePairTest() {
     }
 
     /**
@@ -113,6 +111,26 @@ public class VirtualBoxTest {
         System.out.printf("B: %s\n", B);
         System.out.printf("A × B: %s\n", A.mul(B).toString());
         assertEquals(expected, A.mul(B));
+    }
+    
+    @Test
+    public void testPolyNumbers() {
+        System.out.println("\n\ntestPolyNumber");
+        var A = Box.parse("[0 2 2 2 7 7 7 7 7]");
+        var B = Box.parse("[0 0 7 7 7 8 8 8 8]");
+        var AmB = new DifferencePair(A,B);
+        System.out.println(AmB.asPolyNumber());
+        var Cl = Box.parse("[0 0 4]");
+        var Cr = Box.parse("[1 1 1]");
+        var Dl = Box.parse("[1 1]");
+        var Dr = Box.parse("[2 2 2 2 2]");
+        var C = new DifferencePair(Cl, Cr);
+        var D = new DifferencePair(Dl, Dr);
+        var CxD = C.mul(D);
+        System.out.println(C.asPolyNumber());
+        System.out.println(D.asPolyNumber());
+        System.out.println(CxD.asPolyNumber());
+        
     }
     
 }

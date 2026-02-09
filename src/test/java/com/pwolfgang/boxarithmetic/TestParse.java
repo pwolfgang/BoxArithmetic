@@ -68,14 +68,6 @@ public class TestParse {
     public void testSingle() {
         assertEquals(Box.of(Box.of(2)), Box.parse("[2]"));
     }
-
-    @Test
-    public void testIntList() {
-        var p = Box.of(Box.of(2), Box.of(3), Box.of(-5));
-        System.out.println(p.toIntegerString());
-        var q =  Box.parse("[2 3 -5]");
-        assertEquals(p,q);  
-    }
     
     @Test
     public void testNested() {

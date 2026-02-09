@@ -1,8 +1,8 @@
 # BoxtArithmetic
 An implementation of N. J. Wildberger's model of arithmetic using boxes
 This is based on the youtube lectures Intro to Algebraic Calculus
-This project implements the features described through the lecture "Negation and 
-subtraction via Virtual Boxes"
+This project implements the features described through the lecture "Integer
+Arithmetic via Boxes"
 This project was converted from the MSetArighmetic project by renaming MSet to Box
 and removing the anti features.
 The curious world of integral polynumbers.The basic unit is the box. 
@@ -101,8 +101,30 @@ since []+[] = [] the result is
 
 ## Negative numbers
 
-Negative numbers are represened by virtual boxes. A virtual box contains two boxes and represents
-the value of the leftBox minus the rightBox.
+Negative numbers are represened by difference pairs. A difference pair contains 
+two boxes and represents the value of the leftBox minus the rightBox. Note in
+a previous lecture the differnce pair was called a virtual box. A previous
+commit to implement the virtual box anticipated that the virutal box would
+be a box and thus could be a component of a larget box. This has been removed
+from this commit.
+
+## Difference Pairs of Polynumbers
+Polynumbers with integer coeficients are represented by difference pairs of
+poly numbers. Thus
+
+(1+3α₀²+5α₀⁷, 2+3α₀⁷+4α₀⁸)
+
+represents
+
+(-1+3α₀²+2α₀⁷+4α₀⁸)
+
+Also
+
+C = (2+α₀⁴, 3α₀) = 2-3α₀+α₀⁴
+
+D = (2α₀, 5α₀²) = 2α₀ - 5α₀²
+
+C×D = (4α₀+15α₀³+2α₀⁵, 16α₀²+5α₀⁶ = 4α₀-16α₀²+15α₀³+2α₀⁵-5α₀⁶
 
 
 
