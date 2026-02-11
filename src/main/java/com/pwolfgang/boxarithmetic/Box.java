@@ -50,7 +50,7 @@ public interface Box extends Comparable<Box>, Cloneable, Iterable<Box> {
      * @return the size of this box as a Box of empty boxes.
      */
     Box size();
-    
+       
     /**
      * The B truncation of A is the tox tB obtained by removing
      * all elements of A which are not equal to B.

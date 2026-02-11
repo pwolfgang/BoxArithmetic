@@ -112,7 +112,7 @@ from this commit.
 Polynumbers with integer coeficients are represented by difference pairs of
 poly numbers. Thus
 
-(1+3α₀²+5α₀⁷, 2+3α₀⁷+4α₀⁸)
+(1+3α₀²+5α₀⁷⊖2+3α₀⁷+4α₀⁸)
 
 represents
 
@@ -120,11 +120,11 @@ represents
 
 Also
 
-C = (2+α₀⁴, 3α₀) = 2-3α₀+α₀⁴
+C = (2+α₀⁴⊖3α₀) = 2-3α₀+α₀⁴
 
-D = (2α₀, 5α₀²) = 2α₀ - 5α₀²
+D = (2α₀⊖5α₀²) = 2α₀ - 5α₀²
 
-C×D = (4α₀+15α₀³+2α₀⁵, 16α₀²+5α₀⁶ = 4α₀-16α₀²+15α₀³+2α₀⁵-5α₀⁶
+C×D = (4α₀+15α₀³+2α₀⁵⊖16α₀²+5α₀⁶ = 4α₀-16α₀²+15α₀³+2α₀⁵-5α₀⁶
 
 
 

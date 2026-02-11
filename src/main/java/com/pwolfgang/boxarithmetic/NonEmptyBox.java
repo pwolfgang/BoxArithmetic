@@ -353,7 +353,7 @@ public class NonEmptyBox implements Box {
     
     /**
      * {@inheritDoc }
-     * @return A polynumber representation of this mset.
+     * @return A polynumber representation of this box.
      */
     @Override
     public String asPolyNumber() {
@@ -377,7 +377,7 @@ public class NonEmptyBox implements Box {
         return result;
     }
     
-    String genSupSub(NonEmptyBox m) {
+    static String genSupSub(NonEmptyBox m) {
         var ll = m.groupEquals();
         var stb = new StringBuilder();
         ll.forEach(el ->{
@@ -394,12 +394,12 @@ public class NonEmptyBox implements Box {
         return stb.toString();      
     }
     
-    int countSets(List<Box> el) {
+    static int countSets(List<Box> el) {
         return el.size();
     }
 
     
-    String genSub(int n) {
+    static String genSub(int n) {
         var stb = new StringBuilder();
         var s = Integer.toString(n);
         for (int i = 0; i < s.length(); i++) {
@@ -409,7 +409,7 @@ public class NonEmptyBox implements Box {
         return stb.toString();
     }
 
-    String genSup(int n) {
+    static String genSup(int n) {
         var stb = new StringBuilder();
         var s = Integer.toString(n);
         for (int i = 0; i < s.length(); i++) {

@@ -119,7 +119,10 @@ public class DifferencePairTest {
         var A = Box.parse("[0 2 2 2 7 7 7 7 7]");
         var B = Box.parse("[0 0 7 7 7 8 8 8 8]");
         var AmB = new DifferencePair(A,B);
-        System.out.println(AmB.asPolyNumber());
+        System.out.println(AmB);
+        var actual = AmB.asPolyNumber();
+        var expected = "-1 + 3α₀² + 2α₀⁷ + -4α₀⁸";
+        assertEquals(expected, actual);
         var Cl = Box.parse("[0 0 4]");
         var Cr = Box.parse("[1 1 1]");
         var Dl = Box.parse("[1 1]");
@@ -127,10 +130,14 @@ public class DifferencePairTest {
         var C = new DifferencePair(Cl, Cr);
         var D = new DifferencePair(Dl, Dr);
         var CxD = C.mul(D);
+        System.out.println(C);
         System.out.println(C.asPolyNumber());
+        System.out.println(D);
         System.out.println(D.asPolyNumber());
-        System.out.println(CxD.asPolyNumber());
-        
+        System.out.println(CxD);
+        actual = CxD.asPolyNumber();
+        expected = "4α₀ + -16α₀² + 15α₀³ + 2α₀⁵ + -5α₀⁶";
+        assertEquals(expected, actual);
     }
     
 }
