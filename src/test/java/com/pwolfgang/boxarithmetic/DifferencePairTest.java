@@ -119,9 +119,11 @@ public class DifferencePairTest {
         var A = Box.parse("[0 2 2 2 7 7 7 7 7]");
         var B = Box.parse("[0 0 7 7 7 8 8 8 8]");
         var AmB = new DifferencePair(A,B);
-        System.out.println(AmB);
+        System.out.printf("A = %s%n", A.asPolyNumber());
+        System.out.printf("B = %s%n", B.asPolyNumber());
+        System.out.printf("A-B = %s%n", AmB.asPolyNumber());
         var actual = AmB.asPolyNumber();
-        var expected = "-1 + 3α₀² + 2α₀⁷ + -4α₀⁸";
+        var expected = "\u03051 + 3α₀² + 2α₀⁷ + \u03054α₀⁸";
         assertEquals(expected, actual);
         var Cl = Box.parse("[0 0 4]");
         var Cr = Box.parse("[1 1 1]");
@@ -130,13 +132,11 @@ public class DifferencePairTest {
         var C = new DifferencePair(Cl, Cr);
         var D = new DifferencePair(Dl, Dr);
         var CxD = C.mul(D);
-        System.out.println(C);
-        System.out.println(C.asPolyNumber());
-        System.out.println(D);
-        System.out.println(D.asPolyNumber());
-        System.out.println(CxD);
         actual = CxD.asPolyNumber();
-        expected = "4α₀ + -16α₀² + 15α₀³ + 2α₀⁵ + -5α₀⁶";
+        System.out.printf("C = %s%n", C.asPolyNumber());
+        System.out.printf("D = %s%n", D.asPolyNumber());
+        System.out.printf("C×D = %s%n", CxD.asPolyNumber());
+        expected = "4α₀ + \u030516α₀² + 15α₀³ + 2α₀⁵ + \u03055α₀⁶";
         assertEquals(expected, actual);
     }
     

@@ -106,7 +106,7 @@ public class DifferencePair {
                 leftList.poll();
             } else if (rightPower < leftPower) {
                 var term = genTerm(rightTerm);
-                term.insert(0, '-');
+                term.insert(0, '\u0305');
                 result.add(term);
                 rightList.poll();            
             } else {
@@ -122,7 +122,7 @@ public class DifferencePair {
                         rightTerm.removeLast();
                     }
                     var term = genTerm(leftTerm);
-                    term.insert(0, '-');
+                    term.insert(0, '\u0305');
                     result.add(term);
                 }
                 leftList.poll();
@@ -136,7 +136,7 @@ public class DifferencePair {
         while (!rightList.isEmpty()) {
             var rightTerm = rightList.poll();
                 var term = genTerm(rightTerm);
-                term.insert(0, '-');
+                term.insert(0, '\u0305');
                 result.add(term);                          
             }
         return result.toString();
