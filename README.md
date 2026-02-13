@@ -5,11 +5,11 @@ This project implements the features described through the lecture "Integer
 Arithmetic via Boxes"
 This project was converted from the MSetArighmetic project by renaming MSet to Box
 and removing the anti features.
-The curious world of integral polynumbers.The basic unit is the box. 
+The curious world of integral polynumbers. The basic unit is the box. 
 A box is an unordered collection of objects with the allowance for repeated instances. 
 The objects are restricted to be boxes.
 ## Representing natural numbers 
-The number zero is represented by the empty box []. An integer is represented 
+The number zero is represented by the empty box []. A natural number is represented 
 by an box containing empty boxes. Thus 1 is [[]] 2 is [[][]] and so on.
 ## Representing PolyNumbers
 A PolyNumber is an box of boxes. 

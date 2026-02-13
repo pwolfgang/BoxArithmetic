@@ -188,7 +188,7 @@ public class NonEmptyBox implements Box {
         }
     }
     
-    private void finishLoop(Iterator<Box> itr, StringJoiner sj) {
+    void finishLoop(Iterator<Box> itr, StringJoiner sj) {
         while (itr.hasNext()) {
             sj.add(itr.next().toIntegerString());
         }
