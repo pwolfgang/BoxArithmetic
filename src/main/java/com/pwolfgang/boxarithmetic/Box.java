@@ -112,7 +112,7 @@ public interface Box extends Comparable<Box>, Cloneable, Iterable<Box> {
         if (compareSize != 0) {
             return compareSize;
         } else {
-            return Integer.compare(this.hashCode(), other.hashCode());
+            return Integer.compare(System.identityHashCode(this),System.identityHashCode(other));
         }
     }
   
@@ -190,13 +190,7 @@ public interface Box extends Comparable<Box>, Cloneable, Iterable<Box> {
      * @param other The other EmptyBox
      * @return The sum of this and other
      */
-    Box addEmptyBox(EmptyBox other);
-    /**
-     * Return a new Box that is the sum of this Box an another AntiEmptySet.
-     * @param other The other AntiEMptySet.
-     * @return The sum of this and other
-     */
-    Box addNonEmptyBox(NonEmptyBox other);
+ 
     /**
      * Return a new Box that is the product of this Box an another Box.
      * The result is an Box of the pair-wise sums of the contents of the 
@@ -205,24 +199,6 @@ public interface Box extends Comparable<Box>, Cloneable, Iterable<Box> {
      * @return this times other
      */
     Box mul(Box other);
-    /**
-     * Return a new Box that is the product of this Box an another EmptyBox.
-     * @param other The other EmptyBox.
-     * @return this times other
-     */
-    Box mulEmptyBox(EmptyBox other);
-    /**
-     * Return a new Box that is the product of this Box an another AntiEmptySet.
-     * @param other The other AntiEmptySet.
-     * @return this times other
-     */
-    Box mulNonEmptyBox(NonEmptyBox other);
-    /**
-     * Return the sum of two Boxs. 
-     * @param x one Box
-     * @param y the other Box
-     * @return x + y
-     */
     
     /** Truncation of a box is the result of 
     

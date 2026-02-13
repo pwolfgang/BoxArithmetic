@@ -20,7 +20,6 @@ package com.pwolfgang.boxarithmetic;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 /**
  * This class models the empty mset.
@@ -38,10 +37,12 @@ public class EmptyBox implements Box {
         return 0;
     }
     
+    @Override
     public Box size() {
         return new EmptyBox();
     }
     
+    @Override
     public Box tB(Box b) {
         return new EmptyBox();
     }
@@ -98,30 +99,9 @@ public class EmptyBox implements Box {
      */
     @Override
     public Box add(Box other) {
-        return other.addEmptyBox(this);
-    }
-    
-    /**
-     * {@inheritDoc}
-The sum of two EmptyBoxs is and EmptyBox.
-     * @return The sum of this Box and other
-     */
-    @Override
-    public Box addEmptyBox(EmptyBox other) {
-        return new EmptyBox();
-    }
-    
-    
-    /**
-     * {@inheritDoc}
-The sum of an EmptyBox a NonEmptyBox is a copy of the NonEmptyBox.
-     * @return The sum of this Box and other
-     */
-    @Override
-    public Box addNonEmptyBox(NonEmptyBox other) {
         return other.clone();
     }
-    
+        
     /**
      * {@inheritDoc}
      * Invokes mulEmptyBox on other.
@@ -129,19 +109,9 @@ The sum of an EmptyBox a NonEmptyBox is a copy of the NonEmptyBox.
      */
     @Override
     public Box mul(Box other) {
-        return other.mulEmptyBox(this);
-    }
-       
-    /**
-     * {@inheritDoc}
-The product of a EmptyBox and an EmptyBox is an EmptyBox
-     * @return The product of this Box and other
-     */
-    @Override
-    public Box mulEmptyBox(EmptyBox other) {
         return new EmptyBox();
     }
-        
+       
     /**
      * {@inheritDoc}
      * @return True if other is either an EmptyBox.
@@ -151,6 +121,11 @@ The product of a EmptyBox and an EmptyBox is an EmptyBox
         if (o == null) return false;
         if (this == o) return true;
         return (this.getClass() == o.getClass());
+    }
+    
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
     }
     
     /**
@@ -171,11 +146,6 @@ The product of a EmptyBox and an EmptyBox is an EmptyBox
         return Collections.emptyList();
     }
 
-    @Override
-    public Box mulNonEmptyBox(NonEmptyBox other) {
-        return new EmptyBox();
-    }
-    
     @Override
     public int getHeight() {
         return 0;

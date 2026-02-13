@@ -205,35 +205,12 @@ public class NonEmptyBox implements Box {
          
     /**
      * {@inheritDoc}
-     * Invokes the addNonEmptyBox method on the other parameter
-     * @param other The other mset
-     * @return the sum of this and other
-     */
-    @Override
-    public Box add(Box other) {
-        return other.addNonEmptyBox(this);
-    }
-    
-    /**
-     * {@inheritDoc}
-     * The sum of an non-empty mset and an empty mset is a copy of this
-     * @param other The other mset
-     * @return a copy of this
-     */
-    @Override
-    public Box addEmptyBox(EmptyBox other) {
-        return this.clone();
-    }
-       
-    /**
-     * {@inheritDoc}
-     * The sum of two non-empty mset is an mset containing the contents of both
-     * with any mset-anti-mset pairs removed.
+     * The sum of two boxes is an box containing the contents of both..
      * @param other The other non-empty mset
      * @return The sum of this and other.
      */
     @Override
-    public Box addNonEmptyBox(NonEmptyBox other) {
+    public Box add(Box other) {
         List<Box> list = new LinkedList<>();
         list.addAll(this.content);
         list.addAll(other.getContent());
@@ -247,39 +224,17 @@ public class NonEmptyBox implements Box {
     }
     
     /**
-     * {@interitDoc}
-     *  Apply mulNonEmptyBox method on other
-     * @param other
-     * @return The product of this and other. 
-     */
-    @Override
-    public Box mul(Box other) {
-        return other.mulNonEmptyBox(this);
-    }
-    
-    /**
-     * {@inheritDoc}
-     * The product of an empty mset and this is an empty mset.
-     * @param other An empty mset
-     * @return a new EmptyBox.
-     */
-    @Override
-    public Box mulEmptyBox(EmptyBox other) {
-        return new EmptyBox();
-    }
-       
-    /**
      * {@inheritDoc}
      * The product of two non-empty msets is the pair-wise sum of their contents.
      * @param other A non-empty mset
      * @return the product of the two non-empty msets
      */
     @Override
-    public Box mulNonEmptyBox(NonEmptyBox other) {
+    public Box mul(Box other) {
         List<Box> resultList = new ArrayList<>();
-        for (var msetX : this) {
-            for (var msetY : other) {
-                resultList.add(msetX.add(msetY));
+        for (var boxX : this) {
+            for (var boxY : other) {
+                resultList.add(boxX.add(boxY));
             }
         }
         Box result;
@@ -327,6 +282,11 @@ public class NonEmptyBox implements Box {
         } else {
             return false;
         }
+    }
+    
+    @Override
+    public int hashCode() {
+        return content.hashCode();
     }
     
     List<List<Box>> groupEquals() {
