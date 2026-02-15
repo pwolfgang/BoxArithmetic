@@ -278,6 +278,8 @@ public interface Box extends Comparable<Box>, Cloneable, Iterable<Box> {
      * @return A Polynumber representation of the Box.
      */
     String asPolyNumber();
+    
+    String toCompressedIntegerString();
 
     /**
      * The contents of this Box

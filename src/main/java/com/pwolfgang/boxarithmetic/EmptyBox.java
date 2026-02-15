@@ -137,6 +137,10 @@ public class EmptyBox implements Box {
         return "0";
     }
     
+    public String toCompressedIntegerString() {
+        return ("[ ]");
+    }
+    
     /**
      * {@inheritDoc}
      * @return An empty list

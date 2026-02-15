@@ -46,5 +46,20 @@ public class Maxel extends NonEmptyBox {
         }
         return new Maxel(result);
     }
-        
-}
+    
+    public static Maxel of(int[][] matrix) {
+        List<Pixel> pixels = new ArrayList<>();
+        for (int i = 0; i<matrix.length; i++) {
+            for (int j = 0; j<matrix[i].length; j++) {
+                int count = matrix[i][j];
+                if (count != 0) {
+                    for (int k = 0; k < count; k++) {
+                        pixels.add(Pixel.of(i,j));
+                    }
+                }
+            }
+        }
+        return new Maxel(pixels);       
+    }
+    
+ }

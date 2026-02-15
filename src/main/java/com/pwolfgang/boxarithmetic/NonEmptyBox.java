@@ -379,6 +379,20 @@ public class NonEmptyBox implements Box {
         return stb.toString();
     }
     
+    public String toCompressedIntegerString() {
+        var stj = new StringJoiner(" ", "[", "]");
+        List<List<Box>> grouped = groupEquals();
+        for (var boxList:grouped) {
+            if (boxList.size() == 1) {
+                stj.add(boxList.getFirst().toIntegerString());
+            } else {
+                stj.add(genSub(boxList.size()));
+                stj.add(boxList.getFirst().toIntegerString());
+            }
+        }
+        return stj.toString();
+    }
+    
     /**
      * Return a copy of the content as a list.
      * @return The content as a list.

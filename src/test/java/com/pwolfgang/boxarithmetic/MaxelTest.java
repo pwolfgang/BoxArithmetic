@@ -33,8 +33,27 @@ public class MaxelTest {
     public void testMul() {
         var M = new Maxel(Pixel.of(0,0), Pixel.of(1,0));
         var N = new Maxel(Pixel.of(1,0), Pixel.of(0,2), Pixel.of(2,3));
+        System.out.println(M.toIntegerString());
+        System.out.println(M.toCompressedIntegerString());
+        System.out.println(N.toIntegerString());
+        System.out.println(N.toCompressedIntegerString());      
         var expected = new Maxel(Pixel.of(0,2),Pixel.of(1,2));
         assertEquals(expected, M.mul(N));
+    }
+    
+    @Test
+    public void testExample23() {
+        var M = new Maxel(Pixel.of(0,0), Pixel.of(0, 0), Pixel.of(1,0), Pixel.of(0,2),Pixel.of(0,2),Pixel.of(0,2));
+        System.out.println(M.toIntegerString());
+        System.out.println(M.toCompressedIntegerString());
+        var N = Maxel.of(new int[][]
+                {{0, 4, 0},
+                {1, 0, 0},
+                {0, 7, 0},
+                {0, 0, 5}
+                });
+        System.out.println(N.toCompressedIntegerString());
+        System.out.println(M.mul(N).toCompressedIntegerString());
     }
     
 }
