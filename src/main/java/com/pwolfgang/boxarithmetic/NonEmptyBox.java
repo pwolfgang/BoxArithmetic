@@ -57,7 +57,7 @@ public class NonEmptyBox implements Box {
      * Construct a new NonEmptyMset from a List of boxs.
      * @param boxs The List of boxs
      */
-    NonEmptyBox(List<Box> boxs) {
+    NonEmptyBox(List<? extends Box> boxs) {
         content = new TreeSet<>(Box::compareTo);
         int maxHeight = 0;
         for (Box m : boxs) {
