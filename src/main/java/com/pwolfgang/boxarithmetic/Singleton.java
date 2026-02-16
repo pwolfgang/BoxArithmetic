@@ -31,6 +31,10 @@ public class Singleton extends NonEmptyBox {
         super(List.of(box));
     }
     
+    public static Singleton of(int n) {
+        return new Singleton(Box.of(n));
+    }
+    
     @Override
     public String toString() {
         var stj = new StringJoiner(" ", "\u2308", "\u2309");
@@ -48,6 +52,14 @@ public class Singleton extends NonEmptyBox {
    
     public String toRawString() {
         return super.toString();
+    }
+    
+    public Singleton mul(Pixel p) {
+        if (content.getFirst().equals(p.a)){
+            return new Singleton(p.b);
+        } else {
+            return null;
+        }
     }
     
 }

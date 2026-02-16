@@ -55,4 +55,12 @@ public class SingletonTest {
         printIt("e4", e4);
     }
     
+    @Test
+    public void testMulPixel() {
+        var s = Singleton.of(4);
+        var p = Pixel.of(4,5);
+        assertEquals(Singleton.of(5), s.mul(p));
+        assertNull(s.mul(Pixel.of(5,3)));
+    }
+    
 }

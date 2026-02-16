@@ -54,4 +54,10 @@ public class PixelTest {
         assertNull(BxA);  
     }
     
+    @Test
+    public void testMulSingleton() {
+        assertNull(Pixel.of(5,3).mul(Singleton.of(4)));
+        assertEquals(Singleton.of(5),Pixel.of(5,4).mul(Singleton.of(4)));
+    }
+    
 }

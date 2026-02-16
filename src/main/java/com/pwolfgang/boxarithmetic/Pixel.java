@@ -28,8 +28,8 @@ import java.util.List;
  */
 public class Pixel extends NonEmptyBox {
     
-    private final Box a;
-    private final Box b;
+    final Box a;
+    final Box b;
     
     public static Pixel of(int a, int b) {
         return new Pixel(Box.of(a), Box.of(b));
@@ -70,4 +70,11 @@ public class Pixel extends NonEmptyBox {
         return new Pixel(a,b);
     }
     
+    public Singleton mul(Singleton s) {
+        if (s.getContent().getFirst().equals(b)) {
+            return new Singleton(a);
+        } else {
+            return null;
+        }
+    }
 }

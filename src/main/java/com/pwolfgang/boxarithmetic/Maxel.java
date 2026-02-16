@@ -61,5 +61,5 @@ public class Maxel extends NonEmptyBox {
         }
         return new Maxel(pixels);       
     }
-    
+       
  }
