@@ -61,5 +61,23 @@ public class Maxel extends NonEmptyBox {
         }
         return new Maxel(pixels);       
     }
+    
+        public Vexel mul(Vexel vexel) {
+        List<Singleton> result = new ArrayList<>();
+        for (Box x : getContent()) {
+            if (x instanceof Pixel p) {
+                for (Box y : vexel.getContent()) {
+                    if (y instanceof Singleton s) {
+                        var pxs = p.mul(s);
+                        if (pxs != null) {
+                            result.add(pxs);
+                        }
+                    }
+                }
+            }         
+        }
+        return new Vexel(result);        
+    }
+
        
  }

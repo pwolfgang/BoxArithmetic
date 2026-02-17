@@ -62,4 +62,8 @@ public class Singleton extends NonEmptyBox {
         }
     }
     
+    public Singleton clone() {
+        return new Singleton(content.getFirst());
+    }
+    
 }

@@ -56,4 +56,20 @@ public class MaxelTest {
         System.out.println(M.mul(N).toCompressedIntegerString());
     }
     
+    @Test
+    public void testMulVexel() {
+                var maxel = Maxel.of(new int[][]
+                {{1,  2,  3,  4},
+                 {5,  6,  7,  8},
+                 {9, 10, 11, 12},
+                 {13, 14, 15, 16}});
+        
+        var vexel = Vexel.of(2, 2, 2, 2);
+        var prod = maxel.mul(vexel);
+        var expected = vexel.of(20,52,84,116);
+        System.out.println(prod.toVectorString());
+        assertEquals(expected, prod);
+
+    }
+    
 }
