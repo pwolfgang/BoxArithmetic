@@ -164,4 +164,14 @@ public class EmptyBox implements Box {
         return new EmptyBox();
     }
     
+    @Override
+    public Box union(Box other) {
+        return other.clone();
+    }
+    
+    @Override
+    public Box intersection(Box other) {
+        return new EmptyBox();
+    }
+    
 }

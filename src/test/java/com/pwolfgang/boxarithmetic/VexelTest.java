@@ -48,9 +48,38 @@ public class VexelTest {
     // Tests both ol and toVectorString
     @Test
     public void testOf() {
+        System.out.println("\n\ntestOf");
         var vexel = Vexel.of(2,1,0,0,1);
         System.out.println(vexel.toVectorString());
         assertEquals("(2, 1, 0, 0, 1)", vexel.toVectorString());
+    }
+    
+    @Test
+    public void testUnion() {
+        System.out.println("\n\ntestUnion");
+        var a = Vexel.of(3, 2, 0, 0, 1);
+        var b = Vexel.of(1, 0, 2, 0, 1);
+        var e = Vexel.of(3, 2, 2, 0, 1);
+        var aUb = a.union(b);
+        System.out.println(a.toCompressedIntegerString());
+        System.out.println(b.toCompressedIntegerString());
+        System.out.println(aUb.toCompressedIntegerString());
+        System.out.println(e.toCompressedIntegerString());
+        assertEquals(e, aUb);
+    }
+
+    @Test
+    public void testIntersection() {
+        System.out.println("\n\ntestIntersection");
+        var a = Vexel.of(3, 2, 0, 0, 1);
+        var b = Vexel.of(1, 0, 2, 0, 1);
+        var e = Vexel.of(1, 0, 0, 0, 1);
+        var aUb = a.intersection(b);
+        System.out.println(a.toCompressedIntegerString());
+        System.out.println(b.toCompressedIntegerString());
+        System.out.println(aUb.toCompressedIntegerString());
+        System.out.println(e.toCompressedIntegerString());
+        assertEquals(e, aUb);
     }
 
     

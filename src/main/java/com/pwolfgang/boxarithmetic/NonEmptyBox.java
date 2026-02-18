@@ -19,9 +19,11 @@ package com.pwolfgang.boxarithmetic;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.SortedSet;
 import java.util.StringJoiner;
 import java.util.TreeSet;
@@ -256,8 +258,7 @@ public class NonEmptyBox implements Box {
     public boolean equals(Object o) {
         if (o == null) return false;
         if (this == o) return true;
-        if (this.getClass() == o.getClass()) {
-            NonEmptyBox other = (NonEmptyBox)o;
+        if (o instanceof NonEmptyBox other) {
             var thisContent = this.content;
             var otherContent = other.clone().content;
             if (thisContent.size() != otherContent.size()) {
@@ -381,15 +382,11 @@ public class NonEmptyBox implements Box {
     
     public String toCompressedIntegerString() {
         var stj = new StringJoiner(" ", "[", "]");
-        List<List<Box>> grouped = groupEquals();
-        for (var boxList:grouped) {
-            if (boxList.size() == 1) {
-                stj.add(boxList.getFirst().toIntegerString());
-            } else {
-                stj.add(genSub(boxList.size()));
-                stj.add(boxList.getFirst().toIntegerString());
-            }
-        }
+        var countMap = buildCount(this);
+        countMap.forEach((k,v) -> {
+            stj.add(genSub(v));
+            stj.add(((Box)k).toIntegerString());
+        });
         return stj.toString();
     }
     
@@ -423,6 +420,67 @@ public class NonEmptyBox implements Box {
             
         }
         return result;
+    }
+    
+    public Box union(Box other) {
+        if (other.isEmptyBox()) {
+            return this.clone();
+        }
+        var thisCountMap = buildCount(this);
+        var otherCountMap = buildCount((NonEmptyBox)other);
+        List<Box> result = new ArrayList<>();
+        thisCountMap.forEach((k, v) -> {
+            int maxCount = v;
+            if (otherCountMap.containsKey(k)) {
+                int otherCount = otherCountMap.get(k);
+                if (otherCount > maxCount) {
+                    maxCount = otherCount;
+                }
+            }
+            for (int i = 0; i < maxCount; i++) {
+                result.add(((Box)k).clone());
+            }
+        });
+        otherCountMap.forEach((k,v) -> {
+            if (!thisCountMap.containsKey(k)) {
+                for (int i = 0; i < v; i++) {
+                    result.add(((Box)k).clone());
+                }
+            }
+        });     
+        return new NonEmptyBox(result);
+    }
+    
+    @Override
+    public Box intersection(Box other) {
+        if (other.isEmptyBox()) {
+            return new EmptyBox();
+        }
+        var thisCountMap = buildCount(this);
+        var otherCountMap = buildCount((NonEmptyBox)other);
+        List<Box> result = new ArrayList<>();
+        thisCountMap.forEach((k, v) -> {
+            int minCount = v;
+            if (otherCountMap.containsKey(k)) {
+                int otherCount = otherCountMap.get(k);
+                if (otherCount < minCount) {
+                    minCount = otherCount;
+                }
+                for (int i = 0; i < minCount; i++) {
+                    result.add(((Box)k).clone());
+                }
+            }
+        });
+        return new NonEmptyBox(result);
+    }
+    
+    Map<? super Box, Integer> buildCount(NonEmptyBox box) {
+        Map<? super Box, Integer> result = new HashMap<>();
+        List<List<Box>> grouped = box.groupEquals();
+        for (var boxList:grouped) {
+            result.put(boxList.getFirst(), boxList.size());
+        }
+        return result;   
     }
     
 }

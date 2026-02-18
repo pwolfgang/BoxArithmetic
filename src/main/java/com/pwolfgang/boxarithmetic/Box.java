@@ -350,4 +350,8 @@ public interface Box extends Comparable<Box>, Cloneable, Iterable<Box> {
         }
         return n;
     }
+    
+    Box union(Box other);
+    
+    Box intersection(Box other);
 }
