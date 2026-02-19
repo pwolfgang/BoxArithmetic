@@ -69,7 +69,23 @@ public class MaxelTest {
         var expected = vexel.of(20,52,84,116);
         System.out.println(prod.toVectorString());
         assertEquals(expected, prod);
-
+    }
+    
+    @Test
+    public void simpleExample() {
+        System.out.println("\n\nSimpleExample");
+        var m = Maxel.of(new int[][]
+           {{1,2},
+            {3,4}}
+        );
+        var v = Vexel.of(5,6);
+        var vXm = v.mul(m);
+        var mXv = m.mul(v);
+        System.out.printf("%s: %s%n", "m", m.toCompressedIntegerString());
+        System.out.printf("%s: %s%n", "v", v.toCompressedIntegerString());
+        System.out.printf("%s: %s%n", "vXm", vXm.toCompressedIntegerString());
+        System.out.printf("%s: %s%n", "mXv", mXv.toCompressedIntegerString());
+        
     }
     
 }

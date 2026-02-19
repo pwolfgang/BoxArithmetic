@@ -62,6 +62,7 @@ public class VexelTest {
         var e = Vexel.of(3, 2, 2, 0, 1);
         var aUb = a.union(b);
         System.out.println(a.toCompressedIntegerString());
+        System.out.println(a.asPolyNumber());
         System.out.println(b.toCompressedIntegerString());
         System.out.println(aUb.toCompressedIntegerString());
         System.out.println(e.toCompressedIntegerString());
