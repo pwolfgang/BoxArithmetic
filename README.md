@@ -130,7 +130,7 @@ C×D = 4α₀ + ̅16α₀² + 15α₀³ + 2α₀⁵ + ̅5α₀⁶
 ### Lists
 
 A list is an ordered sequence of boxes. If A, B, C, D are boxes then the list
-&#x2308 A, B, C, D&#2309 is represented by the boz [[A][A B][A B C][A B C D]].
+⌈A, B, C, D⌉ is represented by the boz [[A][A B][A B C][A B C D]].
 Lists are not currently represented in this implementation, but two special
 instances are.
 
@@ -139,7 +139,7 @@ A singleton is a list of a single box. The paper restrices the enclosing box to
 natural numbers, but the lecture did not incloude this restribtion.
 Observe that the singleton of 0 is [[]] which is 1. The singleton of 1 is [[[]]]
 which is [[1]] which is α₀, and the singleton of 2 is [[2]] or α₀² and so on. The
-paper renames α₀&#x207f as *e*&#X2099.
+paper renames αⁿ as eₙ.
 
 ### Pixels
 A pixel is a list of two boxes. The paper restricts the boxes to natural numbers,
@@ -148,7 +148,7 @@ both as a list and also the separate components. Thus the pixel ⌈3, 4⌉ is th
 [[3][3 4]] the individual components are also represented as a and b. 
 
 #### Pixel multiplication
-If ⌈A, B⌉ and ⌈C, D⌉ are pixels then ⌈A, B⌉&#x207b⌈C, C⌉ is ⌈A, D⌉ only if B=C. 
+If ⌈A, B⌉ and ⌈C, D⌉ are pixels then ⌈A, B⌉ × ⌈C, C⌉ is ⌈A, D⌉ only if B=C. 
 It is otherwse nothing. Computationally we use null to represent nothing. 
 In multiplying a signleton ⌈A⌉ and the pixel ⌈B, C⌉ results in the singleton
 ⌈C⌉ only if A=B. In multiplying a pixel ⌈A, B⌉ and a singleton ⌈C⌉ results
@@ -166,8 +166,10 @@ in a matrix. And the number of instances of a pixel represent the value at that
 position.
 
 The matrix
-|1|2|
-|3|4|
+
+    1  2
+    3  4
+
 is the box [₄ ⌈1, 1⌉ ₃ ⌈1, 0⌉ ₂ ⌈0, 1⌉ ₁ ⌈0, 0⌉]
 
 

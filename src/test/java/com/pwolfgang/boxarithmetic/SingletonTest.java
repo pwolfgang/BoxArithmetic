@@ -53,6 +53,7 @@ public class SingletonTest {
         var e4 = new Singleton(Box.of(4));
         System.out.printf("e4: %s%n", e4.toRawString());
         printIt("e4", e4);
+        System.out.println("\u03b1\u207f id e\u2099");
     }
     
     @Test
