@@ -70,7 +70,7 @@ public class Maxel extends NonEmptyBox {
                     if (y instanceof Singleton s) {
                         var pxs = p.mul(s);
                         if (pxs != null) {
-                            result.add(pxs);
+                            result.add((Singleton)pxs);
                         }
                     }
                 }

@@ -339,25 +339,23 @@ public class NonEmptyBox implements Box {
     }
     
     static String genSupSub(NonEmptyBox m) {
+        if (m instanceof Singleton s) {
+            var sub = s.a.intSize();
+            return "e"+genSub(sub);
+        }
         var ll = m.groupEquals();
         var stb = new StringBuilder();
         ll.forEach(el ->{
             stb.append("\u03B1");
             stb.append(genSub(el.get(0).intSize()));
-            var count = countSets(el);
-            if (count < 0) {
-                stb.append("\u207B");
-                stb.append(genSup(-count));
-            } else if (count > 1) {
+            var count = el.size();
+            if (count > 1) {
                 stb.append(genSup(count));
             }
         });
         return stb.toString();      
     }
     
-    static int countSets(List<Box> el) {
-        return el.size();
-    }
 
     
     static String genSub(int n) {
@@ -380,6 +378,7 @@ public class NonEmptyBox implements Box {
         return stb.toString();
     }
     
+    @Override
     public String toCompressedIntegerString() {
         var stj = new StringJoiner(" ", "[", "]");
         var countMap = buildCount(this);

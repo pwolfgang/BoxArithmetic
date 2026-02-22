@@ -25,6 +25,11 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Paul
  */
 public class VexelTest {
+    void printIt(String s, Box box) {
+        System.out.printf("%s: %s%n", s, box.toString());
+        System.out.printf("%s: %s%n", s, box.toIntegerString());
+        System.out.printf("%s: %s%n", s, box.asPolyNumber());
+    }
     
     public VexelTest() {
     }
@@ -40,7 +45,7 @@ public class VexelTest {
         
         var vexel = Vexel.of(2, 2, 2, 2);
         var prod = vexel.mul(maxel);
-        var expected = vexel.of(56, 64, 72, 80);
+        var expected = Vexel.of(56, 64, 72, 80);
         System.out.println(prod.toVectorString());
         assertEquals(expected, prod);
     }
@@ -50,8 +55,10 @@ public class VexelTest {
     public void testOf() {
         System.out.println("\n\ntestOf");
         var vexel = Vexel.of(2,1,0,0,1);
+        printIt("(2,1,0,0,1):", vexel);
         System.out.println(vexel.toVectorString());
-        assertEquals("(2, 1, 0, 0, 1)", vexel.toVectorString());
+        var actual = vexel.toVectorString();
+        assertEquals("(2, 1, 0, 0, 1)", actual);
     }
     
     @Test
@@ -81,6 +88,22 @@ public class VexelTest {
         System.out.println(aUb.toCompressedIntegerString());
         System.out.println(e.toCompressedIntegerString());
         assertEquals(e, aUb);
+    }
+    
+    @Test
+    public void testEs() {
+        System.out.println("\n\nteseEs");
+        var vexel = Vexel.of(1,1,1,1,1);
+        var asPoly = vexel.asPolyNumber();
+        printIt("(1,1,1,1,1)", vexel);
+    }
+    
+    @Test
+    public void testExample() {
+        IO.println("\n\n\ntestExample");
+        var vexel = Vexel.of(3,2,0,0,1);
+        IO.println(vexel.toCompressedIntegerString());
+        IO.println(vexel.asPolyNumber());
     }
 
     

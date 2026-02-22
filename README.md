@@ -138,8 +138,8 @@ instances are.
 A singleton is a list of a single box. The paper restrices the enclosing box to
 natural numbers, but the lecture did not incloude this restribtion.
 Observe that the singleton of 0 is [[]] which is 1. The singleton of 1 is [[[]]]
-which is [[1]] which is α₀, and the singleton of 2 is [[2]] or α₀² and so on. The
-paper renames αⁿ as eₙ.
+which is [[1]] which is α₁, and the singleton of 2 is [[2]] or α₂ and so on. The
+paper renames αₙ as eₙ.
 
 ### Pixels
 A pixel is a list of two boxes. The paper restricts the boxes to natural numbers,
@@ -156,9 +156,8 @@ in ⌈A⌉ only if B=C.
 
 ### Vexels
 A vexel is a box of singletons. If the singletons are restricted to natural numbers,
-then a vexel is a polynumber. For example the box [⌈4⌉ ₃ ⌈0⌉ ₂ ⌈1⌉] contains represents
-3α₀+α₄+2α₁ which can be reordered to read [₃ ⌈0⌉ ₂ ⌈1⌉ ⌈4⌉] can also represent the
-vector (3, 2, 0, 0, 1).
+then a vexel is a multi. For example the box [₁ [[4]] ₃ [1] ₂ [[1]]] contains 
+represents 3e₀+2e₁+e₄ and represents the vector (3, 2, 0, 0, 1).
 
 ### Maxels
 A maxel is a box of pixels. The individual pixels represent the row and column

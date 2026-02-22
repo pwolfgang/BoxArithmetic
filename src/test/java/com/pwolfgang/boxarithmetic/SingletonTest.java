@@ -35,33 +35,62 @@ public class SingletonTest {
     }
 
     @Test
-    public void testToString() {
-        var test = Box.parse("[0]");
-        printIt("test", test);
-        var e0 = new Singleton(Box.of(0));
-        System.out.printf("e0: %s%n", e0.toRawString());
+    public void testAlphas() {
+        IO.println("\n\n\testAlphas");
+        System.out.println("\n\ntestAlphas");
+        var e0 = Singleton.of(0);
         printIt("e0", e0);
-        var e1 = new Singleton(Box.of(1));
-        System.out.printf("e1: %s%n", e1.toRawString());
+        var e1 = Singleton.of(1);
         printIt("e1", e1);
-        var e2 = new Singleton(Box.of(2));
-        System.out.printf("e2: %s%n", e2.toRawString());
+        var e2 = Singleton.of(2);
         printIt("e2", e2);
-        var e3 = new Singleton(Box.of(3));
-        System.out.printf("e3: %s%n", e3.toRawString());
+        var e3 = Singleton.of(3);
         printIt("e3", e3);
-        var e4 = new Singleton(Box.of(4));
-        System.out.printf("e4: %s%n", e4.toRawString());
+        var e4 = Singleton.of(4);
         printIt("e4", e4);
-        System.out.println("\u03b1\u207f id e\u2099");
+        IO.println("\u03B1\u2099 = e\u2099");
+        
+    }
+    
+    @Test
+    public void testBCD() {
+        IO.println("\n\ntestBCD");
+        var B = Singleton.of(7);
+        var C = Singleton.of(0);
+        var D = new Singleton(new EmptyBox());
+        printIt("B", B);
+        printIt("C", C);
+        printIt("D", D);
     }
     
     @Test
     public void testMulPixel() {
         var s = Singleton.of(4);
         var p = Pixel.of(4,5);
+        var sXp = s.mul(p);
+        var five = Singleton.of(5);
+        var areEqual = five.equals(sXp);
         assertEquals(Singleton.of(5), s.mul(p));
         assertNull(s.mul(Pixel.of(5,3)));
+    }
+    
+    @Test
+    public void testVexel() {
+        IO.println("testVexel");
+        var e0 = Singleton.of(0);
+        printIt("e0", e0);
+        var e1 = Singleton.of(1);
+        printIt("e1", e1);
+        var e2 = Singleton.of(2);
+        printIt("e2", e2);
+        var e3 = Singleton.of(3);
+        printIt("e3", e3);
+        var e4 = Singleton.of(4);
+        printIt("e4", e4);
+        var vexel = Box.add(e0,e1,e2,e3,e4);
+        printIt("vexel: ", vexel);
+
+        
     }
     
 }

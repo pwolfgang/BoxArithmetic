@@ -17,8 +17,6 @@
  */
 package com.pwolfgang.boxarithmetic;
 
-import java.util.List;
-import java.util.StringJoiner;
 
 /**
  * A Singleton is a list containing a single box. The paper restricts singletons
@@ -27,43 +25,32 @@ import java.util.StringJoiner;
  */
 public class Singleton extends NonEmptyBox {
     
+    final Box a;
+    
     public Singleton(Box box) {
-        super(List.of(box));
+        this.a = box;
+        super(Box.of(box));
     }
     
     public static Singleton of(int n) {
         return new Singleton(Box.of(n));
     }
     
-    @Override
-    public String toString() {
-        var stj = new StringJoiner(" ", "\u2308", "\u2309");
-        for (Box b : content.getFirst()) {
-            stj.add(b.toString());
-        }
-        return stj.toString();  
+    public String toListString() {
+        return "\u2308" + a.toString() + "\u2309";
     }
     
     @Override
-    public String toIntegerString() {
-        return "\u2308" + content.getFirst().toIntegerString() + "\u2309";
+    public Box mul(Box o) {
+        return switch (o) {
+            case Singleton s -> new Singleton(a.mul(s.a));
+            case Pixel p -> a.equals(p.a) ? new Singleton(p.b) : null;
+            default -> super.mul(o);       
+        };      
     }
-    
-   
-    public String toRawString() {
-        return super.toString();
-    }
-    
-    public Singleton mul(Pixel p) {
-        if (content.getFirst().equals(p.a)){
-            return new Singleton(p.b);
-        } else {
-            return null;
-        }
-    }
-    
-    public Singleton clone() {
-        return new Singleton(content.getFirst());
+       
+   public Singleton clone() {
+        return new Singleton(a);
     }
     
 }

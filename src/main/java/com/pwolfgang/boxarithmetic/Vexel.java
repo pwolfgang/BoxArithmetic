@@ -29,6 +29,10 @@ import java.util.TreeMap;
  */
 public class Vexel extends NonEmptyBox {
     
+    public Vexel() {
+        super();
+    }
+    
     public Vexel(Singleton... singletons) {
         super(singletons);
     }
@@ -45,7 +49,7 @@ public class Vexel extends NonEmptyBox {
                     if (y instanceof Pixel m) {
                         var sxm = s.mul(m);
                         if (sxm != null) {
-                            result.add(sxm);
+                            result.add((Singleton)sxm);
                         }
                     }
                 }
@@ -65,9 +69,7 @@ public class Vexel extends NonEmptyBox {
             }
         }
         return new Vexel(result);
-    }
-    
-    
+    }    
     
     public String toVectorString() {
         SortedMap<Integer, Integer> result = new TreeMap<>();
@@ -75,10 +77,7 @@ public class Vexel extends NonEmptyBox {
         for (var boxList:grouped) {
             int coef = boxList.size();
             var first = boxList.getFirst();
-            int index = 0;
-            if (first.getHeight() > 1) {
-                index = first.getContent().getFirst().intSize();
-            }
+            int index = ((Singleton)first).a.intSize();
             result.put(index,coef);
         }
         int maxIndex = result.lastKey();
@@ -89,6 +88,10 @@ public class Vexel extends NonEmptyBox {
             stj.add(Integer.toString(vector[j]));
         }
         return stj.toString();
+    }
+    
+    public String toRawString() {
+        return super.toString();
     }
             
 }

@@ -45,15 +45,11 @@ public class Pixel extends NonEmptyBox {
     }
     
     public Box mul(Box o) {
-        if (o instanceof Pixel p) {
-            if (b.equals(p.a)) {
-                return new Pixel(a,p.b);
-            } else {
-                return null;
-            }
-        } else {
-            return super.mul(o);
-        }
+        return switch (o) {
+                case Pixel p -> b.equals(p.a) ? new Pixel(a,p.b) : null;
+                case Singleton s -> b.equals(s.a) ? new Singleton(a): null;
+                default -> super.mul(o); 
+       };
     }
     
     public Pixel transpose() {
@@ -70,11 +66,4 @@ public class Pixel extends NonEmptyBox {
         return new Pixel(a,b);
     }
     
-    public Singleton mul(Singleton s) {
-        if (s.getContent().getFirst().equals(b)) {
-            return new Singleton(a);
-        } else {
-            return null;
-        }
-    }
 }
