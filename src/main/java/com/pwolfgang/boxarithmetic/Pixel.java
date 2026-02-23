@@ -19,6 +19,7 @@ package com.pwolfgang.boxarithmetic;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringJoiner;
 
 /**
  * A Pixel is a list of two boxes. It has a special multiply operation.
@@ -57,5 +58,14 @@ public class Pixel extends ListBox {
     public Pixel clone() {
         return new Pixel(a,b);
     }
+    
+    @Override
+    public String toIntegerString() {
+       var stj = new StringJoiner(", ", "\u2308", "\u2309");
+       stj.add(a.asPolyNumber());
+       stj.add(b.asPolyNumber());
+       return stj.toString();
+   }
+
     
 }

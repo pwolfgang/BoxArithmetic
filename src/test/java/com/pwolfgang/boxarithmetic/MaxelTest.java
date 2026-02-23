@@ -31,6 +31,7 @@ public class MaxelTest {
 
     @Test
     public void testMul() {
+        IO.println("\n\ntestMul");
         var M = new Maxel(Pixel.of(0,0), Pixel.of(1,0));
         var N = new Maxel(Pixel.of(1,0), Pixel.of(0,2), Pixel.of(2,3));
         System.out.println(M.toIntegerString());
@@ -43,6 +44,7 @@ public class MaxelTest {
     
     @Test
     public void testExample23() {
+        IO.println("\n\ntestExample23");
         var M = new Maxel(Pixel.of(0,0), Pixel.of(0, 0), Pixel.of(1,0), Pixel.of(0,2),Pixel.of(0,2),Pixel.of(0,2));
         System.out.println(M.toIntegerString());
         System.out.println(M.toCompressedIntegerString());
@@ -58,6 +60,7 @@ public class MaxelTest {
     
     @Test
     public void testMulVexel() {
+        IO.println("\n\ntestMulVexel");
                 var maxel = Maxel.of(new int[][]
                 {{1,  2,  3,  4},
                  {5,  6,  7,  8},
@@ -85,6 +88,27 @@ public class MaxelTest {
         System.out.printf("%s: %s%n", "v", v.toCompressedIntegerString());
         System.out.printf("%s: %s%n", "vXm", vXm.toCompressedIntegerString());
         System.out.printf("%s: %s%n", "mXv", mXv.toCompressedIntegerString());
+        
+    }
+    
+    @Test
+    public void lectureExample() {
+        IO.println("\n\nLecture Example");
+        var p1 = new Pixel(Box.of(0),Box.of(Box.of(7)));
+        var p2 = new Pixel(Box.of(1),Box.of(Box.of(1)));
+        var p3 = new Pixel(Box.of(Box.of(1)), Box.of(2));
+        var p4 = new Pixel(Box.of(Box.of(7)), Box.of(3));
+        System.out.printf("p1: %s%n", p1.toIntegerString());
+        System.out.printf("p2: %s%n", p2.toIntegerString());
+        System.out.printf("p3: %s%n", p3.toIntegerString());
+        System.out.printf("p4: %s%n", p4.toIntegerString());
+        var M = new Maxel(p1,p2);
+        var N = new Maxel(p3,p4);
+        var MxN = M.mul(N);
+        System.out.printf("M = %s%n", M.toCompressedIntegerString());
+        System.out.printf("N = %s%n", N.toCompressedIntegerString());
+        System.out.printf("M × N = %s%n", MxN.toCompressedIntegerString());
+        
         
     }
     

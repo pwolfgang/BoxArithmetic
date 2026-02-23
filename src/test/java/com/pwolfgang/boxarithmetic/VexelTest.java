@@ -105,6 +105,31 @@ public class VexelTest {
         IO.println(vexel.toCompressedIntegerString());
         IO.println(vexel.asPolyNumber());
     }
+    
+    @Test
+    public void testExample2() {
+        IO.println("Lecture example");
+        var alpha = Box.parse("[1]");
+        var onePalphaSq = Box.parse("[0 [0 0]]");
+        var alpha3 = Box.parse("[[0 0 0]]");
+        printIt("alpha", alpha);
+        printIt("1 + \u03b1\u00b2", onePalphaSq);
+        printIt("\u03b1\u00b3", alpha3);
+        var v = new Vexel(
+                Singleton.of(2),
+                Singleton.of(2),
+                Singleton.of(2),
+                new Singleton(alpha),
+                new Singleton(onePalphaSq));
+        System.out.printf("v: %s%n", v.toCompressedIntegerString());
+        var w = new Vexel(Singleton.of(2), new Singleton(alpha3));
+        System.out.printf("w: %s%n", w.toCompressedIntegerString());
+        var result = v.add(Box.of(2).mul(w));
+        System.out.printf("v+2w: %s%n", result.toCompressedIntegerString());
+        
+       
+
+    }
 
     
 }

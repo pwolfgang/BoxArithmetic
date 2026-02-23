@@ -399,7 +399,7 @@ public class NonEmptyBox implements Box {
         var stj = new StringJoiner(" ", "[", "]");
         var countMap = buildCount(this);
         countMap.forEach((k,v) -> {
-            stj.add(genSub(v));
+            if (v > 1) stj.add(genSub(v));
             stj.add(((Box)k).toIntegerString());
         });
         return stj.toString();

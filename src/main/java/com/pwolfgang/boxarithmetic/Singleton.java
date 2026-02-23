@@ -17,6 +17,8 @@
  */
 package com.pwolfgang.boxarithmetic;
 
+import java.util.StringJoiner;
+
 
 /**
  * A Singleton is a list containing a single box. The paper restricts singletons
@@ -47,6 +49,12 @@ public class Singleton extends ListBox {
        
    public Singleton clone() {
         return new Singleton(a);
-    }
+   }
+   
+   public String toIntegerString() {
+       var stj = new StringJoiner(", ", "\u2308", "\u2309");
+       stj.add(a.asPolyNumber());
+       return stj.toString();
+   }
     
 }

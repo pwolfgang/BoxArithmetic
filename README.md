@@ -1,8 +1,8 @@
 # Box Arithmetic
 An implementation of N. J. Wildberger's model of arithmetic using boxes
 This is based on the youtube lectures Intro to Algebraic Calculus
-This project implements the features described through the lecture "Integer
-Arithmetic via Boxes"
+This project implements the features described through the lecture "Sets, lists,
+vexels, and maxels".
 This project was converted from the MSetArighmetic project by renaming MSet to Box
 and removing the anti features.
 The curious world of integral polynumbers. The basic unit is the box. 
@@ -171,4 +171,10 @@ The matrix
 
 is the box [₄ ⌈1, 1⌉ ₃ ⌈1, 0⌉ ₂ ⌈0, 1⌉ ₁ ⌈0, 0⌉]
 
+Example from the lecture
 
+    M = [⌈1, α₀⌉ ⌈0, α₀⁷⌉]
+    N = [⌈α₀, 2⌉ ⌈α₀⁷, 3⌉]
+    M × N = [⌈1, 2⌉ ⌈0, 3⌉] 
+
+Note that [7] is α₀⁷
