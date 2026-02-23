@@ -1,4 +1,4 @@
-# BoxtArithmetic
+# Box Arithmetic
 An implementation of N. J. Wildberger's model of arithmetic using boxes
 This is based on the youtube lectures Intro to Algebraic Calculus
 This project implements the features described through the lecture "Integer
@@ -131,8 +131,8 @@ C×D = 4α₀ + ̅16α₀² + 15α₀³ + 2α₀⁵ + ̅5α₀⁶
 
 A list is an ordered sequence of boxes. If A, B, C, D are boxes then the list
 ⌈A, B, C, D⌉ is represented by the boz [[A][A B][A B C][A B C D]].
-Lists are not currently represented in this implementation, but two special
-instances are.
+Lists are currently represented in this implementation, as well as two special
+instances.
 
 ### Singletons
 A singleton is a list of a single box. The paper restrices the enclosing box to

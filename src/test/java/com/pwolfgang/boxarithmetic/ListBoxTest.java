@@ -17,36 +17,31 @@
  */
 package com.pwolfgang.boxarithmetic;
 
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * A Singleton is a list containing a single box. The paper restricts singletons
- * to boxes of natural numbers, but the lecture removes this restriction.
+ *
  * @author Paul
  */
-public class Singleton extends ListBox {
+public class ListBoxTest {
     
-    final Box a;
-    
-    public Singleton(Box box) {
-        this.a = box;
-        super(box);
+    public ListBoxTest() {
+    }
+
+    @Test
+    public void testListBox() {
+        var listBox = new ListBox(Box.of(1), Box.of(2), Box.of(3));
+        var expected = Box.parse("[[1][1 2][1 2 3]]");
+        assertEquals (expected,listBox);
     }
     
-    public static Singleton of(int n) {
-        return new Singleton(Box.of(n));
-    }
+    @Test void testPi() {
+        var listBox = new ListBox(Box.of(1), Box.of(2), Box.of(3));
+        assertEquals(Box.of(1), listBox.pi(1));
+        assertEquals(Box.of(2), listBox.pi(2));
+        assertEquals(Box.of(3), listBox.pi(3));
         
-    @Override
-    public Box mul(Box o) {
-        return switch (o) {
-            case Singleton s -> new Singleton(a.mul(s.a));
-            case Pixel p -> a.equals(p.a) ? new Singleton(p.b) : null;
-            default -> super.mul(o);       
-        };      
-    }
-       
-   public Singleton clone() {
-        return new Singleton(a);
     }
     
 }

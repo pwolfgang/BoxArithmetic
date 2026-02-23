@@ -26,7 +26,7 @@ import java.util.List;
  * B = C, otherwise nothing.
  * @author Paul
  */
-public class Pixel extends NonEmptyBox {
+public class Pixel extends ListBox {
     
     final Box a;
     final Box b;
@@ -38,10 +38,7 @@ public class Pixel extends NonEmptyBox {
     public Pixel(Box a, Box b) {
         this.a = a;
         this.b = b;
-        List<Box> list = new ArrayList<>();
-        list.add(a);
-        list.add(Box.of(a,b));
-        super(list);
+        super(a, b);
     }
     
     public Box mul(Box o) {
@@ -55,12 +52,7 @@ public class Pixel extends NonEmptyBox {
     public Pixel transpose() {
         return new Pixel(b,a);
     }
-    
-    @Override
-    public String toIntegerString() {
-        return "\u2308" + a.toIntegerString() + ", " + b.toIntegerString() + "\u2309";
-    }
-    
+       
     @Override
     public Pixel clone() {
         return new Pixel(a,b);

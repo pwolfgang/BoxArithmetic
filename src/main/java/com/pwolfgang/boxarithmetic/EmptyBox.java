@@ -56,6 +56,10 @@ public class EmptyBox implements Box {
         return true;
     }
     
+    public Box supp() {
+        return new EmptyBox();
+    }
+    
     /**
      * {@inheritDoc}
      * @return Always returns "[]"

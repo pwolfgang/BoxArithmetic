@@ -50,6 +50,13 @@ public interface Box extends Comparable<Box>, Cloneable, Iterable<Box> {
      * @return the size of this box as a Box of empty boxes.
      */
     Box size();
+    
+    /**
+     * For any box M, the support of M is the set consisting of the elements
+     * but with multiplicity of 1.
+     * @return The support set of this box.
+     */
+    Box supp();
        
     /**
      * The B truncation of A is the tox tB obtained by removing
@@ -81,6 +88,10 @@ public interface Box extends Comparable<Box>, Cloneable, Iterable<Box> {
      */
     boolean isEmptyBox();
     
+    /**
+     * If this box is represented as a tree, the height is the height of th tree.
+     * @return The height of the tree.
+     */
     int getHeight();
 
     /**

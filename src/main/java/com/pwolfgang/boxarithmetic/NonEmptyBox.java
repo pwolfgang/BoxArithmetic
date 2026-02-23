@@ -20,10 +20,12 @@ package com.pwolfgang.boxarithmetic;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.SortedSet;
 import java.util.StringJoiner;
 import java.util.TreeSet;
@@ -107,6 +109,20 @@ public class NonEmptyBox implements Box {
             content.add(newBox);
         }
         height = maxHeight + 1;
+    }
+    
+    /**
+     *
+     * @return
+     */
+    @Override
+    public Box supp(){
+        Set<Box> set = new HashSet<>();
+        for (Box b:content) {
+            set.add(b);
+        }
+        Box[] boxes = set.toArray(Box[]::new);
+        return new NonEmptyBox(boxes);
     }
     
     /**
