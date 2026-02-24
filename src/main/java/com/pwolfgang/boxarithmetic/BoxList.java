@@ -29,11 +29,11 @@ import java.util.StringJoiner;
  * addition to the Box representation.
  * @author Paul
  */
-public class ListBox  extends NonEmptyBox {
+public class BoxList  extends NonEmptyBox {
     
     final List<? extends Box> theList;
     
-    public ListBox(Box... boxes) {
+    public BoxList(Box... boxes) {
         theList = List.copyOf((Arrays.asList(boxes)));
         List<Box> backingList = new ArrayList<>();
         Box newBox = new EmptyBox();

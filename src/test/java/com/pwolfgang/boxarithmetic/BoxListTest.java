@@ -24,20 +24,20 @@ import static org.junit.jupiter.api.Assertions.*;
  *
  * @author Paul
  */
-public class ListBoxTest {
+public class BoxListTest {
     
-    public ListBoxTest() {
+    public BoxListTest() {
     }
 
     @Test
     public void testListBox() {
-        var listBox = new ListBox(Box.of(1), Box.of(2), Box.of(3));
+        var listBox = new BoxList(Box.of(1), Box.of(2), Box.of(3));
         var expected = Box.parse("[[1][1 2][1 2 3]]");
         assertEquals (expected,listBox);
     }
     
     @Test void testPi() {
-        var listBox = new ListBox(Box.of(1), Box.of(2), Box.of(3));
+        var listBox = new BoxList(Box.of(1), Box.of(2), Box.of(3));
         assertEquals(Box.of(1), listBox.pi(1));
         assertEquals(Box.of(2), listBox.pi(2));
         assertEquals(Box.of(3), listBox.pi(3));

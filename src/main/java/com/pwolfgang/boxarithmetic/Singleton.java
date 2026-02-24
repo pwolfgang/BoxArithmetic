@@ -25,7 +25,7 @@ import java.util.StringJoiner;
  * to boxes of natural numbers, but the lecture removes this restriction.
  * @author Paul
  */
-public class Singleton extends ListBox {
+public class Singleton extends BoxList {
     
     final Box a;
     

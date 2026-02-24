@@ -27,7 +27,7 @@ import java.util.StringJoiner;
  * B = C, otherwise nothing.
  * @author Paul
  */
-public class Pixel extends ListBox {
+public class Pixel extends BoxList {
     
     final Box a;
     final Box b;
