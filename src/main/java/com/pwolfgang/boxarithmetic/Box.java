@@ -99,7 +99,7 @@ public interface Box extends Comparable<Box>, Cloneable, Iterable<Box> {
      * @return a String representation of this Box
      */
     @Override
-    public String toString();
+    String toString();
 
     /**
      * Create an integer representation of this Box. The empty Box is zero.
@@ -108,8 +108,8 @@ public interface Box extends Comparable<Box>, Cloneable, Iterable<Box> {
      * negative integers.
      * @return An integer representation of this Box.
      */
-    public String toIntegerString();
-
+    String toIntegerString();
+    
     /**
      * Compare this Box to another Box. MSEts are ordered by size. 
      * To distinguish possible duplicates the hashCode is used.

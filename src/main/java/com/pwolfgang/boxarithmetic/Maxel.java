@@ -78,6 +78,15 @@ public class Maxel extends NonEmptyBox {
         }
         return new Vexel(result);        
     }
-
-       
+        
+    public Maxel transpose() {
+        List<Pixel> result = new ArrayList<>();
+        for (Box b : getContent()) {
+            if (b instanceof Pixel p) {
+                result.add(p.transpose());
+            }
+        }
+        return new Maxel(result);        
+    }
+    
  }

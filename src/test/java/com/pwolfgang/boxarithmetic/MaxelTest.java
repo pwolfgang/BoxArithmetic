@@ -107,9 +107,46 @@ public class MaxelTest {
         var MxN = M.mul(N);
         System.out.printf("M = %s%n", M.toCompressedIntegerString());
         System.out.printf("N = %s%n", N.toCompressedIntegerString());
-        System.out.printf("M × N = %s%n", MxN.toCompressedIntegerString());
-        
-        
+        System.out.printf("M × N = %s%n", MxN.toCompressedIntegerString());       
+    }
+    
+    @Test
+    public void testTranspose() {
+        IO.println("\n\ntest Transpose");
+        var p1 = new Pixel(Box.of(0),Box.of(Box.of(7)));
+        var p2 = new Pixel(Box.of(1),Box.of(Box.of(1)));
+        var p3 = new Pixel(Box.of(Box.of(1)), Box.of(2));
+        var p4 = new Pixel(Box.of(Box.of(7)), Box.of(3));
+        System.out.printf("p1: %s%n", p1.toIntegerString());
+        System.out.printf("p2: %s%n", p2.toIntegerString());
+        System.out.printf("p3: %s%n", p3.toIntegerString());
+        System.out.printf("p4: %s%n", p4.toIntegerString());
+        var M = new Maxel(p1,p2,p3, p4);
+        System.out.printf("M: %s%n", M.toCompressedIntegerString());
+        System.out.printf("Mt: %s%n", M.transpose().toCompressedIntegerString());      
+    }
+    
+    @Test
+    public void testFunctions() {
+        IO.println("\n\ntestFunctions");
+        Box alpha = Box.of(Box.of(1));
+        Box alphaSq = Box.of(Box.of(2));
+        System.out.printf("\u03b1: %s%n", alpha.asPolyNumber());
+        System.out.printf("\u03b1\u00b2: %s%n", alphaSq.asPolyNumber());
+        var p1 = Pixel.of(0,3);
+        var p2 = new Pixel(alpha,Box.of(1));
+        var p3 = Pixel.of(3, 1);
+        var p4 = new Pixel(Box.of(2),Box.of(6).add(alphaSq));
+        var p5 = Pixel.of(4,5);
+        var F = new Maxel(p1,p2,p3,p4,p5);
+        System.out.printf("F: %s%n", F.toCompressedIntegerString());
+        var G = new Maxel(Pixel.of(0,0), Pixel.of(3, 8), Pixel.of(1,8));        
+        System.out.printf("G: %s%n", G.toCompressedIntegerString());
+        var e = new Maxel(Pixel.of(0,8), new Pixel(alpha,Box.of(8)), Pixel.of(3,8));
+        System.out.printf("e: %s%n", e.toCompressedIntegerString());
+        var a = F.mul(G);
+        System.out.printf("a: %s%n", a.toCompressedIntegerString());
+        assertEquals(e,a);       
     }
     
 }

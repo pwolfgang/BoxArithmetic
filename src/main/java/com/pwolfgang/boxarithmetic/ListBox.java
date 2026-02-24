@@ -45,7 +45,11 @@ public class ListBox  extends NonEmptyBox {
     }
     
     public Box pi(int i) {
-        return theList.get(i-1);
+        if (i <= intSize()) {
+            return theList.get(i-1);
+        } else {
+            return null;
+        }
     }
     
     public String toListString() {
