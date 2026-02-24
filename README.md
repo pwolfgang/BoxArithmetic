@@ -1,8 +1,8 @@
 # Box Arithmetic
 An implementation of N. J. Wildberger's model of arithmetic using boxes
 This is based on the youtube lectures Intro to Algebraic Calculus
-This project implements the features described through the lecture "Sets, lists,
-vexels, and maxels".
+This project implements the features described through the lecture "A new world
+of functions from box arithmetic".
 This project was converted from the MSetArighmetic project by renaming MSet to Box
 and removing the anti features.
 The curious world of integral polynumbers. The basic unit is the box. 
@@ -178,3 +178,38 @@ Example from the lecture
     M × N = [⌈1, 2⌉ ⌈0, 3⌉] 
 
 Note that [7] is α₀⁷
+
+Example from the paper:
+
+    M = [₃ ⌈0, 2⌉ ₂ ⌈0, 0⌉ ⌈1, 0⌉]
+
+        2   0   3
+        1   0   0
+
+    N =[₄ ⌈0, 1⌉ ₇ ⌈2, 1⌉ ⌈1, 0⌉ ₅ ⌈3, 2⌉]
+
+        0   4   0
+        1   0   0
+        0   7   0
+        0   0   5
+
+    M×N =[₂₉ ⌈0, 1⌉ ₄ ⌈1, 1⌉]
+
+        0  29
+        0   4
+
+### ListBoxes
+A Listbox is a Box of Lists. Maxels and Vixels are ListBoxes.
+Example:
+    X = [⌈5, [[[2]]], 1⌉ ⌈2, α₀³⌉ ⌈0, 0, [[1]], [0 1]⌉]
+The function pi(i) selects the ith element of each list and returns is as a box.
+    X.pi(1) = X.pi(1) [2 5 0]
+    X.pi(2) [[3] [[[2]]] 0]
+    X.pi(3) [1 [[1]]]
+
+## Functions
+A function is a Maxel where pi(1) known as the range is a set. Example:
+    F: [⌈2, 6+α₀²⌉ ⌈0, 3⌉ ⌈α₀, 1⌉ ⌈3, 1⌉ ⌈4, 5⌉]
+    G: [⌈1, 8⌉ ⌈3, 8⌉ ⌈0, 0⌉]
+Functions can be composed by multiplying the correxponding Maxels.
+    F×G: [⌈0, 8⌉ ⌈α₀, 8⌉ ⌈3, 8⌉]
