@@ -24,7 +24,7 @@ import java.util.List;
  *
  * @author Paul
  */
-public class Maxel extends NonEmptyBox {
+public class Maxel extends ListBox {
     
     public Maxel(Pixel... pixels) {
         super(pixels);

@@ -34,10 +34,14 @@ public class BoxList  extends NonEmptyBox {
     final List<? extends Box> theList;
     
     public BoxList(Box... boxes) {
-        theList = List.copyOf((Arrays.asList(boxes)));
+        this(Arrays.asList(boxes));
+    }
+    
+    public BoxList(List<? extends Box> list) {      
+        theList = List.copyOf(list);
         List<Box> backingList = new ArrayList<>();
         Box newBox = new EmptyBox();
-        for (Box box : boxes) {
+        for (Box box : list) {
             newBox = newBox.add(Box.of(box));
             backingList.add(newBox);
         }
@@ -52,13 +56,18 @@ public class BoxList  extends NonEmptyBox {
         }
     }
     
-    public String toListString() {
+    @Override
+    public String toIntegerString() {
         var stj = new StringJoiner(", ", "\u2308", "\u2309");
         for (Box box : theList) {
             stj.add(box.toIntegerString());
         }
         return stj.toString();
     }
-
     
+    @Override
+    public BoxList clone() {
+        return new BoxList(theList);
+    }
+
 }
