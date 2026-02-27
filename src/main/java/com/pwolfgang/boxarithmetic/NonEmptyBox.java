@@ -50,7 +50,7 @@ public class NonEmptyBox implements Box {
     }
     
     /**
-     * Construct a new NonEmptyMset from an array of boxs.
+     * Construct a new NonEmptyBox from an array of boxs.
      * @param boxs The array of boxs
      */
     NonEmptyBox(Box... boxs) {
@@ -58,7 +58,7 @@ public class NonEmptyBox implements Box {
     }
     
     /**
-     * Construct a new NonEmptyMset from a List of boxs.
+     * Construct a new NonEmptyBox from a List of boxs.
      * @param boxs The List of boxs
      */
     NonEmptyBox(List<? extends Box> boxs) {
@@ -95,7 +95,7 @@ public class NonEmptyBox implements Box {
     } 
     
     /**
-     * Construct a new NonEmptyMset from a SortedSet of boxs.
+     * Construct a new NonEmptyBox from a SortedSet of boxs.
      * @param boxs The SortedSet of boxs
      */
     NonEmptyBox(SortedSet<Box> c) {
