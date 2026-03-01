@@ -69,7 +69,7 @@ public class MaxelTest {
         
         var vexel = Vexel.of(2, 2, 2, 2);
         var prod = maxel.mul(vexel);
-        var expected = vexel.of(20,52,84,116);
+        var expected = Vexel.of(20,52,84,116);
         System.out.println(prod.toVectorString());
         assertEquals(expected, prod);
     }

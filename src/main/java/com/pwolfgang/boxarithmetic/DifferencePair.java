@@ -77,11 +77,6 @@ public class DifferencePair {
         return toString();
     }
 
-    @Override
-    public DifferencePair clone() {
-        return new DifferencePair(leftBox.clone(), rightBox.clone());
-    }
-
     public String asPolyNumber() {
         PriorityQueue<List<Box>> leftList;
         PriorityQueue<List<Box>> rightList;

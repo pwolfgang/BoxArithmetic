@@ -101,12 +101,11 @@ public class NonEmptyBox implements Box {
     NonEmptyBox(SortedSet<Box> c) {
         content = new TreeSet<>(Box::compareTo);
         int maxHeight = 0;
-        for (Box Box : c) {
-            Box newBox = Box.clone();
-            if (maxHeight < newBox.getHeight()) {
-                maxHeight = newBox.getHeight();
+        for (Box box : c) {
+            if (maxHeight < box.getHeight()) {
+                maxHeight = box.getHeight();
             }
-            content.add(newBox);
+            content.add(box);
         }
         height = maxHeight + 1;
     }

@@ -197,12 +197,6 @@ public interface Box extends Comparable<Box>, Cloneable, Iterable<Box> {
     Box add(Box other);
     
     /**
-     * Return a new Box that is the sum of this Box an another EmptyBox.
-     * @param other The other EmptyBox
-     * @return The sum of this and other
-     */
- 
-    /**
      * Return a new Box that is the product of this Box an another Box.
      * The result is an Box of the pair-wise sums of the contents of the 
      * input Boxs. 

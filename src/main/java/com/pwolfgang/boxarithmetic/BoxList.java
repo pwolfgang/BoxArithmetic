@@ -68,6 +68,4 @@ public class BoxList  extends NonEmptyBox {
     @Override
     public BoxList clone() {
         return new BoxList(theList);
-    }
-
 }
