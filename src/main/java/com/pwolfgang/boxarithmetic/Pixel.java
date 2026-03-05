@@ -66,6 +66,5 @@ public class Pixel extends BoxList {
        stj.add(b.asPolyNumber());
        return stj.toString();
    }
-
     
 }

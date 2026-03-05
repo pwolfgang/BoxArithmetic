@@ -38,17 +38,17 @@ public class ToPolyNumberTest {
         
     }
     
-    void printIt(String s, Box mSet) {
-        System.out.printf("%s: %s%n", s, mSet.toString());
-        System.out.printf("%s: %s%n", s, mSet.toIntegerString());
-        System.out.printf("%s: %s%n", s, mSet.asPolyNumber());
-        assertEquals(s, mSet.asPolyNumber());
+    void printIt(String s, Box box) {
+        System.out.printf("%s: %s%n", s, box.toString());
+        System.out.printf("%s: %s%n", s, box.toIntegerString());
+        System.out.printf("%s: %s%n", s, box.asPolyNumber());
+        assertEquals(s, box.asPolyNumber());
     }
 
-    void printIt_noAssert(String s, Box mSet) {
-        System.out.printf("%s: %s%n", s, mSet.toString());
-        System.out.printf("%s: %s%n", s, mSet.toIntegerString());
-        System.out.printf("%s: %s%n", s, mSet.asPolyNumber());
+    void printIt_noAssert(String s, Box box) {
+        System.out.printf("%s: %s%n", s, box.toString());
+        System.out.printf("%s: %s%n", s, box.toIntegerString());
+        System.out.printf("%s: %s%n", s, box.asPolyNumber());
     }
     
     @Test

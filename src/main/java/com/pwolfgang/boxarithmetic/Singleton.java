@@ -17,6 +17,7 @@
  */
 package com.pwolfgang.boxarithmetic;
 
+import java.util.Collections;
 import java.util.StringJoiner;
 
 
@@ -28,6 +29,11 @@ import java.util.StringJoiner;
 public class Singleton extends BoxList {
     
     final Box a;
+    
+    public Singleton() {
+        this.a = null;
+        super(Collections.EMPTY_LIST);
+    }
     
     public Singleton(Box box) {
         this.a = box;
@@ -48,12 +54,18 @@ public class Singleton extends BoxList {
     }
        
    public Singleton clone() {
+       if (a == null) {
+           return new Singleton();
+       } else {
         return new Singleton(a);
+       }
    }
    
    public String toIntegerString() {
        var stj = new StringJoiner(", ", "\u2308", "\u2309");
-       stj.add(a.asPolyNumber());
+       if (a != null) {
+           stj.add(a.asPolyNumber());
+       }
        return stj.toString();
    }
     

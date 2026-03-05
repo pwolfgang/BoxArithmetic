@@ -37,6 +37,8 @@ public class ListBoxTest {
         var onePlusAlpha = Box.of(1).add(alpha);
         System.out.printf("1 + \u03b1: %s%n", onePlusAlpha.asPolyNumber());
         System.out.printf("1 + \u03b1: %s%n", onePlusAlpha.toIntegerString());
+        assertEquals("1+α₀", onePlusAlpha.asPolyNumber());
+        assertEquals("[0 1]", onePlusAlpha.toIntegerString());        
         var l2 = new BoxList(Box.of(0), Box.of(0), Box.of(alpha), onePlusAlpha);
         var l3 = new BoxList(Box.of(5), Box.of(Box.of(alphaSq)), Box.of(1));
         System.out.printf("l1: %s%n", l1.toIntegerString());
@@ -48,6 +50,12 @@ public class ListBoxTest {
         System.out.printf("X.pi(1) %s%n", X.pi(1).toCompressedIntegerString());
         System.out.printf("X.pi(2) %s%n", X.pi(2).toCompressedIntegerString());
         System.out.printf("X.pi(3) %s%n", X.pi(3).toCompressedIntegerString());
+        var Xpi1 = Box.parse("[2 5 0]");
+        var Xpi2 = Box.parse("[0 [[[2]]] [3]]");
+        var Xpi3 = Box.parse("[1 [[1]]]");
+        assertEquals(Xpi1, X.pi(1));
+        assertEquals(Xpi2, X.pi(2));
+        assertEquals(Xpi3, X.pi(3));
         var M = new Maxel
         (Pixel.of(2,3), 
         Pixel.of(2, 3),
@@ -58,7 +66,8 @@ public class ListBoxTest {
         System.out.printf("M = %s%n", M.toIntegerString());
         System.out.printf("M.pi(1) = %s%n", M.pi(1).toIntegerString());
         System.out.printf("M.pi(2) = %s%n", M.pi(2).toIntegerString());
-       
+        assertEquals(Box.parse("[0 2 2 2 4 4]"), M.pi(1));
+        assertEquals(Box.parse("[2 3 3 5 5 7]"), M.pi(2));
     }
     
 }

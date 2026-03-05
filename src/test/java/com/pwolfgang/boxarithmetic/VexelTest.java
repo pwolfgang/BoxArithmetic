@@ -36,7 +36,7 @@ public class VexelTest {
 
     @Test
     public void testMul() {
-        
+        IO.println("\n\ntestMul");    
         var maxel = Maxel.of(new int[][]
                 {{1,  2,  3,  4},
                  {5,  6,  7,  8},
@@ -53,6 +53,7 @@ public class VexelTest {
     // Tests both ol and toVectorString
     @Test
     public void testOf() {
+        IO.println("\n\ntestOf");
         System.out.println("\n\ntestOf");
         var vexel = Vexel.of(2,1,0,0,1);
         printIt("(2,1,0,0,1):", vexel);
@@ -92,6 +93,7 @@ public class VexelTest {
     
     @Test
     public void testEs() {
+        IO.println("testEs");
         System.out.println("\n\nteseEs");
         var vexel = Vexel.of(1,1,1,1,1);
         var asPoly = vexel.asPolyNumber();
@@ -104,11 +106,13 @@ public class VexelTest {
         var vexel = Vexel.of(3,2,0,0,1);
         IO.println(vexel.toCompressedIntegerString());
         IO.println(vexel.asPolyNumber());
+        var expected = Box.parse("[[[0]][[0]][[0]][[1]][[1]][[4]]]");
+        assertEquals(expected,vexel);
     }
     
     @Test
     public void testExample2() {
-        IO.println("Lecture example");
+        IO.println("\n\nLecture example");
         var alpha = Box.parse("[1]");
         var onePalphaSq = Box.parse("[0 [0 0]]");
         var alpha3 = Box.parse("[[0 0 0]]");
@@ -125,10 +129,12 @@ public class VexelTest {
         var w = new Vexel(Singleton.of(2), new Singleton(alpha3));
         System.out.printf("w: %s%n", w.toCompressedIntegerString());
         var result = v.add(Box.of(2).mul(w));
+        printIt("result", result);
         System.out.printf("v+2w: %s%n", result.toCompressedIntegerString());
-        
-       
-
+        var expected = Box.parse("[[[2]][[2]][[2]][[2]][[2]][[[3]]][[[3]]][[[0 2]]][[[1]]]]");
+        printIt("expected", expected);
+        System.out.printf("expected: %s%n", expected.toCompressedIntegerString());
+        assertEquals(expected,result);
     }
 
     

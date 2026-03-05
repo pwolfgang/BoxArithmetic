@@ -40,10 +40,14 @@ public class BoxList  extends NonEmptyBox {
     public BoxList(List<? extends Box> list) {      
         theList = List.copyOf(list);
         List<Box> backingList = new ArrayList<>();
-        Box newBox = new EmptyBox();
-        for (Box box : list) {
-            newBox = newBox.add(Box.of(box));
-            backingList.add(newBox);
+        if (list.isEmpty()) {
+            backingList.add(new EmptyBox());
+        } else {
+            Box newBox = new EmptyBox();
+            for (Box box : list) {
+                newBox = newBox.add(Box.of(box));
+                backingList.add(newBox);
+            }
         }
         super(backingList);     
     }
@@ -68,4 +72,5 @@ public class BoxList  extends NonEmptyBox {
     @Override
     public BoxList clone() {
         return new BoxList(theList);
+    }
 }

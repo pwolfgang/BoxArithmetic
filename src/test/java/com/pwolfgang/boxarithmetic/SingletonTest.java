@@ -36,18 +36,28 @@ public class SingletonTest {
 
     @Test
     public void testAlphas() {
-        IO.println("\n\n\testAlphas");
+        IO.println("\n\ntestAlphas");
         System.out.println("\n\ntestAlphas");
         var e0 = Singleton.of(0);
+        var e0E = Box.parse("[1]");
         printIt("e0", e0);
+        assertEquals(e0E,e0);
         var e1 = Singleton.of(1);
+        var e1E = Box.parse("[[1]]");
         printIt("e1", e1);
+        assertEquals(e1E,e1);
         var e2 = Singleton.of(2);
+        var e2E = Box.parse("[[2]]");
         printIt("e2", e2);
+        assertEquals(e2E, e2);
         var e3 = Singleton.of(3);
+        var e3E = Box.parse("[[3]]");
         printIt("e3", e3);
+        assertEquals(e3E, e3);
         var e4 = Singleton.of(4);
+        var e4E = Box.parse("[[4]]");
         printIt("e4", e4);
+        assertEquals(e4E,e4);
         IO.println("\u03B1\u2099 = e\u2099");
         
     }
@@ -57,10 +67,16 @@ public class SingletonTest {
         IO.println("\n\ntestBCD");
         var B = Singleton.of(7);
         var C = Singleton.of(0);
-        var D = new Singleton(new EmptyBox());
+        var D = new Singleton();
+        var Be = Box.parse("[[7]]");
+        var Ce = Box.parse("[[[]]]");
+        var De = Box.parse("[[]]");
         printIt("B", B);
         printIt("C", C);
         printIt("D", D);
+        assertEquals(Be,B);
+        assertEquals(Ce,C);
+        assertEquals(De,D);
     }
     
     @Test
@@ -89,8 +105,7 @@ public class SingletonTest {
         printIt("e4", e4);
         var vexel = Box.add(e0,e1,e2,e3,e4);
         printIt("vexel: ", vexel);
-
-        
-    }
-    
+        var expected = Box.parse("[1 [1][2][3][4]]");
+        assertEquals(expected, vexel);    
+    }  
 }

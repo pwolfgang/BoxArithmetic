@@ -27,7 +27,7 @@ import com.pwolfgang.boxarithmetic.Box;
 
 public class BoxTest3 {
     
-        @BeforeEach
+    @BeforeEach
     public void init() {
         try {
             PrintStream p = new PrintStream(new FileOutputStream(FileDescriptor.out), true, "UTF-8");

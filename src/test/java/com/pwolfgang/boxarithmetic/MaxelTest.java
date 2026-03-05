@@ -55,7 +55,13 @@ public class MaxelTest {
                 {0, 0, 5}
                 });
         System.out.println(N.toCompressedIntegerString());
+        var MxN = M.mul(N);
+        var MxNexpected = Maxel.of(new int[][]
+           {{0, 29},
+            {0,  4}
+           });
         System.out.println(M.mul(N).toCompressedIntegerString());
+        assertEquals(MxNexpected, MxN);
     }
     
     @Test
@@ -88,7 +94,10 @@ public class MaxelTest {
         System.out.printf("%s: %s%n", "v", v.toCompressedIntegerString());
         System.out.printf("%s: %s%n", "vXm", vXm.toCompressedIntegerString());
         System.out.printf("%s: %s%n", "mXv", mXv.toCompressedIntegerString());
-        
+        var vXmExpected = Vexel.of(23, 34);
+        var mXvExpected = Vexel.of(17, 39);
+        assertEquals(vXmExpected, vXm);
+        assertEquals(mXvExpected, mXv);
     }
     
     @Test
@@ -107,7 +116,9 @@ public class MaxelTest {
         var MxN = M.mul(N);
         System.out.printf("M = %s%n", M.toCompressedIntegerString());
         System.out.printf("N = %s%n", N.toCompressedIntegerString());
-        System.out.printf("M × N = %s%n", MxN.toCompressedIntegerString());       
+        System.out.printf("M × N = %s%n", MxN.toCompressedIntegerString());
+        var MxNExpected = Box.of(Pixel.of(1,2),Pixel.of(0,3));
+        assertEquals(MxNExpected, MxN);
     }
     
     @Test
@@ -117,13 +128,20 @@ public class MaxelTest {
         var p2 = new Pixel(Box.of(1),Box.of(Box.of(1)));
         var p3 = new Pixel(Box.of(Box.of(1)), Box.of(2));
         var p4 = new Pixel(Box.of(Box.of(7)), Box.of(3));
+        var p1T = new Pixel(Box.of(Box.of(7)), Box.of(0));
+        var p2T = new Pixel(Box.of(Box.of(1)),Box.of(1));
+        var p3T = new Pixel(Box.of(2),Box.of(Box.of(1)));
+        var p4T = new Pixel(Box.of(3),Box.of(Box.of(7)));
         System.out.printf("p1: %s%n", p1.toIntegerString());
         System.out.printf("p2: %s%n", p2.toIntegerString());
         System.out.printf("p3: %s%n", p3.toIntegerString());
         System.out.printf("p4: %s%n", p4.toIntegerString());
         var M = new Maxel(p1,p2,p3, p4);
+        var MtE = new Maxel(p1T,p2T,p3T,p4T);
+        var Mt = M.transpose();
         System.out.printf("M: %s%n", M.toCompressedIntegerString());
-        System.out.printf("Mt: %s%n", M.transpose().toCompressedIntegerString());      
+        System.out.printf("Mt: %s%n", Mt.toCompressedIntegerString());
+        assertEquals(MtE,Mt);
     }
     
     @Test

@@ -19,7 +19,6 @@ package com.pwolfgang.boxarithmetic;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import org.junit.jupiter.api.Test;
-import com.pwolfgang.boxarithmetic.Box;
 
 public class testEquals {
     
