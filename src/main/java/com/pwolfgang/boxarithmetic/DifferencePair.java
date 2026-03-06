@@ -38,6 +38,14 @@ public class DifferencePair {
         rightBox = right;
     }
     
+    public Box getLeftBox() {
+        return leftBox;
+    }
+    
+    public Box getRightBox() {
+        return rightBox;
+    }
+    
     @Override
     public String toString() {
         return "(" + leftBox.toIntegerString() + "\u2296" + rightBox.toIntegerString() + ")";
@@ -68,8 +76,12 @@ public class DifferencePair {
     }
     
     public DifferencePair mul(DifferencePair other) {
-        var term1 = leftBox.mul(other.leftBox).add(rightBox.mul(other.rightBox));
-        var term2 = leftBox.mul(other.rightBox).add(rightBox.mul(other.leftBox));
+        var lXl = leftBox.mul(other.leftBox);
+        var rXr = rightBox.mul(other.rightBox);
+        var term1 = lXl.add(rXr);
+        var lXr = leftBox.mul(other.rightBox);
+        var rXl = rightBox.mul(other.leftBox);
+        var term2 = lXr.add(rXl);
         return new DifferencePair(term1, term2);
     }   
 

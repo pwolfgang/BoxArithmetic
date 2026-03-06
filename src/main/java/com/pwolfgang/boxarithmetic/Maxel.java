@@ -34,17 +34,22 @@ public class Maxel extends ListBox {
         super(pixels);
     }
     
-    public Maxel mul(Maxel other) {
-        List<Pixel> result = new ArrayList<>();
-        for (var pixelX: content) {
-            for (var pixelY:other.content) {
-                var XxY =((Pixel)pixelX).mul((Pixel)pixelY);
-                if (XxY != null) {
-                    result.add((Pixel)XxY);
+    @Override
+    public Box mul(Box o) {
+        if (o instanceof Maxel other) {
+            List<Pixel> result = new ArrayList<>();
+            for (var pixelX: content) {
+                for (var pixelY:other.content) {
+                    var XxY =((Pixel)pixelX).mul((Pixel)pixelY);
+                    if (XxY != null) {
+                        result.add((Pixel)XxY);
+                    }
                 }
             }
+            return new Maxel(result);
+        } else {
+            return ((NonEmptyBox)this).mul(o);
         }
-        return new Maxel(result);
     }
     
     public static Maxel of(int[][] matrix) {
