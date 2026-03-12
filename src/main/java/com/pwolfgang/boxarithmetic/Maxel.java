@@ -1,4 +1,4 @@
-/*
+ /*
  * Copyright (C) 2026 Paul
  *
  * This program is free software; you can redistribute it and/or
@@ -19,12 +19,18 @@ package com.pwolfgang.boxarithmetic;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.StringJoiner;
 
 /**
  *
  * @author Paul
  */
 public class Maxel extends ListBox {
+    
+    public Maxel() {
+        super();
+    }
     
     public Maxel(Pixel... pixels) {
         super(pixels);
@@ -50,6 +56,22 @@ public class Maxel extends ListBox {
         } else {
             return ((NonEmptyBox)this).mul(o);
         }
+    }
+    
+    @Override
+    public Box add(Box o) {
+        if (o instanceof Maxel other) {
+            List<Pixel> result = new ArrayList<>();
+            for (var pixelX:content) {
+                result.add((Pixel)pixelX);
+            }
+            for (var pixelY:other.content) {
+                result.add((Pixel)pixelY);
+            }
+            return new Maxel(result);           
+        } else {
+            return ((NonEmptyBox)this).add(o);
+        }  
     }
     
     public static Maxel of(int[][] matrix) {
@@ -92,6 +114,51 @@ public class Maxel extends ListBox {
             }
         }
         return new Maxel(result);        
+    }
+    
+    public String asMatrix() {
+        int maxRow = -1;
+        int maxCol = -1;
+        var countMap = buildCount(this);
+        for (Map.Entry<?, Integer> entry : countMap.entrySet()) {            
+            int value = entry.getValue();
+            var k = entry.getKey();
+            if (k instanceof Pixel p) {
+                var row = p.a.intSize();
+                var col = p.b.intSize();
+                if (row > maxRow) {
+                    maxRow = row;
+                }
+                if (col > maxCol) {
+                    maxCol = col;
+                }
+            }
+        }
+        int[][] matrix = new int[maxRow+1][maxCol+1];
+        int maxValue = -1;
+        for (Map.Entry<?, Integer> entry : countMap.entrySet()) {            
+            int value = entry.getValue();
+            if (value > maxValue) {
+                maxValue = value;
+            }
+            var k = entry.getKey();
+            if (k instanceof Pixel p) {
+                var row = p.a.intSize();
+                var col = p.b.intSize();
+                matrix[row][col] = value;
+            }
+        }
+        int numDigits = (int)Math.ceil(Math.log10(maxValue));
+        var format = "%" + String.format("%d", numDigits+1) + "d";
+        var outerStj = new StringJoiner("\n");
+        for (int row = 0; row < maxRow+1; row++) {
+            var innerStj = new StringJoiner(" ");
+            for (int col = 0; col < maxCol+1; col++) {
+               innerStj.add(String.format(format,matrix[row][col]));
+            }
+            outerStj.add(innerStj.toString());
+        }
+        return outerStj.toString();
     }
     
  }

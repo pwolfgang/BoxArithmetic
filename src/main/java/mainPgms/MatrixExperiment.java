@@ -58,17 +58,21 @@ public class MatrixExperiment {
          { 1, 0,10, 0, 5, 0}                   
         });
         
-        var MM = new DifferencePair(m,new EmptyBox());
+        var MM = new DifferencePair(m,new Maxel());
         var MI = new DifferencePair(mIl, mIr);
         
         var P = MM.mul(MI);
         
-        System.out.println(m.toCompressedIntegerString());
-        System.out.println(mIl.toCompressedIntegerString());
-        System.out.println(mIr.toCompressedIntegerString());
-        
-        System.out.println(P.getLeftBox().toCompressedIntegerString());
-        System.out.println(P.getRightBox().toCompressedIntegerString());
+        System.out.println("Matrix M");
+        System.out.println(m.asMatrix());
+        System.out.println("\n\nMatrix M inverse left");
+        System.out.println(mIl.asMatrix());
+        System.out.println("\n\nMatris M inverst right");
+        System.out.println(mIr.asMatrix());
+        System.out.println("\n\nM × MI left");
+        System.out.println(((Maxel)P.getLeftBox()).asMatrix());
+        System.out.println("\n\nM × MI right");
+        System.out.println(((Maxel)P.getRightBox()).asMatrix());
 
     }
     

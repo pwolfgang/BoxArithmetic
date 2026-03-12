@@ -55,6 +55,7 @@ public class MaxelTest {
                 {0, 0, 5}
                 });
         System.out.println(N.toCompressedIntegerString());
+        System.out.println(N.asMatrix());
         var MxN = M.mul(N);
         var MxNexpected = Maxel.of(new int[][]
            {{0, 29},
