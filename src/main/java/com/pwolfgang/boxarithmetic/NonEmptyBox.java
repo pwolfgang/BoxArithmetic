@@ -263,10 +263,41 @@ public class NonEmptyBox implements Box {
         return result;        
     }
     
+        /**
+     * {@inheritDoc}
+     * The crt of two non-empty msets is the pair-wise product of their contents.
+     * @param other A non-empty mset
+     * @return The crt of the two non-empty msets.
+     */
+    @Override
+    public Box crt(Box other) {
+        List<Box> resultList = new ArrayList<>();
+        for (var msetX : this) {
+            for (var msetY : other) {
+                resultList.add(msetX.mul(msetY));
+            }
+        }
+        if (!resultList.isEmpty()) {
+            return new NonEmptyBox(resultList);
+        } else {
+            return new EmptyBox();
+        }        
+    }
+    
+    @Override
+    public Box sigma() {
+        Box s = new EmptyBox();
+        for (Box b:content) {
+            s = s.add(b);
+        }
+        return s;
+    }
+
+    
 
     /**
-     * Determine of this non-empty mset and the other are equal. 
-     * @param o The other non-empty mset
+     * Determine of this non-empty box and the other are equal. 
+     * @param o The other non-empty box
      * @return True if they are equal.
      */
     @Override

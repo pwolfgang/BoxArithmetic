@@ -38,7 +38,7 @@ public class MatrixExperiment {
          { 1, 3, 3, 1, 0, 0},
          { 1, 4, 6, 4, 1, 0},
          { 1, 5,10,10, 5, 1}                   
-        });
+        }, true);
    
         Maxel mIl = Maxel.of(new int[][]
         {{ 1, 0, 0, 0, 0, 0},
@@ -47,7 +47,7 @@ public class MatrixExperiment {
          { 0, 3, 0, 1, 0, 0},
          { 1, 0, 6, 0, 1, 0},
          { 0, 5, 0,10, 0, 1}                   
-        });
+        },true);
         
         Maxel mIr = Maxel.of(new int[][]
         {{ 0, 0, 0, 0, 0, 0},
@@ -56,7 +56,7 @@ public class MatrixExperiment {
          { 1, 0, 3, 0, 0, 0},
          { 0, 4, 0, 4, 0, 0},
          { 1, 0,10, 0, 5, 0}                   
-        });
+        },true);
         
         var MM = new DifferencePair(m,new Maxel());
         var MI = new DifferencePair(mIl, mIr);

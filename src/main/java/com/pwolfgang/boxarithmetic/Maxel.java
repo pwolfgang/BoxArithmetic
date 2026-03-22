@@ -28,15 +28,25 @@ import java.util.StringJoiner;
  */
 public class Maxel extends ListBox {
     
+    final boolean zeroBiased;
+    
     public Maxel() {
+        zeroBiased = true;
         super();
     }
     
     public Maxel(Pixel... pixels) {
+        zeroBiased = true;
         super(pixels);
     }
 
     public Maxel(List<Pixel> pixels) {
+        zeroBiased = true;
+        super(pixels);
+    }
+
+    public Maxel(List<Pixel> pixels, boolean zeroBiased) {
+        this.zeroBiased = zeroBiased;
         super(pixels);
     }
     
@@ -52,7 +62,7 @@ public class Maxel extends ListBox {
                     }
                 }
             }
-            return new Maxel(result);
+            return new Maxel(result, zeroBiased && other.zeroBiased);
         } else {
             return ((NonEmptyBox)this).mul(o);
         }
@@ -74,19 +84,23 @@ public class Maxel extends ListBox {
         }  
     }
     
-    public static Maxel of(int[][] matrix) {
+    public static Maxel of(int[][] matrix, boolean zeroBiased) {
         List<Pixel> pixels = new ArrayList<>();
         for (int i = 0; i<matrix.length; i++) {
             for (int j = 0; j<matrix[i].length; j++) {
                 int count = matrix[i][j];
                 if (count != 0) {
                     for (int k = 0; k < count; k++) {
-                        pixels.add(Pixel.of(i,j));
+                        if (zeroBiased) {
+                            pixels.add(Pixel.of(i,j));                            
+                        } else {
+                            pixels.add(Pixel.of(i+1,j+1));
+                        }
                     }
                 }
             }
         }
-        return new Maxel(pixels);       
+        return new Maxel(pixels, zeroBiased);       
     }
     
         public Vexel mul(Vexel vexel) {
@@ -123,9 +137,15 @@ public class Maxel extends ListBox {
         for (Map.Entry<?, Integer> entry : countMap.entrySet()) {            
             int value = entry.getValue();
             var k = entry.getKey();
+            int row, col;
             if (k instanceof Pixel p) {
-                var row = p.a.intSize();
-                var col = p.b.intSize();
+                if (zeroBiased) {
+                    row = p.a.intSize();
+                    col = p.b.intSize();                    
+                } else {
+                    row = p.a.intSize()-1;
+                    col = p.b.intSize()-1;
+                }
                 if (row > maxRow) {
                     maxRow = row;
                 }
@@ -142,9 +162,15 @@ public class Maxel extends ListBox {
                 maxValue = value;
             }
             var k = entry.getKey();
+            int row, col;
             if (k instanceof Pixel p) {
-                var row = p.a.intSize();
-                var col = p.b.intSize();
+                if (zeroBiased) {
+                    row = p.a.intSize();
+                    col = p.b.intSize();                    
+                } else {
+                    row = p.a.intSize()-1;
+                    col = p.b.intSize()-1;
+                }
                 matrix[row][col] = value;
             }
         }

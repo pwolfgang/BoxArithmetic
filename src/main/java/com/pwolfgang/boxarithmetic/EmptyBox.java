@@ -115,6 +115,16 @@ public class EmptyBox implements Box {
     public Box mul(Box other) {
         return new EmptyBox();
     }
+    
+    @Override
+    public Box crt(Box other) {
+        return new EmptyBox();
+    }
+    
+    @Override
+    public Box sigma() {
+        return new EmptyBox();
+    }
        
     /**
      * {@inheritDoc}

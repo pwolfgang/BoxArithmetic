@@ -53,14 +53,14 @@ public class MaxelTest {
                 {1, 0, 0},
                 {0, 7, 0},
                 {0, 0, 5}
-                });
+                }, true);
         System.out.println(N.toCompressedIntegerString());
         System.out.println(N.asMatrix());
         var MxN = M.mul(N);
         var MxNexpected = Maxel.of(new int[][]
            {{0, 29},
             {0,  4}
-           });
+           }, true);
         System.out.println(M.mul(N).toCompressedIntegerString());
         assertEquals(MxNexpected, MxN);
     }
@@ -72,7 +72,7 @@ public class MaxelTest {
                 {{1,  2,  3,  4},
                  {5,  6,  7,  8},
                  {9, 10, 11, 12},
-                 {13, 14, 15, 16}});
+                 {13, 14, 15, 16}},true);
         
         var vexel = Vexel.of(2, 2, 2, 2);
         var prod = maxel.mul(vexel);
@@ -87,7 +87,7 @@ public class MaxelTest {
         var m = Maxel.of(new int[][]
            {{1,2},
             {3,4}}
-        );
+        , true);
         var v = Vexel.of(5,6);
         var vXm = v.mul(m);
         var mXv = m.mul(v);

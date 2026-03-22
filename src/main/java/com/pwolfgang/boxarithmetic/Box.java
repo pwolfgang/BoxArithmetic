@@ -18,6 +18,7 @@
 package com.pwolfgang.boxarithmetic;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -205,7 +206,12 @@ public interface Box extends Comparable<Box>, Cloneable, Iterable<Box> {
      */
     Box mul(Box other);
     
-    /** Truncation of a box is the result of 
+    /**
+     * Return an box that is the result of the caret operator.
+     * @param other The other MSet
+     * @return this ^ other
+     */
+    Box crt(Box other);
     
     
     public static Box add(Box x, Box y) {
@@ -277,6 +283,51 @@ public interface Box extends Comparable<Box>, Cloneable, Iterable<Box> {
             }
         }
     }
+
+    /**
+     * Compute the product of two Boxs. The product is formed by adding
+     * all possible pairs from the two Boxs.
+     * @param x An Box
+     * @param y The other Box
+     * @return x × y
+     */
+    public static Box crt(Box x, Box y) {
+        return x.crt(y);
+    }
+
+    /**
+     * Compute the product of an array of Boxs. The product is formed
+     * by taking the first two and forming their product. Each subsequent
+     * Box is then multiplied by the result.
+     * @param boxes A list of Boxs
+     * @return The product of the Boxs.
+     */
+    public static Box crt(Box... boxes) {
+        switch (boxes.length) {
+            case 0 -> {
+                return Box.of(0);
+            }
+            case 1 -> {
+                return boxes[0];
+            }
+            default -> {
+                var x = boxes[0];
+                var y = boxes[1];
+                var z = x.crt(y);
+                for (int i = 2; i < boxes.length; i++) {
+                    z = z.crt(boxes[i]);
+                }
+                return z;
+            }
+        }
+    }
+    
+    /**
+     * Return the summation of the contents of a box. If M = [A B ... K] then
+     * sigma(M) = A + B + ... + K
+     * @return the summation of a Box
+     */
+    Box sigma();
 
     /**
      * Create a polynumber representation of the Box.
