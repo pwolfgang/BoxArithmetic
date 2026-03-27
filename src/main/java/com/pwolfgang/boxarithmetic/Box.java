@@ -410,4 +410,14 @@ public interface Box extends Comparable<Box>, Cloneable, Iterable<Box> {
     Box union(Box other);
     
     Box intersection(Box other);
+    
+    default Box truncate(int k) {
+        List<Box> result = new ArrayList<>();
+        for (Box b : this) {
+            if (b.intSize() <= k) {
+                result.add(b);
+            }
+        }
+        return Box.of(result);
+    }
 }

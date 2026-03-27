@@ -76,4 +76,19 @@ public class CrtText {
         assertEquals(Box.of(29), pXq.sigma());
     }
     
+    @Test
+    public void testTheorum14() {
+        System.out.println("\n\nTheroum14");
+        var p2 = Box.parse("[1 2 4 8]");
+        var p3 = Box.parse("[1 3 9]");
+        var p5 = Box.parse("[1 5]");
+        var p7 = Box.parse("[1 7]");
+        var p11 = Box.parse("[1,11]");
+        var s = Box.crt(p2, p3, p5, p7, p11).truncate(12);
+        System.out.println(s.toIntegerString());
+        var e = Box.parse("[1 2 3 4 5 6 7 8 9 10 11 12]");
+        System.out.println(e.toIntegerString());
+        assertEquals(e, s);
+    }
+    
 }
