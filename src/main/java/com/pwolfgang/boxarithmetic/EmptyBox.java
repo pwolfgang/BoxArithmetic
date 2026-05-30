@@ -66,7 +66,7 @@ public class EmptyBox implements Box {
      */
     @Override
     public String toString() {
-        return "[ ]";
+        return "\u25a1";
     }
        
     /**

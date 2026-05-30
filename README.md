@@ -3,50 +3,52 @@ An implementation of N. J. Wildberger's model of arithmetic using boxes
 This is based on the youtube lectures Intro to Algebraic Calculus
 This project implements the features described through the lecture "A new world
 of functions from box arithmetic".
+This branch is being updated to be consistent with Wildberger's new book. 
 This project was converted from the MSetArighmetic project by renaming MSet to Box
-and removing the anti features.
-The curious world of integral polynumbers. The basic unit is the box. 
+and removing the anti features. (The anti features may be restored.)
+The basic unit is the box. 
 A box is an unordered collection of objects with the allowance for repeated instances. 
 The objects are restricted to be boxes.
 ## Representing natural numbers 
-The number zero is represented by the empty box []. A natural number is represented 
-by an box containing empty boxes. Thus 1 is [[]] 2 is [[][]] and so on.
+The number zero is represented by the empty box &#x230a&#x230b, or by &#x25a1. 
+A natural number is represented by an box containing empty boxes. Thus 1 is 
+&#x230a&#x230a&#x230b&#x230b 2 is &#x230a&#x230a&#x230b&#x230a&#x230b&#x230b and so on.
 ## Representing PolyNumbers
 A PolyNumber is an box of boxes. 
 The polynumber &#x03B1; is represented by the box containing a box
 containing an empty box, which is the box containing the natural number one..
 
-[[[]]] = [[1]] = &#x03B1;
+&#x230a&#x230a&#x230a&#x230b&#x230b&#x230b = &#x230a&#x230a1&#x230b&#x230b = &#x03B1;
 
 The polynumber 2&#x03B1; is the multiset containing two instances of alpha
 
-[[[]][[]]] = [[1][1]] = 2&#x03B1;
+&#x230a&#x230a&#x230a&#x230b&#x230b&#x230a&#x230a&#x230b&#x230b&#x230b = &#x230a&#x230a1&#x230b&#x230a1&#x230b&#x230b = 2&#x03B1;
 
 The polynumber &#x03B1;<sup>2</sup> is represented by the box containing a box
 containing two empty boxes, which is the box containing the natural number two.
 
-[[[][]]] = [[2]] = &#x03B1;<sup>2</sup>
+&#x230a&#x230a&#x230a&#x230b&#x230a&#x230b&#x230b&#x230b = &#x230a&#x230a2&#x230b&#x230b = &#x03B1;<sup>2</sup>
 
 In general, m&#x03b1;<sup>n</sup> is represented by an box containing m copies of the natural number n.
 
 The polynumber 3 + &#x03B1; + &#x03B1;<sup>3</sup> + 2&#x03B1;<sup>4</sup> is represented by
 
-[[][][][[]][[][][]][[][][][]][[][][][]]]
+&#x230a&#x230a&#x230b&#x230a&#x230b&#x230a&#x230b&#x230a&#x230a&#x230b&#x230b&#x230a&#x230a&#x230b&#x230a&#x230b&#x230a&#x230b&#x230b&#x230a&#x230a&#x230b&#x230a&#x230b&#x230a&#x230b&#x230a&#x230b&#x230b&#x230a&#x230a&#x230b&#x230a&#x230b&#x230a&#x230b&#x230a&#x230b&#x230b&#x230b
 
-which can be written as [0 0 0 1 3 4 4].
+which can be written as &#x230a0 0 0 1 3 4 4&#x230b.
 
 ## Multinumbers
 
 A muultinumber is an box of poly numbers. For example:
 
-[0 0 0 [1] [1 1] [1 1] [1 1] [1 1] [1 1 1 1 1]]
+&#x230a0 0 0 &#x230a1&#x230b &#x230a1 1&#x230b &#x230a1 1&#x230b &#x230a1 1&#x230b &#x230a1 1&#x230b &#x230a1 1 1 1 1&#x230b&#x230b
 
 Interpreting polynumbers as polynomials the "variable" &#x03B1; is used. Encapsulating a polynumber
 into a mset introduces additional "variables". &#x03B1; now becomes &#x03B1;<sub>0</sub>, then
-[&#x03B1;<sub>0</sub>] becomes &#x03B1;<sub>1</sub>. In general m&#x03B1;<sub>k</sub><sup>n</sup>
+&#x230a&#x03B1;<sub>0</sub>&#x230b becomes &#x03B1;<sub>1</sub>. In general m&#x03B1;<sub>k</sub><sup>n</sup>
 is represented by an mset containing m copies of the mset containing n copies of the number k.
 
- [0 0 2 3 3 3 3 [1] [1] [1] [0 1] [0 1] [0 1] [0 1] [0 1] [0 0 1 1]]
+ &#x230a0 0 2 3 3 3 3 &#x230a1&#x230b &#x230a1&#x230b &#x230a1&#x230b &#x230a0 1&#x230b &#x230a0 1&#x230b &#x230a0 1&#x230b &#x230a0 1&#x230b &#x230a0 1&#x230b &#x230a0 0 1 1&#x230b&#x230b
  
  Represents
  
@@ -60,92 +62,66 @@ contents of the multisets being combined.
 
 #### Addition of natural numbers
 
-[[][]] + [[][][]] = [[][][][][]] (2 + 3 = 5)
+&#x230a&#x230a&#x230b&#x230a&#x230b&#x230b + &#x230a&#x230a&#x230b&#x230a&#x230b&#x230a&#x230b&#x230b = &#x230a&#x230a&#x230b&#x230a&#x230b&#x230a&#x230b&#x230a&#x230b&#x230a&#x230b&#x230b (2 + 3 = 5)
 
 #### Addition of polynumbers
 
-[3 3 4] + 0 + 1 + [3 7] = [0 3 3 3 4 7]
+&#x230a3 3 4&#x230b + 0 + 1 + &#x230a3 7&#x230b = &#x230a0 3 3 3 4 7&#x230b
 
 2α₀³+α₀⁴ + 0 + 1 + α₀³+α₀⁷ = 1+3α₀³+α₀⁴+α₀⁷
 
 #### Addition of multinumbers
 
-[[4] [3]] + [0 [4] [1 1 2]] + [4 [1 1 2]] = [0 4 [4] [4] [3] [1 1 2] [1 1 2]]
+&#x230a&#x230a4&#x230b &#x230a3&#x230b&#x230b + &#x230a0 &#x230a4&#x230b &#x230a1 1 2&#x230b&#x230b + &#x230a4 &#x230a1 1 2&#x230b&#x230b = &#x230a0 4 &#x230a4&#x230b &#x230a4&#x230b &#x230a3&#x230b &#x230a1 1 2&#x230b &#x230a1 1 2&#x230b&#x230b
 
 α₄+α₃ + 1+α₄+α₁²α₂ + α₀⁴+α₁²α₂ = 1+α₀⁴+2α₄+α₃+2α₁²α₂ 
 
 ### Multiplication
 
 Multiplication of boxes is accomplished by forming all possible combinations of the contents
-of the msets being multiplied and adding them. For example [A B C] × [X Y] = [A+X A+Y B+X B+Y C+X C+Y].
+of the msets being multiplied and adding them. For example &#x230aA B C&#x230b × &#x230aX Y&#x230b = &#x230aA+X A+Y B+X B+Y C+X C+Y&#x230b.
 
 #### Multiplication of natural numbers
 
-[[][]] × [[][][]] = [[]+[] []+[] []+[] []+[] []+[] []+[]]
+&#x230a&#x230a&#x230b&#x230a&#x230b&#x230b × &#x230a&#x230a&#x230b&#x230a&#x230b&#x230a&#x230b&#x230b = &#x230a&#x230a&#x230b+&#x230a&#x230b &#x230a&#x230b+&#x230a&#x230b &#x230a&#x230b+&#x230a&#x230b &#x230a&#x230b+&#x230a&#x230b &#x230a&#x230b+&#x230a&#x230b &#x230a&#x230b+&#x230a&#x230b&#x230b
 
-since []+[] = [] the result is 
+since &#x230a&#x230b+&#x230a&#x230b = &#x230a&#x230b the result is 
 
-[[][]] × [[][][]] = [[] [] [] [] [] []] or 2 × 3 = 6
+&#x230a&#x230a&#x230b&#x230a&#x230b&#x230b × &#x230a&#x230a&#x230b&#x230a&#x230b&#x230a&#x230b&#x230b = &#x230a&#x230a&#x230b &#x230a&#x230b &#x230a&#x230b &#x230a&#x230b &#x230a&#x230b &#x230a&#x230b&#x230b or 2 × 3 = 6
 
 #### Multiplication of polynumbers
 
-[2 3] × [0 1 1] = [2 3 3 3 4 4]
+&#x230a2 3&#x230b × &#x230a0 1 1&#x230b = &#x230a2 3 3 3 4 4&#x230b
 
 α₀²+α₀³ × 1+2α₀ = α₀²+3α₀³+2α₀⁴
 
 #### Multiplication of multinumbers
 
-[[3 8] [0 0 2]] × [2 [9] [1 1]] = [[3 8 9] [1 1 3 8] [0 0 3 8] [0 0 2 9] [0 0 1 1 2] [0 0 0 0 2]]
+&#x230a&#x230a3 8&#x230b &#x230a0 0 2&#x230b&#x230b × &#x230a2 &#x230a9&#x230b &#x230a1 1&#x230b&#x230b = &#x230a&#x230a3 8 9&#x230b &#x230a1 1 3 8&#x230b &#x230a0 0 3 8&#x230b &#x230a0 0 2 9&#x230b &#x230a0 0 1 1 2&#x230b &#x230a0 0 0 0 2&#x230b&#x230b
 
 α₃α₈+α₀²α₂ × α₀²+α₉+α₁² = α₃α₈α₉+α₁²α₃α₈+α₀²α₃α₈+α₀²α₂α₉+α₀²α₁²α₂+α₀⁴α₂
-
-## Negative numbers
-
-Negative numbers are represened by difference pairs. A difference pair contains 
-two boxes and represents the value of the leftBox minus the rightBox. Note in
-a previous lecture the differnce pair was called a virtual box. A previous
-commit to implement the virtual box anticipated that the virutal box would
-be a box and thus could be a component of a larget box. This has been removed
-from this commit.
-
-## Difference Pairs of Polynumbers
-Polynumbers with integer coeficients are represented by difference pairs of
-poly numbers. Thus
-(1+3α₀²+5α₀⁷⊖2+3α₀⁷+4α₀⁸)
-
-represents
-
-̅1 + 3α₀² + 2α₀⁷ + ̅4α₀⁸
-
-Also
-
-C = 2 + ̅3α₀ + α₀⁴
-
-D = 2α₀ + ̅5α₀²
-
-C×D = 4α₀ + ̅16α₀² + 15α₀³ + 2α₀⁵ + ̅5α₀⁶
 
 ## Lists, Singletons,  Vexels, and Maxels
 
 ### Lists
 
 A list is an ordered sequence of boxes. If A, B, C, D are boxes then the list
-⌈A, B, C, D⌉ is represented by the boz [[A][A B][A B C][A B C D]].
+⌈A, B, C, D⌉ is represented by the boz &#x230a&#x230aA&#x230b&#x230aA B&#x230b&#x230aA B C&#x230b&#x230aA B C D&#x230b&#x230b.
 Lists are currently represented in this implementation, as well as two special
 instances.
 
 ### Singletons
 A singleton is a list of a single box. The paper restrices the enclosing box to
 natural numbers, but the lecture did not incloude this restribtion.
-Observe that the singleton of 0 is [[]] which is 1. The singleton of 1 is [[[]]]
-which is [[1]] which is α₁, and the singleton of 2 is [[2]] or α₂ and so on. The
+Observe that the singleton of 0 is &#x230a&#x230a&#x230b&#x230b which is 1. The singleton of 1 is &#x230a&#x230a&#x230a&#x230b&#x230b&#x230b
+which is &#x230a&#x230a1&#x230b&#x230b which is α₁, and the singleton of 2 is &#x230a&#x230a2&#x230b&#x230b or α₂ and so on. The
 paper renames αₙ as eₙ.
 
 ### Pixels
 A pixel is a list of two boxes. The paper restricts the boxes to natural numbers,
 but the lecture does not have this restriction. Internally we represent a pixel
 both as a list and also the separate components. Thus the pixel ⌈3, 4⌉ is the box
-[[3][3 4]] the individual components are also represented as a and b. 
+&#x230a&#x230a3&#x230b&#x230a3 4&#x230b&#x230b the individual components are also represented as a and b. 
 
 #### Pixel multiplication
 If ⌈A, B⌉ and ⌈C, D⌉ are pixels then ⌈A, B⌉ × ⌈C, C⌉ is ⌈A, D⌉ only if B=C. 
@@ -156,7 +132,7 @@ in ⌈A⌉ only if B=C.
 
 ### Vexels
 A vexel is a box of singletons. If the singletons are restricted to natural numbers,
-then a vexel is a multi. For example the box [₁ [[4]] ₃ [1] ₂ [[1]]] contains 
+then a vexel is a multi. For example the box &#x230a₁ &#x230a&#x230a4&#x230b&#x230b ₃ &#x230a1&#x230b ₂ &#x230a&#x230a1&#x230b&#x230b&#x230b contains 
 represents 3e₀+2e₁+e₄ and represents the vector (3, 2, 0, 0, 1).
 
 ### Maxels
@@ -169,31 +145,31 @@ The matrix
     1  2
     3  4
 
-is the box [₄ ⌈1, 1⌉ ₃ ⌈1, 0⌉ ₂ ⌈0, 1⌉ ₁ ⌈0, 0⌉]
+is the box &#x230a₄ ⌈1, 1⌉ ₃ ⌈1, 0⌉ ₂ ⌈0, 1⌉ ₁ ⌈0, 0⌉&#x230b
 
 Example from the lecture
 
-    M = [⌈1, α₀⌉ ⌈0, α₀⁷⌉]
-    N = [⌈α₀, 2⌉ ⌈α₀⁷, 3⌉]
-    M × N = [⌈1, 2⌉ ⌈0, 3⌉] 
+    M = &#x230a⌈1, α₀⌉ ⌈0, α₀⁷⌉&#x230b
+    N = &#x230a⌈α₀, 2⌉ ⌈α₀⁷, 3⌉&#x230b
+    M × N = &#x230a⌈1, 2⌉ ⌈0, 3⌉&#x230b 
 
-Note that [7] is α₀⁷
+Note that &#x230a7&#x230b is α₀⁷
 
 Example from the paper:
 
-    M = [₃ ⌈0, 2⌉ ₂ ⌈0, 0⌉ ⌈1, 0⌉]
+    M = &#x230a₃ ⌈0, 2⌉ ₂ ⌈0, 0⌉ ⌈1, 0⌉&#x230b
 
         2   0   3
         1   0   0
 
-    N =[₄ ⌈0, 1⌉ ₇ ⌈2, 1⌉ ⌈1, 0⌉ ₅ ⌈3, 2⌉]
+    N =&#x230a₄ ⌈0, 1⌉ ₇ ⌈2, 1⌉ ⌈1, 0⌉ ₅ ⌈3, 2⌉&#x230b
 
         0   4   0
         1   0   0
         0   7   0
         0   0   5
 
-    M×N =[₂₉ ⌈0, 1⌉ ₄ ⌈1, 1⌉]
+    M×N =&#x230a₂₉ ⌈0, 1⌉ ₄ ⌈1, 1⌉&#x230b
 
         0  29
         0   4
@@ -201,15 +177,15 @@ Example from the paper:
 ### ListBoxes
 A Listbox is a Box of Lists. Maxels and Vixels are ListBoxes.
 Example:
-    X = [⌈5, [[[2]]], 1⌉ ⌈2, α₀³⌉ ⌈0, 0, [[1]], [0 1]⌉]
+    X = &#x230a⌈5, &#x230a&#x230a&#x230a2&#x230b&#x230b&#x230b, 1⌉ ⌈2, α₀³⌉ ⌈0, 0, &#x230a&#x230a1&#x230b&#x230b, &#x230a0 1&#x230b⌉&#x230b
 The function pi(i) selects the ith element of each list and returns is as a box.
-    X.pi(1) = X.pi(1) [2 5 0]
-    X.pi(2) [[3] [[[2]]] 0]
-    X.pi(3) [1 [[1]]]
+    X.pi(1) = X.pi(1) &#x230a2 5 0&#x230b
+    X.pi(2) &#x230a&#x230a3&#x230b &#x230a&#x230a&#x230a2&#x230b&#x230b&#x230b 0&#x230b
+    X.pi(3) &#x230a1 &#x230a&#x230a1&#x230b&#x230b&#x230b
 
 ## Functions
 A function is a Maxel where pi(1) known as the range is a set. Example:
-    F: [⌈2, 6+α₀²⌉ ⌈0, 3⌉ ⌈α₀, 1⌉ ⌈3, 1⌉ ⌈4, 5⌉]
-    G: [⌈1, 8⌉ ⌈3, 8⌉ ⌈0, 0⌉]
+    F: &#x230a⌈2, 6+α₀²⌉ ⌈0, 3⌉ ⌈α₀, 1⌉ ⌈3, 1⌉ ⌈4, 5⌉&#x230b
+    G: &#x230a⌈1, 8⌉ ⌈3, 8⌉ ⌈0, 0⌉&#x230b
 Functions can be composed by multiplying the correxponding Maxels.
-    F×G: [⌈0, 8⌉ ⌈α₀, 8⌉ ⌈3, 8⌉]
+    F×G: &#x230a⌈0, 8⌉ ⌈α₀, 8⌉ ⌈3, 8⌉&#x230b

@@ -53,7 +53,7 @@ public class BoxTest {
         var m = Box.of();
         printIt("m", m);
         assertEquals(0, m.intSize());
-        assertEquals("[ ]", m.toString());
+        assertEquals("\u25a1", m.toString());
         assertEquals("0", m.toIntegerString());
         assertEquals("0", m.asPolyNumber());
     }
@@ -65,7 +65,7 @@ public class BoxTest {
         var one = Box.of(zero);
         printIt("one", one);
         assertEquals(1, one.intSize());
-        assertEquals("[[ ]]", one.toString());
+        assertEquals("\u230a\u25a1\u230b", one.toString());
         assertEquals("1", one.toIntegerString());
         assertEquals("1", one.asPolyNumber());
     }
@@ -77,7 +77,7 @@ public class BoxTest {
         var two = Box.of(Box.of(), Box.of());
         var oneOneTwo = Box.of(Box.of(zero), Box.of(zero), two);
         printIt("oneOneTwo", oneOneTwo);
-        assertEquals("[1 1 2]", oneOneTwo.toIntegerString());
+        assertEquals("\u230a1, 1, 2\u230b", oneOneTwo.toIntegerString());
     }
     
     @Test 
@@ -85,7 +85,7 @@ public class BoxTest {
         System.out.println("testPoly2");
         var boxOf13 = Box.of(Box.of(13));
         printIt("13", boxOf13);
-        assertEquals("[13]", boxOf13.toIntegerString());
+        assertEquals("\u230a13\u230b", boxOf13.toIntegerString());
     }
     
     
@@ -98,9 +98,9 @@ public class BoxTest {
         var test2 = Box.of(threeFiveEleven);
         var test3 = Box.of(Box.of(0));
         var test4 = Box.of(0);
-        assertEquals("[[1 1] [1 1]]", test1.toIntegerString());
+        assertEquals("\u230a\u230a1, 1\u230b, \u230a1, 1\u230b\u230b", test1.toIntegerString());
         printIt("2α₁²", test1);
-        assertEquals("[[3 5 11]]", test2.toIntegerString());
+        assertEquals("\u230a\u230a3, 5, 11\u230b\u230b", test2.toIntegerString());
         printIt("α₃α₅α₁₁", test2);
         assertEquals("1", test3.toIntegerString());
         assertEquals("0", test4.toIntegerString());
@@ -119,7 +119,7 @@ public class BoxTest {
         printIt("c", c);
         var sum = Box.add(a, b, c);
         printIt("a+b+c",sum);
-        var expected = Box.parse("[0 4 [3] [4] [4] [1 1 2] [1 1 2]]");
+        var expected = Box.parse("\u230a0 4 \u230a3\u230b \u230a4\u230b \u230a4\u230b \u230a1 1 2\u230b \u230a1 1 2\u230b\u230b");
         assertEquals(expected, sum);
     }
     
@@ -136,7 +136,7 @@ public class BoxTest {
         printIt("C", c);
         printIt("d", d);
         printIt("a+b+c+d",sum);
-        var expected = Box.parse("[0 3 3 3 4 7]");
+        var expected = Box.parse("\u230a0 3 3 3 4 7\u230b");
         assertEquals(expected, sum);
     }
     
@@ -187,7 +187,7 @@ public class BoxTest {
         printIt("x", x);
         printIt("y", y);
         var r = Box.mul(x, y);
-        var e = Box.parse("[[3 8 11] [3 8 9] [0 0 3 8] [0 0 2 11] [0 0 2 9] [0 0 0 0 2]]");
+        var e = Box.parse("\u230a\u230a3, 8, 11\u230b \u230a3, 8, 9\u230b \u230a0, 0, 3, 8\u230b \u230a0, 0, 2, 11\u230b \u230a0, 0, 2, 9\u230b \u230a0, 0, 0, 0, 2\u230b\u230b");
         printIt("x × y", r);
         assertEquals(e, r);
    }
@@ -199,7 +199,7 @@ public class BoxTest {
         var y = Box.of(Box.of(Box.of(4)),Box.of(Box.of(4)));
         var z = Box.of(Box.of(Box.of(1),Box.of(6)),Box.of(0));
         var r = Box.mul(x,y,z);
-        var e = Box.parse("[[2 4] [2 4] [0 0 0 4] [0 0 0 4] [1 2 4 6] [1 2 4 6] [0 0 0 1 4 6] [0 0 0 1 4 6]]");
+        var e = Box.parse("\u230a\u230a2, 4\u230b \u230a2, 4\u230b \u230a0, 0, 0, 4\u230b \u230a0, 0, 0, 4\u230b \u230a1, 2, 4, 6\u230b \u230a1, 2, 4, 6\u230b \u230a0, 0, 0, 1, 4, 6\u230b \u230a0, 0, 0, 1, 4, 6\u230b\u230b");
         printIt("x", x);
         printIt("y", y);
         printIt("x", z);
@@ -229,16 +229,16 @@ public class BoxTest {
     @Test
     public void testTruncation() {
         System.out.println("\n\ntestTruncation");
-        Box A = Box.parse("[7 7 [3 5] [[4] 2]]");
+        Box A = Box.parse("\u230a7, 7 \u230a3 5\u230b \u230a\u230a4\u230b 2\u230b\u230b");
         Box B = Box.of(7);
-        Box C = Box.parse("[3 5]");
+        Box C = Box.parse("\u230a3, 5\u230b");
         Box D = Box.of(8);
         printIt("A: ", A);
         printIt("B: ", B);
         printIt("C: ", C);
         printIt("D: ", D);
-        Box tBofA = Box.parse("[7 7]");
-        Box tCofA = Box.parse("[[3 5]]");
+        Box tBofA = Box.parse("\u230a7 7\u230b");
+        Box tCofA = Box.parse("\u230a\u230a3, 5\u230b\u230b");
         Box tDofA = Box.of(0);
         assertEquals(tBofA, A.tB(B));
         assertEquals(tCofA, A.tB(C));

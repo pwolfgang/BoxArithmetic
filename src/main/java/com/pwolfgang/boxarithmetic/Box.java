@@ -351,7 +351,7 @@ public interface Box extends Comparable<Box>, Cloneable, Iterable<Box> {
     static Box parse(String s) {
         List<Box> result = new ArrayList<>();
         int k = 0;
-        while (k < s.length() && s.charAt(k) != '[') {k++;}
+        while (k < s.length() && (s.charAt(k) != '[' && s.charAt(k) != '\u230a')) {k++;}
         if (k == s.length()) return null;
         k = parse1(s, k+1, result);
         return Box.of(result);
@@ -366,9 +366,9 @@ public interface Box extends Comparable<Box>, Cloneable, Iterable<Box> {
      * @return The index of the closing ']'
      */
     private static int parse1(String s, int k, List<Box> result) {
-            for (char c = s.charAt(k); c != ']'; c=s.charAt(++k)) {
+            for (char c = s.charAt(k); c != ']' && c!='\u230b'; c=s.charAt(++k)) {
                 switch (c) {
-                    case '[' -> {
+                    case '[', '\u230a' -> {
                         List<Box> list = new ArrayList<>();
                         k = parse1(s, k+1, list);
                             result.add(Box.of(list));
@@ -391,7 +391,7 @@ public interface Box extends Comparable<Box>, Cloneable, Iterable<Box> {
                         result.add(Box.of(i));
                         --k;
                     }
-                    case ' ' -> {
+                    case ' ', ',' -> {
                     }
                 }
             }

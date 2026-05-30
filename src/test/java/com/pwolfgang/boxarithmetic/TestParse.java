@@ -59,14 +59,14 @@ public class TestParse {
 
     @Test
     public void testEmpty() {
-        assertEquals(Box.of(0), Box.parse("[]"));
-        assertEquals(Box.of(0), Box.parse("[  ]"));
-        assertEquals(Box.of(0), Box.parse("  [ ] "));
+        assertEquals(Box.of(0), Box.parse("\u230a\u230b"));
+        assertEquals(Box.of(0), Box.parse("\u230a  \u230b"));
+        assertEquals(Box.of(0), Box.parse("  \u230a \u230b "));
     }
     
     @Test
     public void testSingle() {
-        assertEquals(Box.of(Box.of(2)), Box.parse("[2]"));
+        assertEquals(Box.of(Box.of(2)), Box.parse("\u230a2\u230b"));
     }
     
     @Test
@@ -74,7 +74,7 @@ public class TestParse {
         var p = Box.of(Box.of(2), Box.of(Box.of(3),Box.of(Box.of(3))));
         System.out.println(p.toIntegerString());
         System.out.println(p.asPolyNumber());
-        var q = Box.parse("[2 [3 [3]]]");
+        var q = Box.parse("\u230a2 \u230a3 \u230a3\u230b\u230b\u230b");
         System.out.println(q.toIntegerString());
         System.out.println(q.asPolyNumber());
         assertEquals(p, q);

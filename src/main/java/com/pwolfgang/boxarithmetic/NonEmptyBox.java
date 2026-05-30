@@ -167,7 +167,7 @@ public class NonEmptyBox implements Box {
      */
     @Override
     public String toString() {
-        var stj = new StringJoiner(" ", "[", "]");
+        var stj = new StringJoiner(", ", "\u230a", "\u230b");
         content.forEach(m -> stj.add(m.toString()));
         return stj.toString();
     }
@@ -187,7 +187,7 @@ public class NonEmptyBox implements Box {
             if (c.isEmptyBox()) {
                 countOfEmptySets++;
             } else {
-                sj = new StringJoiner(" ", "[", "]");
+                sj = new StringJoiner(", ", "\u230a", "\u230b");
                 if (countOfEmptySets != 0) {
                     for (int i = 0; i < countOfEmptySets; i++) {
                         sj.add("0");
